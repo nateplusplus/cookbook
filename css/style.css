@@ -1,0 +1,20 @@
+/*  Cookbook  |  Custom CSS Styles  */
+
+/*    1 - Typography    */
+
+html { font: 100%/1.5 arial, sans-serrif; }
+
+body, input, button {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/*    2 - Layout    */
+
+* { box-sizing: border-box; }
+
+
+/*    3 - Colors    */
+
+
+/*    4 - Skins    */
