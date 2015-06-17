@@ -3,33 +3,47 @@
     {
       "id": 1,
       "recipeName": "Baked Chicken",
-      "ingredients": ["Chicken", "Cooking Oil", "Salt", "Black Pepper"],
+      "ingredients": [
+          { "item": "Chicken" },
+          { "item": "Cooking Oil" },
+          { "item": "Salt"},
+          { "item": "Black Pepper" }
+      ],
       "directions": [
-          "Preheat oven to 400 degrees.", 
-          "Pat chicken dry.",
-          "Cover all sides with salt and pepper.",
-          "Coat pan with cooking oil of choice.",
-          "Arrange chicken on pan.",
-          "Cook chicken for 30 minutes to brown the chicken.",
-          "Set oven to 350 and continue cooking until juices run clear, or internal temperature is 170 degrees."],
-      "image": "/img/baked-chicken.jpg"
+          { "step": "Preheat oven to 400 degrees." }, 
+          { "step": "Pat chicken dry." },
+          { "step": "Cover all sides with salt and pepper." },
+          { "step": "Coat pan with cooking oil of choice." },
+          { "step": "Arrange chicken on pan." },
+          { "step": "Cook chicken for 30 minutes to brown the chicken." },
+          { "step": "Set oven to 350 and continue cooking until juices run clear, or internal temperature is 170 degrees." }
+           ],
+      "image": "../img/baked-chicken.jpg"
     },
     {
       "id": 2,
       "recipeName": "Pecan Roasted Brussles",
-      "ingredients": ["Brussle Sprouts", "Cooking Oil", "Salt", "Black Pepper", "Garlic", "Pecans", "Maple Syrup"],
+      "ingredients": [
+          { "item": "Brussle Sprouts" },
+          { "item": "Cooking Oil" },
+          { "item": "Salt"},
+          { "item": "Black Pepper" },
+          { "item": "Garlic" },
+          { "item": "Pecans"},
+          { "item": "Maple Syrup"}
+      ],
       "directions": [
-          "Preheat oven to 350 degrees.",
-          "Cover pan with aluminum foil",
-          "Coat foil with cooking oil of choice.",
-          "Arrange pecans on foil-covered pan",
-          "Toast the pecans, but don't let them burn!",
-          "Cut brussles in half, along the stem.",
-          "Take pecans out, let cool for a minute.",
-          "Again, coat the pan with cooking oil of choice.",
-          "Toss brussles with oil, maple syrup, salt and pepper",
-          "Roast the brussles for 20 minutes or until golden brown in spots",
-          "Transfer to a serving dish, and top with nuts"
+          { "step": "Preheat oven to 350 degrees." },
+          { "step": "Cover pan with aluminum foil" },
+          { "step": "Coat foil with cooking oil of choice." },
+          { "step": "Arrange pecans on foil-covered pan" },
+          { "step": "Toast the pecans, but don't let them burn!" },
+          { "step": "Cut brussles in half, along the stem." },
+          { "step": "Take pecans out, let cool for a minute." },
+          { "step": "Again, coat the pan with cooking oil of choice." },
+          { "step": "Toss brussles with oil, maple syrup, salt and pepper" },
+          { "step": "Roast the brussles for 20 minutes or until golden brown in spots" },
+          { "step": "Transfer to a serving dish, and top with nuts" }
       ],
       "image": ""
     }

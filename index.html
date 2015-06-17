@@ -30,7 +30,12 @@
     -->
     
     <script type="text/x-handlebars" data-template-name="index">
-        {{#link-to "recipes" }}recipes{{/link-to}}
+       {{#link-to "recipes" }}recipes{{/link-to}}
+        <ul>
+            {{#each}}
+                <li>{{item}}</li>
+            {{/each}}
+        </ul>
     </script>
     
     <script type="text/x-handlebars" data-template-name="recipes">
@@ -42,18 +47,29 @@
     </script>
     
     <script type="text/x-handlebars" data-template-name="directions">
-        {{#link-to "recipes" }}recipes{{/link-to}}
-        {{#each}}
-            {{#recipe-directions recipeName=recipeName ingredients=ingredients directions=directions image=image}}
-                {{copy}}
-            {{/recipe-directions}}
-        {{/each}}
-    </script>
-    
-    <script type="text/x-handlebars" data-template-name="components/recipe-directions">
-        <div>{{recipeName}}</div>
-        <div>{{ingredients}}</div>
-        <div>{{directions}}</div>
+        <div>{{#link-to "recipes" }}recipes{{/link-to}}</div>
+        <div>
+            {{#each}}
+                {{#if image}}
+                    <img {{bind-attr src="image"}} width="200">
+                {{else}}
+                   <p>No image available</p>
+                {{/if}}
+                <h4>{{recipeName}}</h4>
+                <p>Ingredients:</p>
+                <ul>
+                    {{#each ingredients}}
+                        <li>{{item}}</li>
+                    {{/each}}
+                </ul>
+                <p>Directions:</p>
+                <ul>
+                    {{#each directions}}
+                        <li>{{step}}</li>
+                    {{/each}}
+                </ul>
+            {{/each}}
+        </div>
     </script>
 
     
