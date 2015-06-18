@@ -7,7 +7,6 @@
         <link rel="stylesheet" href="css/lib/normalize.css">
         <link rel="stylesheet" href="css/lib/bootstrap.min.css">
         <link rel="stylesheet" href="css/style.css">
-        <script src="js/lib/ember-template-compiler.js"></script>
     </head>
     <body>
     
@@ -29,60 +28,64 @@
         All templates below this comment line.
     -->
     
-    <script type="text/x-handlebars" data-template-name="index">
+    <script type="text/x-handlebars" data-template-name="ingredients">
        {{#link-to "recipes" }}recipes{{/link-to}}
+        <h3>What do you have?</h3>
         <ul>
-            {{#each model.ingredients}}
-                <li {{action "select" item }}>{{item}}</li>
+            {{#each recipes in model.recipes}}
+            {{#each recipes.ingredients}}
+                <li {{action "select" value=itemName }}>{{item}}</li>
+            {{/each}}
             {{/each}}
         </ul>
+        <h3>You've selected the following:</h3>
         <ul>
-            {{#each model.cupboard}}
+            {{#each cupboard in model.cupboard}}
+            <li>{{cupboard.item}}</li>
+            {{/each}}
+        </ul>
+        <h3>Do you <em>not</em> have any of these?</h3>
+        <ul>
+            {{#each recipes in model.recipes}}
+            {{#each recipes.ingredients}}
                 <li>{{item}}</li>
+            {{/each}}
             {{/each}}
         </ul>
     </script>
     
     <script type="text/x-handlebars" data-template-name="recipes">
-        {{#link-to "index" }}ingredients{{/link-to}}
-        {{#each}}
-        <div>{{recipeName}}</div>
-        {{/each}}
+        {{#link-to "ingredients" }}ingredients{{/link-to}}
+        <h3>Here are some recipes you can make!</h3>
+        <ul>
+            <li>Recipe list here</li>
+        </ul>
         {{#link-to "directions" }}directions{{/link-to}}
     </script>
     
     <script type="text/x-handlebars" data-template-name="directions">
         <div>{{#link-to "recipes" }}recipes{{/link-to}}</div>
-        <div>
-            {{#each}}
-                {{#if image}}
-                    <img {{bind-attr src="image"}} width="200">
-                {{else}}
-                   <p>No image available</p>
-                {{/if}}
-                <h4>{{recipeName}}</h4>
-                <p>Ingredients:</p>
-                <ul>
-                    {{#each ingredients}}
-                        <li>{{item}}</li>
-                    {{/each}}
-                </ul>
-                <p>Directions:</p>
-                <ul>
-                    {{#each directions}}
-                        <li>{{step}}</li>
-                    {{/each}}
-                </ul>
-            {{/each}}
-        </div>
+        <p>recipe image here</p>
+        <h3>Recipe title</h3>
+        <p>Ingredients:</p>
+        <ul>
+            <li>Ingredients list here</li>
+        </ul>
+        <ul>
+            <li>Directions here</li>
+        </ul>
     </script>
 
     
     <!-- Scripts, Libraries and Frameworks, oh my! -->
     <script src="js/lib/jquery-1.11.3.min.js"></script>
     <script src="js/lib/bootstrap.min.js"></script>
-    <script src="js/lib/handlebars-v3.0.3.js"></script>
-    <script src="js/lib/ember.min.js"></script>
+    <script src="js/lib/handlebars-v1.3.0.js"></script>
+    <script src="js/lib/ember.js"></script>
+    <script src="js/lib/ember-data.js"></script>
     <script src="js/app.js"></script>
+    <script src="js/router.js"></script>
+    <script src="js/models/cupboard.js"></script>
+    <script src="js/models/recipes.js"></script>
     </body>
 </html>
