@@ -32,7 +32,12 @@
     <script type="text/x-handlebars" data-template-name="index">
        {{#link-to "recipes" }}recipes{{/link-to}}
         <ul>
-            {{#each}}
+            {{#each model.ingredients}}
+                <li {{action "select" item }}>{{item}}</li>
+            {{/each}}
+        </ul>
+        <ul>
+            {{#each model.cupboard}}
                 <li>{{item}}</li>
             {{/each}}
         </ul>
