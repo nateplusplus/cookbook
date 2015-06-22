@@ -30,28 +30,33 @@
     
     <script type="text/x-handlebars" data-template-name="ingredients">
        {{#link-to "recipes" }}recipes{{/link-to}}
-        <h3>What do you have?</h3>
-        <ul>
-            {{#each recipes in model.recipes}}
-            {{#each recipes.ingredients}}
-                <li {{action "select" value=itemName }}>{{item}}</li>
-            {{/each}}
-            {{/each}}
-        </ul>
-        <h3>You've selected the following:</h3>
-        <ul>
-            {{#each cupboard in model.cupboard}}
-            <li>{{cupboard.item}}</li>
-            {{/each}}
-        </ul>
-        <h3>Do you <em>not</em> have any of these?</h3>
-        <ul>
-            {{#each recipes in model.recipes}}
-            {{#each recipes.ingredients}}
-                <li>{{item}}</li>
-            {{/each}}
-            {{/each}}
-        </ul>
+        
+        <div id='yesFoods'>
+            <h3>What do you have to work with?</h3>
+            <p>Click all that apply:</p>
+            <ul>
+                {{#each item in ingredients}}
+                    <li {{action 'selectYes'}}>{{item.food}}</li>
+                {{/each}}
+            </ul>
+        </div>
+        
+        <div id="cupboardList">
+            <h3>Your Cupboard:</h3>
+            <ul>
+                {{#each item in cupboard}}
+                <li>{{item.item}}</li>
+                {{/each}}
+            </ul>
+        </div>
+        
+        <div id="noFoods">
+            <h3>Are you missing any of these?</h3>
+            <ul>
+                <li {{action 'selectNo'}}>items</li>
+            </ul>
+        </div>
+        
     </script>
     
     <script type="text/x-handlebars" data-template-name="recipes">
@@ -85,7 +90,10 @@
     <script src="js/lib/ember-data.js"></script>
     <script src="js/app.js"></script>
     <script src="js/router.js"></script>
+    <script src="js/controllers/ingredientsController.js"></script>
     <script src="js/models/cupboard.js"></script>
     <script src="js/models/recipes.js"></script>
+    <script src="js/models/directions.js"></script>
+    <script src="js/models/ingredients.js"></script>
     </body>
 </html>
