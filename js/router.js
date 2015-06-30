@@ -22,6 +22,26 @@ Cookbook.IngredientsRoute = Ember.Route.extend({
         controller.set('directions', model.directions);
         controller.set('ingredients', model.ingredients);
         controller.set('cupboard', model.cupboard);
+    },
+    
+    actions: {
+        addToCupboard: function(data) {
+            var newFood = this.store.createRecord('cupboard', {
+                item: data
+            });
+            newFood.save();
+        }
     }
     
+});
+
+Cookbook.IngredientsView = Ember.View.extend({
+    templateName: 'ingredients'
+});
+
+Cookbook.SelectFoodView = Ember.View.extend({
+  click: function(evt) {
+      var selectedFood = this.$().text();
+      this.get('controller').send('addToCupboard', selectedFood);
+  }
 });

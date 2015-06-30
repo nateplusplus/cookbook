@@ -3,16 +3,12 @@ Cookbook.Cupboard = DS.Model.extend({
 });
 
 Cookbook.Cupboard.FIXTURES = [
- {
-   id: 1,
-   item: 'Chicken'
- },
- {
-   id: 2,
-   item: 'Ground Beef'
- },
- {
-   id: 3,
-   item: 'Brussle Sprouts'
- }
+    {
+        'id'    : 1,
+        'item'  : 'test item'
+    },
+    {
+        'id'    : 2,
+        'item'  : 'another test item'
+    }
 ];
