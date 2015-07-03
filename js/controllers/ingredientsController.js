@@ -3,8 +3,8 @@ Cookbook.IngredientsController = Ember.ArrayController.extend({
         var cupboardItems = this.get('cupboard').getEach('item');
         
         // Find instances of cupboard items within ingredients model
-        var firstRecipe = this.store.find('ingredients', {food: 'Baked Chicken'});
-        console.log(firstRecipe);
+        /*var firstRecipe = this.store.find('ingredients', {food: 'Baked Chicken'});
+        console.log(firstRecipe);*/
         
         
             // Finding matching records
