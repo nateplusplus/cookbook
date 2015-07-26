@@ -29,15 +29,14 @@
     -->
     
     <script type="text/x-handlebars" data-template-name="ingredients">
-       {{#link-to "recipes" }}recipes{{/link-to}}
-        
+       
         <div id='yesFoods'>
             <h3>What do you have to work with?</h3>
             <p>Click all that apply:</p>
             
             <ul>
                 {{#each item in ingredients}}
-                    {{#view "selectFood"}}<li>{{item.food}}</li>{{/view}}
+                    <li>{{item}}</li>
                 {{/each}}
             </ul>
             
@@ -64,16 +63,14 @@
     </script>
     
     <script type="text/x-handlebars" data-template-name="recipes">
-        {{#link-to "ingredients" }}ingredients{{/link-to}}
         <h3>Here are some recipes you can make!</h3>
         <ul>
             <li>Recipe list here</li>
         </ul>
-        {{#link-to "directions" }}directions{{/link-to}}
     </script>
     
     <script type="text/x-handlebars" data-template-name="directions">
-        <div>{{#link-to "recipes" }}recipes{{/link-to}}</div>
+        {{#link-to "recipes" }}back{{/link-to}}
         <p>recipe image here</p>
         <h3>Recipe title</h3>
         <p>Ingredients:</p>
@@ -101,6 +98,7 @@
     <script src="js/models/recipes.js"></script>
     <script src="js/models/directions.js"></script>
     <script src="js/models/ingredients.js"></script>
+    <script src="js/models/test.js"></script>
     <script src="js/models/test.json"></script>
     </body>
 </html>

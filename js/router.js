@@ -4,8 +4,6 @@ Cookbook.Router.map(function() {
     this.route('directions');
 });
 
-/*Cookbook.ApplicationController = Ember.ArrayController.extend({});*/
-
 Cookbook.IngredientsRoute = Ember.Route.extend({
     
     model: function() {
@@ -45,3 +43,5 @@ Cookbook.SelectFoodView = Ember.View.extend({
       this.get('controller').send('addToCupboard', selectedFood);
   }
 });
+
+Cookbook.Item = Ember.Object.extend();
