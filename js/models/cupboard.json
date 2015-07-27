@@ -1,10 +1,11 @@
 {
-    'cupboard': {
-        'id'    : 1,
-        'item'  : 'test item'
-    },
-    'cupboard': {
-        'id'    : 2,
-        'item'  : 'another test item'
-    }
+    'cupboard': [
+        {
+            'id'    : 1,
+            'item'  : 'test item'
+        }, {
+            'id'    : 2,
+            'item'  : 'another test item'
+        }
+    ]
 }
