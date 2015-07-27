@@ -29,12 +29,7 @@
         -->
 
         <script type="text/x-handlebars" data-template-name="index">
-        
-            {{#link-to "ingredients"}}Enter{{/link-to}}
-        
-        </script>
-        
-        <script type="text/x-handlebars" data-template-name="ingredients">
+         
           {{#link-to "recipes"}}to recipes{{/link-to}}
           <p>Cupboard:</p>
             <ul>
@@ -69,7 +64,7 @@
         </script>
 
         <script type="text/x-handlebars" data-template-name="recipes">
-            {{#link-to "ingredients"}}back{{/link-to}} |
+            {{#link-to "index"}}back{{/link-to}} |
             {{#link-to "directions"}}directions{{/link-to}}
             
             <p>Cupboard:</p>

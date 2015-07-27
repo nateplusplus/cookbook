@@ -5,7 +5,6 @@ window.Cookbook = Ember.Application.create();
 // ============ ROUTERS ============ //
 
 Cookbook.Router.map(function() {
-    this.route('ingredients');
     this.route('recipes');
     this.route('directions');
 });
@@ -14,7 +13,7 @@ Cookbook.Router.map(function() {
 
 /* Ingredients route */ 
 
-Cookbook.IngredientsRoute = Ember.Route.extend({
+Cookbook.IndexRoute = Ember.Route.extend({
     
     model: function() {
         return Ember.RSVP.hash({
