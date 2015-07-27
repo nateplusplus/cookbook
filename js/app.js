@@ -10,7 +10,6 @@ Cookbook.Router.map(function() {
 });
 
 
-
 /* Ingredients route */ 
 
 Cookbook.IndexRoute = Ember.Route.extend({
@@ -60,22 +59,6 @@ Cookbook.RecipesRoute = Ember.Route.extend({
         });
     }
 });
-
-
-/* Directions route */ 
-/*
-Cookbook.DirectionsRoute = Ember.Route.extend({
-    
-    model: function() {
-        return Ember.RSVP.hash({
-            ingredients: this.store.findAll('ingredients'),
-            cupboard: this.store.findAll('cupboard'),
-            removedFoods: this.store.findAll('removedFoods'),
-            recipes: this.store.findAll('recipes'),
-            directions: this.store.findAll('step')
-        });
-    }
-});*/
 
 
 
