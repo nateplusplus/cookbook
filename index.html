@@ -23,12 +23,77 @@
             </div>
         </script>
     
-    <!--
-        The app's entire page structure is above this comment line.
-        All templates below this comment line.
-    -->
-    
-    <script type="text/x-handlebars" data-template-name="ingredients">
+        <!--
+            The app's entire page structure is above this comment line.
+            All templates below this comment line.
+        -->
+
+        <script type="text/x-handlebars" data-template-name="index">
+
+            <div id='yesFoods'>
+                <h3>What do you have to work with?</h3>
+                <p>Click all that apply:</p>
+
+                <ul>
+
+                </ul>
+
+            </div>
+
+            <div id="cupboardList">
+                <h3>Your Cupboard:</h3>
+                <ul>
+
+                </ul>
+            </div>
+
+            <div id="noFoods">
+                <h3>Are you missing any of these?</h3>
+                <ul>
+
+                </ul>
+            </div>
+
+        </script>
+
+        <script type="text/x-handlebars" data-template-name="recipes">
+            {{#link-to "index" }}back{{/link-to}}
+            <h3>Here are some recipes you can make!</h3>
+            <ul>
+                <li>Recipe list here</li>
+            </ul>
+        </script>
+
+        <script type="text/x-handlebars" data-template-name="directions">
+            {{#link-to "recipes" }}back{{/link-to}}
+            <p>recipe image here</p>
+            <h3>Recipe title</h3>
+            <p>Ingredients:</p>
+            <ul>
+                <li>Ingredients list here</li>
+            </ul>
+            <ul>
+                <li>Directions here</li>
+            </ul>
+        </script>
+
+
+        <!-- Scripts, Libraries and Frameworks, oh my! -->
+        <script src="js/lib/jquery-1.11.3.min.js"></script>
+        <script src="js/lib/bootstrap.min.js"></script>
+        <script src="js/lib/handlebars-v1.3.0.js"></script>
+        <script src="js/lib/ember.js"></script>
+        <script src="js/lib/ember-data.js"></script>
+        <script src="js/lib/localstorage-adapter.js"></script>
+        <script src="js/app.js"></script>
+    </body>
+</html>
+
+
+<!--
+
+
+
        
         <div id='yesFoods'>
             <h3>What do you have to work with?</h3>
@@ -61,41 +126,7 @@
                 {{/each}}
             </ul>
         </div>
-        
-    </script>
-    
-    <script type="text/x-handlebars" data-template-name="recipes">
-        <h3>Here are some recipes you can make!</h3>
-        <ul>
-            <li>Recipe list here</li>
-        </ul>
-    </script>
-    
-    <script type="text/x-handlebars" data-template-name="directions">
-        {{#link-to "recipes" }}back{{/link-to}}
-        <p>recipe image here</p>
-        <h3>Recipe title</h3>
-        <p>Ingredients:</p>
-        <ul>
-            <li>Ingredients list here</li>
-        </ul>
-        <ul>
-            <li>Directions here</li>
-        </ul>
-    </script>
 
-    
-    <!-- Scripts, Libraries and Frameworks, oh my! -->
-    <script src="js/lib/jquery-1.11.3.min.js"></script>
-    <script src="js/lib/bootstrap.min.js"></script>
-    <script src="js/lib/handlebars-v1.3.0.js"></script>
-    <script src="js/lib/ember.js"></script>
-    <script src="js/lib/ember-data.js"></script>
-    <script src="js/lib/localstorage-adapter.js"></script>
-    <script src="js/app.js"></script>
-    <script src="js/models/cupboard.json"></script>
-    <script src="js/models/directions.json"></script>
-    <script src="js/models/ingredients.json"></script>
-    <script src="js/models/recipes.json"></script>
-    </body>
-</html>
+
+
+-->

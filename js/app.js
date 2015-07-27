@@ -5,43 +5,36 @@ window.Cookbook = Ember.Application.create();
 // ============ ROUTERS ============ //
 
 Cookbook.Router.map(function() {
-    this.resource('ingredients', { path: '/' });
     this.route('recipes');
     this.route('directions');
 });
 
-Cookbook.IngredientsRoute = Ember.Route.extend({
+Cookbook.IndexRoute = Ember.Route.extend({
     
     // Setup models for recipes, ingredients and cupboard
     model: function() {
-        return Ember.RSVP.hash({
-            cupboard: this.store.findAll('cupboard'),
-            directions: $.getJSON('js/models/directions.json').then(function(data) {
-                return data.directions; }),
-            ingredients: $.getJSON('js/models/ingredients.json').then(function(data) {
-                return data.ingredients; }),
-            recipes: $.getJSON('js/models/recipes.json').then(function(data) {
-                return data.recipes; }),
-        });
-    },
-    
+        return $.getJSON("js/models/directions.json").then(function(data) {
+                return data.directions;
+        })
+    } // Model object
+
     // Setup the ingredients controller
-    setupController: function(controller, model) {
+   /* setupController: function(controller, model) {
         controller.set('recipes', model.recipes);
         controller.set('directions', model.directions);
         controller.set('ingredients', model.ingredients);
         controller.set('cupboard', model.cupboard);
-    },
+    }*/
     
     // Action allows user to add items to their cupboard
-    actions: {
+    /*actions: {
         addToCupboard: function(data) {
             var newFood = this.store.createRecord('cupboard', {
                 item: data
             });
             newFood.save();
         }
-    }
+    }*/
     
 });
 
@@ -49,16 +42,23 @@ Cookbook.IngredientsRoute = Ember.Route.extend({
 
 // ============ MODELS ============ //
 
+
+/*
 Cookbook.Cupboard = DS.Model.extend({
     item: DS.attr()
 });
+
+Cookbook.ApplicationAdapter = DS.LSAdapter.extend({
+    namespace: "cupboard"
+});
+*/
 
 Cookbook.Directions = DS.Model.extend({
     recipeId: DS.attr(),
     step: DS.attr()
 });
 
-Cookbook.Ingredients = DS.Model.extend({
+/*Cookbook.Ingredients = DS.Model.extend({
     recipeId: DS.attr(),
     food: DS.attr()
 });
@@ -69,11 +69,14 @@ Cookbook.Recipes = DS.Model.extend({
     image: DS.attr()
 });
 
+*/
+
 
 
 // ============ VIEWS ============ //
+/*
 
-Cookbook.IngredientsView = Ember.View.extend({
+Cookbook.IndexView = Ember.View.extend({
     templateName: 'ingredients'
 });
 
@@ -84,21 +87,22 @@ Cookbook.SelectFoodView = Ember.View.extend({
   }
 });
 
+*/
 
 
 // ============ CONTROLLERS ============ //
 
-Cookbook.IngredientController = Ember.ObjectController.extend({
+/*Cookbook.IngredientController = Ember.ObjectController.extend({
     actions: {
         addToCupboard: function(data) {
         }
     }
 });
 
-Cookbook.IngredientsController = Ember.ArrayController.extend({
+Cookbook.IndexController = Ember.ArrayController.extend({
     otherIngredients: function() {
         var cupboardItems = this.get('cupboard').getEach('item');
-        
+        */
         // Find instances of cupboard items within ingredients model
         /*var firstRecipe = this.store.find('ingredients', {food: 'Baked Chicken'});
         console.log(firstRecipe);*/
@@ -112,7 +116,7 @@ Cookbook.IngredientsController = Ember.ArrayController.extend({
         // Get ingredients corresponding to each recipeId
         // Subtract any ingredients already listed in cupboard
         // Print result as array
-        
+/*        
         return cupboardItems;
     }.property()    // Not updating either due to dependencies, or use of fixtures
-});
+});*/
