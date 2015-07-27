@@ -6,5 +6,4 @@ This is a simple app that I'm desiging with Ember to practice what I learn, but 
 LINKS:
 -----
 
-Working Sample:   
-http://natehub.net/cookbook
+<a href="http://natehub.net/cookbook" target="_blank">Working Sample</a>
