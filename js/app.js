@@ -12,9 +12,6 @@ Cookbook.Router.map(function() {
 
 Cookbook.IngredientsRoute = Ember.Route.extend({
     
-    model: function() {
-        return this.store.find('cupboard');
-    },
     setupController: function(controller, model){
         this._super(controller, model);
         controller.set('ingredients', this.store.find('Ingredients'));
