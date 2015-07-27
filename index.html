@@ -29,52 +29,45 @@
         -->
 
         <script type="text/x-handlebars" data-template-name="index">
-
-            <div id='yesFoods'>
-                <h3>What do you have to work with?</h3>
-                <p>Click all that apply:</p>
-
-                <ul>
-
-                </ul>
-
-            </div>
-
-            <div id="cupboardList">
-                <h3>Your Cupboard:</h3>
-                <ul>
-
-                </ul>
-            </div>
-
-            <div id="noFoods">
-                <h3>Are you missing any of these?</h3>
-                <ul>
-
-                </ul>
-            </div>
-
+        
+            {{#link-to "ingredients"}}Enter{{/link-to}}
+        
+        </script>
+        
+        <script type="text/x-handlebars" data-template-name="ingredients">
+          {{#link-to "recipes"}}to recipes{{/link-to}}
+          <p>Cupboard:</p>
+            <ul>
+                {{#each item in cupboard}}
+                    <li>{{item.item}}</li>
+                {{/each}}
+            </ul>
+            <p>Select Ingredients:</p>
+            <ul>
+                {{#each item in ingredients}}
+                    <li>{{item.food}}</li>
+                {{/each}}
+            </ul>
+            <p>Remove Ingredients:</p>
+            <ul>
+                {{#each item in ingredients}}
+                    <li>{{item.food}}</li>
+                {{/each}}
+            </ul>
         </script>
 
         <script type="text/x-handlebars" data-template-name="recipes">
-            {{#link-to "index" }}back{{/link-to}}
-            <h3>Here are some recipes you can make!</h3>
-            <ul>
-                <li>Recipe list here</li>
-            </ul>
+           {{#link-to "ingredients"}}back{{/link-to}}
+           
+               <ul>
+                    {{#each item in model}}
+                        <li>{{item.item}}</li>
+                    {{/each}}
+                </ul>
         </script>
 
         <script type="text/x-handlebars" data-template-name="directions">
-            {{#link-to "recipes" }}back{{/link-to}}
-            <p>recipe image here</p>
-            <h3>Recipe title</h3>
-            <p>Ingredients:</p>
-            <ul>
-                <li>Ingredients list here</li>
-            </ul>
-            <ul>
-                <li>Directions here</li>
-            </ul>
+            
         </script>
 
 
