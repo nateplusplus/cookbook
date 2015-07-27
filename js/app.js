@@ -63,7 +63,7 @@ Cookbook.RecipesRoute = Ember.Route.extend({
 
 
 /* Directions route */ 
-
+/*
 Cookbook.DirectionsRoute = Ember.Route.extend({
     
     model: function() {
@@ -72,10 +72,10 @@ Cookbook.DirectionsRoute = Ember.Route.extend({
             cupboard: this.store.findAll('cupboard'),
             removedFoods: this.store.findAll('removedFoods'),
             recipes: this.store.findAll('recipes'),
-            directions: this.store.findAll('directions')
+            directions: this.store.findAll('step')
         });
     }
-});
+});*/
 
 
 
@@ -127,13 +127,13 @@ Cookbook.Ingredients = DS.Model.extend({
 
 Cookbook.Recipes = DS.Model.extend({
     recipeName: DS.attr(),
-    directions: DS.attr(),
+    directions: DS.hasMany('steps', {async: true}),
     image: DS.attr()
 });
 
-Cookbook.Directions = DS.Model.extend({
-    recipeId: DS.attr(),
-    step: DS.attr()
+Cookbook.Step = DS.Model.extend({
+    recipeId: DS.belongsTo('recipes'),
+    text: DS.attr()
 });
 
 Cookbook.Cupboard.FIXTURES = []

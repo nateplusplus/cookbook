@@ -94,7 +94,9 @@
             
             <p>{{recipeName}}</p>
             <ul>
-                <li>directions here</li>
+                {{#each directions}}
+                    <li>{{text}}</li>
+                {{/each}}
             </ul>
             
         </script>
