@@ -20,3 +20,11 @@ body, input, button {
 
 
 /*    4 - Skins    */
+
+.clickable {
+    cursor: pointer;
+}
+
+.clickable:hover { color: blue; }
+
+.noFood { color: red; }

@@ -12,10 +12,33 @@ Cookbook.Router.map(function() {
 
 Cookbook.IngredientsRoute = Ember.Route.extend({
     
-    setupController: function(controller, model){
-        this._super(controller, model);
-        controller.set('ingredients', this.store.find('Ingredients'));
-        controller.set('cupboard', this.store.find('Cupboard'));
+    model: function() {
+        return Ember.RSVP.hash({
+            ingredients: this.store.findAll('ingredients'),
+            cupboard: this.store.findAll('cupboard'),
+            removedFoods: this.store.findAll('removedFoods'),
+            recipes: this.store.findAll('recipes')
+        });
+    },
+    actions: {
+        addToCupboard: function(data) {
+            var newFood = this.store.createRecord('cupboard', {
+                item: data
+            });
+            newFood.save();
+        },
+        removeFromCupboard: function(data) {
+            var entry = 'No '+data,
+                newFood = this.store.createRecord('removedFoods', {
+                item: entry
+            });
+            newFood.save();
+        },
+        deselect: function(data) {
+           this.store.find(data).then( function(record) {
+               record.destroyRecord();
+           });
+        }
     }
     
 });
@@ -29,9 +52,19 @@ Cookbook.Cupboard = DS.Model.extend({
     item: DS.attr()
 });
 
+Cookbook.RemovedFoods = DS.Model.extend({
+    item: DS.attr()
+});
+
 Cookbook.Ingredients = DS.Model.extend({
     recipeId: DS.attr(),
     food: DS.attr()
+});
+
+Cookbook.Recipes = DS.Model.extend({
+    recipeName: DS.attr(),
+    directions: DS.attr(),
+    image: DS.attr()
 });
 
 Cookbook.Cupboard.FIXTURES = [
@@ -44,6 +77,8 @@ Cookbook.Cupboard.FIXTURES = [
         'item'  : 'Brussle Sprouts'
     }
 ]
+
+Cookbook.RemovedFoods.FIXTURES = []
 
 
 Cookbook.Ingredients.FIXTURES = [
@@ -82,8 +117,44 @@ Cookbook.Ingredients.FIXTURES = [
         }
 ]
 
+Cookbook.Recipes.FIXTURES = [
+    {
+        'id': 1,
+        'recipeName': 'Baked Chicken',
+        'directions': [1, 2, 3, 4, 5, 6],
+        'image': '../img/baked-chicken.jpg'
+    },
+    {
+        'id': 2,
+        'recipeName': 'Pecan Roasted Brussles',
+        'directions': [7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17],
+        'image': ''
+    }
+]
+
 
 // ============ VIEWS ============ //
+
+Cookbook.CupboardView = Ember.View.extend({
+  click: function(evt) {
+      var cupboardItem = this.$().text();
+      this.get('controller').send('deselect', cupboardItem);
+  }
+});
+
+Cookbook.SelectFoodView = Ember.View.extend({
+  click: function(evt) {
+      var selectedFood = this.$().text();
+      this.get('controller').send('addToCupboard', selectedFood);
+  }
+});
+
+Cookbook.RemoveFoodView = Ember.View.extend({
+  click: function(evt) {
+      var removeFood = this.$().text();
+      this.get('controller').send('removeFromCupboard', removeFood);
+  }
+});
 
 
 // ============ CONTROLLERS ============ //

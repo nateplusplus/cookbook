@@ -39,19 +39,31 @@
           <p>Cupboard:</p>
             <ul>
                 {{#each item in cupboard}}
-                    <li>{{item.item}}</li>
+                    <li class="clickable yesFood">{{item.item}}</li>
+                {{/each}}
+                {{#each item in removedFoods}}
+                    <li class="clickable noFood">{{item.item}}</li>
                 {{/each}}
             </ul>
             <p>Select Ingredients:</p>
             <ul>
                 {{#each item in ingredients}}
-                    <li>{{item.food}}</li>
+                    <li class="clickable">
+                        {{#view selectFood}}
+                            {{item.food}}
+                        {{/view}}
+                    </li>
                 {{/each}}
+                
             </ul>
             <p>Remove Ingredients:</p>
             <ul>
                 {{#each item in ingredients}}
-                    <li>{{item.food}}</li>
+                    <li class="clickable">
+                            {{#view removeFood}}
+                                {{item.food}}
+                            {{/view}}
+                        </li>
                 {{/each}}
             </ul>
         </script>
@@ -61,7 +73,7 @@
            
                <ul>
                     {{#each item in model}}
-                        <li>{{item.item}}</li>
+                        <li class="clickable">{{item.item}}</li>
                     {{/each}}
                 </ul>
         </script>
