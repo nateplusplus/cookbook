@@ -52,6 +52,8 @@ Cookbook.RecipesRoute = Ember.Route.extend({
             removedFoods: this.store.findAll('removedFoods'),
             recipes: this.store.findAll('recipes')
         });
+    },
+    actions: {
     }
 });
 
@@ -112,6 +114,12 @@ Cookbook.Recipes = DS.Model.extend({
     image: DS.attr()
 });
 
+/*Cookbook.CustomRecipeList = DS.Model.extend({
+    recipeName: DS.attr(),
+    directions: DS.hasMany('steps', {async: true}),
+    image: DS.attr()
+});*/
+
 Cookbook.Step = DS.Model.extend({
     recipeId: DS.belongsTo('recipes'),
     text: DS.attr()
@@ -120,6 +128,8 @@ Cookbook.Step = DS.Model.extend({
 Cookbook.Cupboard.FIXTURES = []
 
 Cookbook.RemovedFoods.FIXTURES = []
+
+/*Cookbook.CustomRecipeList.FIXTURES = []*/
 
 
 Cookbook.Ingredients.FIXTURES = [
