@@ -36,7 +36,9 @@
             
             <ul>
                 {{#each item in ingredients}}
-                    <li>{{item}}</li>
+                    {{#view "selectFood"}}
+                        <li>{{item}}</li>
+                    {{/view}}
                 {{/each}}
             </ul>
             
