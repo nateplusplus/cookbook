@@ -69,17 +69,30 @@
         </script>
 
         <script type="text/x-handlebars" data-template-name="recipes">
-           {{#link-to "ingredients"}}back{{/link-to}}
-           
-               <ul>
-                    {{#each item in model}}
-                        <li class="clickable">{{item.item}}</li>
-                    {{/each}}
-                </ul>
+            {{#link-to "ingredients"}}back{{/link-to}} |
+            {{#link-to "directions"}}directions{{/link-to}}
+            
+            <p>Cupboard:</p>
+            <ul>
+                {{#each item in cupboard}}
+                    <li class="clickable">
+                        {{item.item}}
+                    </li>
+                {{/each}}
+            </ul>
+            
+            <p>Recipes:</p>
+            <ul>
+                {{#each item in recipes}}
+                    <li class="clickable">
+                        {{item.recipeName}}
+                    </li>
+                {{/each}}
+            </ul>
         </script>
 
         <script type="text/x-handlebars" data-template-name="directions">
-            
+            {{#link-to "recipes"}}back{{/link-to}}
         </script>
 
 
@@ -93,45 +106,3 @@
         <script src="js/app.js"></script>
     </body>
 </html>
-
-
-<!--
-
-
-
-       
-        <div id='yesFoods'>
-            <h3>What do you have to work with?</h3>
-            <p>Click all that apply:</p>
-            
-            <ul>
-                {{#each item in ingredients}}
-                    {{#view "selectFood"}}
-                        <li>{{item}}</li>
-                    {{/view}}
-                {{/each}}
-            </ul>
-            
-        </div>
-        
-        <div id="cupboardList">
-            <h3>Your Cupboard:</h3>
-            <ul>
-                {{#each item in cupboard}}
-                <li>{{item.item}}</li>
-                {{/each}}
-            </ul>
-        </div>
-        
-        <div id="noFoods">
-            <h3>Are you missing any of these?</h3>
-            <ul>
-                {{#each item in otherIngredients}}
-                <li>{{item}}</li>
-                {{/each}}
-            </ul>
-        </div>
-
-
-
--->

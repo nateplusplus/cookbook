@@ -10,6 +10,10 @@ Cookbook.Router.map(function() {
     this.route('directions');
 });
 
+
+
+/* Ingredients route */ 
+
 Cookbook.IngredientsRoute = Ember.Route.extend({
     
     model: function() {
@@ -44,6 +48,50 @@ Cookbook.IngredientsRoute = Ember.Route.extend({
 });
 
 
+/* Recipes route */ 
+
+Cookbook.RecipesRoute = Ember.Route.extend({
+    
+    model: function() {
+        return Ember.RSVP.hash({
+            ingredients: this.store.findAll('ingredients'),
+            cupboard: this.store.findAll('cupboard'),
+            removedFoods: this.store.findAll('removedFoods'),
+            recipes: this.store.findAll('recipes')
+        });
+    }
+});
+
+
+// ============ VIEWS ============ //
+
+Cookbook.CupboardView = Ember.View.extend({
+  click: function(evt) {
+      var cupboardItem = this.$().text();
+      this.get('controller').send('deselect', cupboardItem);
+  }
+});
+
+Cookbook.SelectFoodView = Ember.View.extend({
+  click: function(evt) {
+      var selectedFood = this.$().text();
+      this.get('controller').send('addToCupboard', selectedFood);
+  }
+});
+
+Cookbook.RemoveFoodView = Ember.View.extend({
+  click: function(evt) {
+      var removeFood = this.$().text();
+      this.get('controller').send('removeFromCupboard', removeFood);
+  }
+});
+
+
+// ============ CONTROLLERS ============ //
+
+
+
+
 // ============ MODELS ============ //
 
 Cookbook.ApplicationAdapter = DS.FixtureAdapter.extend();
@@ -67,16 +115,7 @@ Cookbook.Recipes = DS.Model.extend({
     image: DS.attr()
 });
 
-Cookbook.Cupboard.FIXTURES = [
-    {
-        'id'    : 1,
-        'item'  : 'Chicken'
-    },
-    {
-        'id'    : 2,
-        'item'  : 'Brussle Sprouts'
-    }
-]
+Cookbook.Cupboard.FIXTURES = []
 
 Cookbook.RemovedFoods.FIXTURES = []
 
@@ -131,31 +170,3 @@ Cookbook.Recipes.FIXTURES = [
         'image': ''
     }
 ]
-
-
-// ============ VIEWS ============ //
-
-Cookbook.CupboardView = Ember.View.extend({
-  click: function(evt) {
-      var cupboardItem = this.$().text();
-      this.get('controller').send('deselect', cupboardItem);
-  }
-});
-
-Cookbook.SelectFoodView = Ember.View.extend({
-  click: function(evt) {
-      var selectedFood = this.$().text();
-      this.get('controller').send('addToCupboard', selectedFood);
-  }
-});
-
-Cookbook.RemoveFoodView = Ember.View.extend({
-  click: function(evt) {
-      var removeFood = this.$().text();
-      this.get('controller').send('removeFromCupboard', removeFood);
-  }
-});
-
-
-// ============ CONTROLLERS ============ //
-
