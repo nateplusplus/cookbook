@@ -79,17 +79,25 @@
             <p>Recipes:</p>
             <ul>
                 {{#each item in recipes}}
-                    <li class="clickable">
-                        {{item.recipeName}}
+                    <li>
+                        {{#link-to 'directions' item}}
+                            {{item.recipeName}}
+                        {{/link-to}}
                     </li>
                 {{/each}}
             </ul>
         </script>
 
         <script type="text/x-handlebars" data-template-name="directions">
+            
             {{#link-to "recipes"}}back{{/link-to}}
+            
+            <p>{{recipeName}}</p>
+            <ul>
+                <li>directions here</li>
+            </ul>
+            
         </script>
-
 
         <!-- Scripts, Libraries and Frameworks, oh my! -->
         <script src="js/lib/jquery-1.11.3.min.js"></script>
@@ -99,5 +107,6 @@
         <script src="js/lib/ember-data.js"></script>
         <script src="js/lib/localstorage-adapter.js"></script>
         <script src="js/app.js"></script>
+        <script src="js/models/directions.js"></script>
     </body>
 </html>

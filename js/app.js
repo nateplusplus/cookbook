@@ -6,7 +6,7 @@ window.Cookbook = Ember.Application.create();
 
 Cookbook.Router.map(function() {
     this.route('recipes');
-    this.route('directions');
+    this.route('directions', { path: 'directions/:id' });
 });
 
 
@@ -62,6 +62,23 @@ Cookbook.RecipesRoute = Ember.Route.extend({
 });
 
 
+/* Directions route */ 
+
+Cookbook.DirectionsRoute = Ember.Route.extend({
+    
+    model: function() {
+        return Ember.RSVP.hash({
+            ingredients: this.store.findAll('ingredients'),
+            cupboard: this.store.findAll('cupboard'),
+            removedFoods: this.store.findAll('removedFoods'),
+            recipes: this.store.findAll('recipes'),
+            directions: this.store.findAll('directions')
+        });
+    }
+});
+
+
+
 // ============ VIEWS ============ //
 
 Cookbook.CupboardView = Ember.View.extend({
@@ -114,6 +131,11 @@ Cookbook.Recipes = DS.Model.extend({
     image: DS.attr()
 });
 
+Cookbook.Directions = DS.Model.extend({
+    recipeId: DS.attr(),
+    step: DS.attr()
+});
+
 Cookbook.Cupboard.FIXTURES = []
 
 Cookbook.RemovedFoods.FIXTURES = []
@@ -122,7 +144,7 @@ Cookbook.RemovedFoods.FIXTURES = []
 Cookbook.Ingredients.FIXTURES = [
     {
             "id": 1,
-            "recipeId": 1,  //Foreign Key to Recipes model
+            "recipeId": 1,  //Foreign Key to Recipes
             "food": "Chicken"
         }, { 
             "id": 2,
@@ -159,7 +181,7 @@ Cookbook.Recipes.FIXTURES = [
     {
         'id': 1,
         'recipeName': 'Baked Chicken',
-        'directions': [1, 2, 3, 4, 5, 6],
+        'directions': [1, 2, 3, 4, 5, 6], // Foreign key to Directions
         'image': '../img/baked-chicken.jpg'
     },
     {
