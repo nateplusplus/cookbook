@@ -35,11 +35,6 @@ Cookbook.IndexRoute = Ember.Route.extend({
                 item: entry
             });
             newFood.save();
-        },
-        deselect: function(data) {
-           this.store.find(data).then( function(record) {
-               record.destroyRecord();
-           });
         }
     }
     
@@ -64,12 +59,7 @@ Cookbook.RecipesRoute = Ember.Route.extend({
 
 // ============ VIEWS ============ //
 
-Cookbook.CupboardView = Ember.View.extend({
-  click: function(evt) {
-      var cupboardItem = this.$().text();
-      this.get('controller').send('deselect', cupboardItem);
-  }
-});
+
 
 Cookbook.SelectFoodView = Ember.View.extend({
   click: function(evt) {
@@ -88,6 +78,14 @@ Cookbook.RemoveFoodView = Ember.View.extend({
 
 // ============ CONTROLLERS ============ //
 
+
+Cookbook.IndexController = Ember.ObjectController.extend({
+    actions: {
+        removeCupboardItem: function(item){
+            item.destroyRecord();
+        }
+    }
+});
 
 
 

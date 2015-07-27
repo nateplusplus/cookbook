@@ -34,10 +34,10 @@
           <p>Cupboard:</p>
             <ul>
                 {{#each item in cupboard}}
-                    <li class="clickable yesFood">{{item.item}}</li>
+                    <li class="clickable yesFood" {{action 'removeCupboardItem' item}}>{{item.item}}</li>
                 {{/each}}
                 {{#each item in removedFoods}}
-                    <li class="clickable noFood">{{item.item}}</li>
+                    <li class="clickable noFood" {{action 'removeCupboardItem' item}}>{{item.item}}</li>
                 {{/each}}
             </ul>
             <p>Select Ingredients:</p>
