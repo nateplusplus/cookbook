@@ -86,6 +86,11 @@
                     </li>
                 {{/each}}
             </ul>
+            
+            <p>Test:</p>
+            {{#each item in customRecipeList}}
+                <p>{{item.recipeName}}</p>
+            {{/each}}
         </script>
 
         <script type="text/x-handlebars" data-template-name="directions">

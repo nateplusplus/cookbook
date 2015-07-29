@@ -10,7 +10,7 @@ Cookbook.Router.map(function() {
 });
 
 
-/* Ingredients route */ 
+/* Ingredients route */
 
 Cookbook.IndexRoute = Ember.Route.extend({
     
@@ -35,13 +35,20 @@ Cookbook.IndexRoute = Ember.Route.extend({
                 item: entry
             });
             newFood.save();
+        },
+        compileRecipes: function(data) {
+            var cupboardFoods = this.store.findAll('cupboard'),
+                missingFoods = this.store.findAll('removedFoods'),
+                allIngredients = this.store.findAll('ingredients');
+
+            console.log(allIngredients);
         }
     }
     
 });
 
 
-/* Recipes route */ 
+/* Recipes route */
 
 Cookbook.RecipesRoute = Ember.Route.extend({
     
@@ -50,10 +57,9 @@ Cookbook.RecipesRoute = Ember.Route.extend({
             ingredients: this.store.findAll('ingredients'),
             cupboard: this.store.findAll('cupboard'),
             removedFoods: this.store.findAll('removedFoods'),
-            recipes: this.store.findAll('recipes')
+            recipes: this.store.findAll('recipes'),
+            customRecipeList: this.store.findAll('customRecipeList')
         });
-    },
-    actions: {
     }
 });
 
@@ -67,6 +73,7 @@ Cookbook.SelectFoodView = Ember.View.extend({
   click: function(evt) {
       var selectedFood = this.$().text();
       this.get('controller').send('addToCupboard', selectedFood);
+      this.get('controller').send('compileRecipes', selectedFood);
   }
 });
 
@@ -110,15 +117,15 @@ Cookbook.Ingredients = DS.Model.extend({
 
 Cookbook.Recipes = DS.Model.extend({
     recipeName: DS.attr(),
-    directions: DS.hasMany('steps', {async: true}),
+    directions: DS.attr(),
     image: DS.attr()
 });
 
-/*Cookbook.CustomRecipeList = DS.Model.extend({
+Cookbook.CustomRecipeList = DS.Model.extend({
     recipeName: DS.attr(),
     directions: DS.hasMany('steps', {async: true}),
     image: DS.attr()
-});*/
+});
 
 Cookbook.Step = DS.Model.extend({
     recipeId: DS.belongsTo('recipes'),
@@ -129,43 +136,50 @@ Cookbook.Cupboard.FIXTURES = []
 
 Cookbook.RemovedFoods.FIXTURES = []
 
-/*Cookbook.CustomRecipeList.FIXTURES = []*/
+Cookbook.CustomRecipeList.FIXTURES = []
 
 
 Cookbook.Ingredients.FIXTURES = [
     {
-            "id": 1,
-            "recipeId": 1,  //Foreign Key to Recipes
-            "food": "Chicken"
-        }, { 
-            "id": 2,
-            "recipeId": [1, 2],
-            "food": "Cooking Oil"
-        }, { 
-            "id": 3,
-            "recipeId": [1, 2],
-            "food": "Salt"
-        }, { 
-            "id": 4,
-            "recipeId": [1, 2],
-            "food": "Black Pepper"
-        }, { 
-            "id": 5,
-            "recipeId": 2,
-            "food": "Brussle Sprouts"
-        }, { 
-            "id": 6,
-            "recipeId": 2,
-            "food": "Garlic"
-        }, { 
-            "id": 7,
-            "recipeId": 2,
-            "food": "Pecans"
-        }, { 
-            "id": 8,
-            "recipeId": 2,
-            "food": "Maple Syrup"
-        }
+        "id": 1,
+        "recipeId": 1,  //Foreign Key to Recipes
+        "food": "Chicken"
+    },
+    { 
+        "id": 2,
+        "recipeId": [1, 2],
+        "food": "Cooking Oil"
+    },
+    { 
+        "id": 3,
+        "recipeId": [1, 2],
+        "food": "Salt"
+    },
+    { 
+        "id": 4,
+        "recipeId": [1, 2],
+        "food": "Black Pepper"
+    },
+    { 
+        "id": 5,
+        "recipeId": 2,
+        "food": "Brussle Sprouts"
+    },
+    { 
+        "id": 6,
+        "recipeId": 2,
+        "food": "Garlic"
+    },
+    { 
+        "id": 7,
+        "recipeId": 2,
+        "food": "Pecans"
+    },
+    { 
+        "id": 8,
+        "recipeId": 2,
+        "food": "Maple Syrup"
+    }
 ]
 
 Cookbook.Recipes.FIXTURES = [
