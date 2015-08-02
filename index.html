@@ -5,115 +5,12 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Cookbook</title>
         <link rel="stylesheet" href="css/lib/normalize.css">
-        <link rel="stylesheet" href="css/lib/bootstrap.min.css">
         <link rel="stylesheet" href="css/style.css">
     </head>
     <body>
-    
-        <!--
-            DEFAULT APPLICATION TEMPLATE: This gets rendered in a browser
-            as soon as "Ember.Application.create()" happens.
-        -->
-        
-        <script type="text/x-handlebars">
-            <div class="container">
-                <div class="row">
-                    {{outlet}}
-                </div>
-            </div>
-        </script>
-    
-        <!--
-            The app's entire page structure is above this comment line.
-            All templates below this comment line.
-        -->
-
-        <script type="text/x-handlebars" data-template-name="index">
-         
-          {{#link-to "recipes"}}to recipes{{/link-to}}
-          <p>Cupboard:</p>
-            <ul>
-                {{#each item in cupboard}}
-                    <li class="clickable yesFood" {{action 'removeCupboardItem' item}}>{{item.item}}</li>
-                {{/each}}
-                {{#each item in removedFoods}}
-                    <li class="clickable noFood" {{action 'removeCupboardItem' item}}>{{item.item}}</li>
-                {{/each}}
-            </ul>
-            <p>Select Ingredients:</p>
-            <ul>
-                {{#each item in ingredients}}
-                    <li class="clickable">
-                        {{#view selectFood}}
-                            {{item.food}}
-                        {{/view}}
-                    </li>
-                {{/each}}
-                
-            </ul>
-            <p>Remove Ingredients:</p>
-            <ul>
-                {{#each item in ingredients}}
-                    <li class="clickable">
-                            {{#view removeFood}}
-                                {{item.food}}
-                            {{/view}}
-                        </li>
-                {{/each}}
-            </ul>
-        </script>
-
-        <script type="text/x-handlebars" data-template-name="recipes">
-            {{#link-to "index"}}back{{/link-to}} |
-            {{#link-to "directions"}}directions{{/link-to}}
-            
-            <p>Cupboard:</p>
-            <ul>
-                {{#each item in cupboard}}
-                    <li class="clickable">
-                        {{item.item}}
-                    </li>
-                {{/each}}
-            </ul>
-            
-            <p>Recipes:</p>
-            <ul>
-                {{#each item in recipes}}
-                    <li>
-                        {{#link-to 'directions' item}}
-                            {{item.recipeName}}
-                        {{/link-to}}
-                    </li>
-                {{/each}}
-            </ul>
-            
-            <p>Test:</p>
-            {{#each item in customRecipeList}}
-                <p>{{item.recipeName}}</p>
-            {{/each}}
-        </script>
-
-        <script type="text/x-handlebars" data-template-name="directions">
-            
-            {{#link-to "recipes"}}back{{/link-to}}
-            
-            <p>{{recipeName}}</p>
-            <ul>
-                {{#each directions}}
-                    <li>{{text}}</li>
-                {{/each}}
-            </ul>
-            
-        </script>
+          
 
         <!-- Scripts, Libraries and Frameworks, oh my! -->
         <script src="js/lib/jquery-1.11.3.min.js"></script>
-        <script src="js/lib/bootstrap.min.js"></script>
-        <script src="js/lib/handlebars-v1.3.0.js"></script>
-        <script src="js/lib/ember.js"></script>
-        <script src="js/lib/ember-data.js"></script>
-        <script src="js/lib/localstorage-adapter.js"></script>
-        <script src="js/app.js"></script>
-        <script src="js/models/directions.js"></script>
     </body>
 </html>
