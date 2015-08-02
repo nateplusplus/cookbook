@@ -1,4 +1,61 @@
 {
+    'recipes': [
+        {
+            'id': 1,
+            'recipeName': 'Baked Chicken',
+            'directions': [1, 2, 3, 4, 5, 6],
+            'image': '../img/baked-chicken.jpg'
+        },
+        {
+            'id': 2,
+            'recipeName': 'Pecan Roasted Brussles',
+            'directions': [7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17],
+            'image': ''
+        }
+    ]
+}
+
+
+{
+    "ingredients": [
+        {
+            "id": 1,
+            "recipeId": 1,  //Foreign Key to Recipes model
+            "food": "Chicken"
+        }, { 
+            "id": 2,
+            "recipeId": [1, 2],
+            "food": "Cooking Oil"
+        }, { 
+            "id": 3,
+            "recipeId": [1, 2],
+            "food": "Salt"
+        }, { 
+            "id": 4,
+            "recipeId": [1, 2],
+            "food": "Black Pepper"
+        }, { 
+            "id": 5,
+            "recipeId": 2,
+            "food": "Brussle Sprouts"
+        }, { 
+            "id": 6,
+            "recipeId": 2,
+            "food": "Garlic"
+        }, { 
+            "id": 7,
+            "recipeId": 2,
+            "food": "Pecans"
+        }, { 
+            "id": 8,
+            "recipeId": 2,
+            "food": "Maple Syrup"
+        }
+    ]
+}
+
+
+{
     "directions": [
         {
             "id": 1,
