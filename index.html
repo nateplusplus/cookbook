@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Cookbook</title>
         <link rel="stylesheet" href="css/lib/normalize.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="css/style.css">
     </head>
     <body>
@@ -16,29 +17,27 @@
                     <p>A pragmatic recipe app</p>
                 </header>
                 <main id="mainSection">
-                    <div id="selectionList" class="column">
-                        <div id="availableBox" class="box"><!--Available Foods-->
-                            
-                            <div class="selectBoxLabel">
-                                <h3>What are you in the mood for?</h3>
-                            </div>    
-                            
-                            <ul id='availableBoxList' class="selectBox">
-                               
-                            </ul>
+                    <div id="availableBox" class="column"><!--Available Foods-->
+
+                        <div class="selectBoxLabel">
+                            <h3>What are you craving?</h3>
+                        </div>    
+
+                        <ul id='availableBoxList' class="selectBox">
+
+                        </ul>
+                    </div>
+                    <div id="unavailableBox" class="column hidden"><!--Unavailable Foods-->
+                        <div class="selectBoxLabel">
+                            <h3>Is there anything here you don't have?</h3>
                         </div>
-                        <div id="unavailableBox" class="box"><!--Unavailable Foods-->
-                            <div class="selectBoxLabel">
-                                <h3>Is there anything here you don't have?</h3>
-                            </div>
-                            
-                            <ul id='unavailableBoxList' class="selectBox">
-                                
-                            </ul>
-                        </div>
+
+                        <ul id='unavailableBoxList' class="selectBox">
+
+                        </ul>
                     </div>
                     <div id="cupboardBox" class="column"><!--Cupboard-->
-                        <h3>Your personal cupboard</h3>
+                        <h3>Your cupboard</h3>
                         <p>Available:</p>
                         <ul id="cupboardAvailList">
                             
@@ -50,7 +49,15 @@
                     </div>
                 </main>
                 <footer>
-                    <a href="">Find Recipes!</a>
+                   <div id="back" class="button hidden">
+                        <i class="fa fa-chevron-left fa-lg"></i> <span>Back</span>
+                    </div>
+                    <div id="next" class="button">
+                        <span>Next</span> <i class="fa fa-chevron-right fa-lg"></i>
+                    </div>
+                    <div id="goToRecipes" class="button hidden">
+                        <i class="fa fa-cutlery fa-lg"></i> <span>Find Recipes!</span>
+                    </div>
                 </footer>
             </div>
         </section>
