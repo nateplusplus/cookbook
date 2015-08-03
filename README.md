@@ -1,7 +1,9 @@
 Cookbook
 =============
 
-This is a simple app that I'm desiging with Ember to practice what I learn, but also to help me cook! My idea is to focus on organizing recipes by the ingredients that I already have around the house.
+This began as a simple app to teach me Ember. I learned that I don't like Ember.
+
+Now this is a simple app, to teach me how to build an effective UI and figure out what backend actually works!
 
 LINKS:
 -----

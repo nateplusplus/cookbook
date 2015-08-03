@@ -9,9 +9,54 @@
     </head>
     <body>
         
-        
+        <section id="container">
+            <div id="wrapper">
+                <header>
+                    <h1>Cookbook</h1>
+                    <p>A pragmatic recipe app</p>
+                </header>
+                <main id="mainSection">
+                    <div id="selectionList" class="column">
+                        <div id="availableBox" class="box"><!--Available Foods-->
+                            
+                            <div class="selectBoxLabel">
+                                <h3>What are you in the mood for?</h3>
+                            </div>    
+                            
+                            <ul id='availableBoxList' class="selectBox">
+                               
+                            </ul>
+                        </div>
+                        <div id="unavailableBox" class="box"><!--Unavailable Foods-->
+                            <div class="selectBoxLabel">
+                                <h3>Is there anything here you don't have?</h3>
+                            </div>
+                            
+                            <ul id='unavailableBoxList' class="selectBox">
+                                
+                            </ul>
+                        </div>
+                    </div>
+                    <div id="cupboardBox" class="column"><!--Cupboard-->
+                        <h3>Your personal cupboard</h3>
+                        <p>Available:</p>
+                        <ul id="cupboardAvailList">
+                            
+                        </ul>
+                        <p>Unavailable:</p>
+                        <ul id="cupboardUnavailList">
+                            
+                        </ul>
+                    </div>
+                </main>
+                <footer>
+                    <a href="">Find Recipes!</a>
+                </footer>
+            </div>
+        </section>
         
         <!-- Scripts, Libraries and Frameworks, oh my! -->
         <script src="js/lib/jquery-1.11.3.min.js"></script>
+        <script src="js/functions.js"></script>
     </body>
 </html>
