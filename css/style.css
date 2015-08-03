@@ -112,9 +112,13 @@ ul li {
     width: 40%;
 }
 
-/* State Changes */
+.left {
+    float:left;
+}
 
-.hidden { display: none; }
+.right {
+    float: right;
+}
 
 
 
@@ -127,3 +131,5 @@ header { border-bottom: 1px solid black; }
 footer { border-top: 1px solid black; }
 
 li:nth-child(2n) { background-color: rgb(245,248,255); }
+
+.button { cursor: pointer; }

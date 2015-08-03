@@ -17,7 +17,7 @@
                     <p>A pragmatic recipe app</p>
                 </header>
                 <main id="mainSection">
-                    <div id="availableBox" class="column"><!--Available Foods-->
+                    <div id="availableBox" class="column index"><!--Available Foods-->
 
                         <div class="selectBoxLabel">
                             <h3>What are you craving?</h3>
@@ -27,16 +27,16 @@
 
                         </ul>
                     </div>
-                    <div id="unavailableBox" class="column hidden"><!--Unavailable Foods-->
+                    <div id="unavailableBox" class="column filters"><!--Unavailable Foods-->
                         <div class="selectBoxLabel">
-                            <h3>Is there anything here you don't have?</h3>
+                            <h3>Missing any of these things?</h3>
                         </div>
 
                         <ul id='unavailableBoxList' class="selectBox">
 
                         </ul>
                     </div>
-                    <div id="cupboardBox" class="column"><!--Cupboard-->
+                    <div id="cupboardBox" class="column index filters"><!--Cupboard-->
                         <h3>Your cupboard</h3>
                         <p>Available:</p>
                         <ul id="cupboardAvailList">
@@ -48,14 +48,14 @@
                         </ul>
                     </div>
                 </main>
-                <footer>
-                   <div id="back" class="button hidden">
+                <footer id="navMenu">
+                    <div id="back" class="button left filters">
                         <i class="fa fa-chevron-left fa-lg"></i> <span>Back</span>
                     </div>
-                    <div id="next" class="button">
+                    <div id="next" class="button middle index filters">
                         <span>Next</span> <i class="fa fa-chevron-right fa-lg"></i>
                     </div>
-                    <div id="goToRecipes" class="button hidden">
+                    <div id="findRecipes" class="button right filters">
                         <i class="fa fa-cutlery fa-lg"></i> <span>Find Recipes!</span>
                     </div>
                 </footer>
