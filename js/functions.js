@@ -395,4 +395,19 @@ $( document ).ready(function(){
         window.location.hash = getNavSequence('findRecipes');
     };
     
+    
+    /* ========================= SEARCH CONTROLLER ============================= */
+    
+    
+    function searchForRecipes () {
+        
+        // recipesWithAvail =  Find recipes that use cupboard ingredients 
+        // recipesWithUnavail = Find recipes within recipesWithAvail that use unavailable ingredients
+        // recipesMatch = Remove recipesWithUnavail from recipesWithAvail
+        
+        // return recipesMatch
+        
+    }
+    
+    
 }); // DOM ready
