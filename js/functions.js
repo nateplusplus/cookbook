@@ -31,7 +31,8 @@ $( document ).ready(function(){
             }
         ],
         cupboardAvail = [],
-        cupboardUnavail = [];
+        cupboardUnavail = [],
+        matchedRecipes = [];
     
     
     
@@ -111,6 +112,9 @@ $( document ).ready(function(){
 
             }
             
+            // Filter data based on any user input
+            filterRecipeData(cupboardAvail);
+            
             // Build each list, with fetched data
             createEl(allIngredients, availableBoxList, 'li');
             createEl(allIngredients, unavailableBoxList, 'li');
@@ -137,13 +141,10 @@ $( document ).ready(function(){
         
         hiddenElements.each(function(){
             if($(this).attr('id')) {
-                console.log('making '+$(this).attr('id')+' visible');
                 $(this).show();
             }
         });
         
-        
-        console.log('searching for class: .'+ routeName);
         
         var renderElements = $('#mainSection .'+routeName),
             renderNav = $('#navMenu .'+routeName),
@@ -152,22 +153,16 @@ $( document ).ready(function(){
         
         var test = $(renderElements).length;
         var test2 = $(renderNav).length;
-        
-        console.log('found '+test+' elements with '+routeName+' in main');
-        console.log('found '+test2+' elements with '+routeName+' in nav');
+
         
         renderElements.each(function(){
             var renderId = $(this).attr('id');
             
-            console.log('render main element: '+renderId );
-        
             allMain.each( function(i, el) {
                 
                 var elementId = $(el).attr('id');
-                console.log('comparing all elements: '+elementId );
                 
                     if( renderId == elementId ){
-                        console.log('element match found: '+renderId );
                         allMain[i] = '';
                         return false;
                     }
@@ -178,7 +173,6 @@ $( document ).ready(function(){
         allMain.each(function(){
             
             if ($(this).attr('id')) {
-                console.log('Hiding: '+$(this).attr('id') );
                 $(this).hide();
             }
         });
@@ -189,15 +183,11 @@ $( document ).ready(function(){
         renderNav.each(function(){
             
             var renderId = $(this).attr('id');
-            
-            console.log('render nav element: '+renderId );
         
             allNav.each( function(i, el) {
                 var elementId = $(el).attr('id');
-                console.log('comparing all elements: '+elementId );
 
                     if( renderId == elementId ){
-                        console.log('element match found: '+renderId );
                         allNav[i] = '';
                         return false;
                     }
@@ -208,7 +198,6 @@ $( document ).ready(function(){
         allNav.each(function(){
             
             if ($(this).attr('id')) {
-                console.log('Hiding: '+$(this).attr('id') );
                 $(this).hide();
             }
         });
@@ -325,23 +314,15 @@ $( document ).ready(function(){
             sequenceId = 0;
         } else {
             
-            console.log('entered else loop.');
-            console.log('navSequence.length: '+navSequence.length);
-            
             for (i=0; i<navSequence.length; i++) {
-                console.log('looping... '+navSequence[i]);
                 if (window.location.hash == navSequence[i]) {
-                    console.log('Match found! '+navSequence[i]);
                     sequenceId = i;
                     
-                    console.log('breaking loop');
                     break;
                 }
             }
             
         }
-        
-        console.log(sequenceId);
         
         
         var page = '';
@@ -399,7 +380,55 @@ $( document ).ready(function(){
     /* ========================= SEARCH CONTROLLER ============================= */
     
     
-    function searchForRecipes () {
+    function filterRecipeData (available) {
+        
+        for (i=0; i<available.length; i++) {
+            
+            var thisCupboardItem = available[i];
+            
+            for (a=0; a<recipes.length; a++) {
+            
+                var thisRecipe = recipes[a];
+                
+                for (b=0; b<thisRecipe.ingredients.length; b++) {
+                    
+                    var thisIngredient = thisRecipe.ingredients[b].food;
+                    
+                    if( thisCupboardItem === thisIngredient ) {
+                        
+                        var recipeId = recipes.indexOf(thisRecipe);
+                        
+                        if ( matchedRecipes.length > 0 ){
+                        
+                            for ( c=0; c<matchedRecipes.length; c++ ) {
+                                
+                                var thisMatchedRecipe = matchedRecipes[c];
+                                
+                                
+                                // How to compare and NOT add matches???
+
+                                if ( recipeId === thisMatchedRecipe ) {
+                                    continue;
+                                } 
+                                
+                                console.log();
+                            }
+                            
+                        } else {
+                            
+                            matchedRecipes.push(recipeId);
+                            
+                        }
+                        
+                        
+                        console.log('Recipe ids: '+matchedRecipes);
+                    }
+                    
+                }
+                
+            }
+        }
+        
         
         // recipesWithAvail =  Find recipes that use cupboard ingredients 
         // recipesWithUnavail = Find recipes within recipesWithAvail that use unavailable ingredients
@@ -408,6 +437,8 @@ $( document ).ready(function(){
         // return recipesMatch
         
     }
+    
+    
     
     
 }); // DOM ready

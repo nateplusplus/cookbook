@@ -22,7 +22,6 @@
             "name"  : "Pecan Roasted Brussles",
             "img"   : "",
             "ingredients"   : [
-                { "food"    : "Chicken" },
                 { "food"    : "Cooking Oil" },
                 { "food"    : "Salt" },
                 { "food"    : "Black Pepper" },
