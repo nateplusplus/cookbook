@@ -388,7 +388,8 @@ $( document ).ready(function(){
             
             for (a=0; a<recipes.length; a++) {
             
-                var thisRecipe = recipes[a];
+                var thisRecipe = recipes[a],
+                    matchedRecipes = [];
                 
                 for (b=0; b<thisRecipe.ingredients.length; b++) {
                     
@@ -398,30 +399,15 @@ $( document ).ready(function(){
                         
                         var recipeId = recipes.indexOf(thisRecipe);
                         
-                        if ( matchedRecipes.length > 0 ){
+                        // How the hell to test if recipe has already been matched??
                         
-                            for ( c=0; c<matchedRecipes.length; c++ ) {
-                                
-                                var thisMatchedRecipe = matchedRecipes[c];
-                                
-                                
-                                // How to compare and NOT add matches???
-
-                                if ( recipeId === thisMatchedRecipe ) {
-                                    continue;
-                                } 
-                                
-                                console.log();
-                            }
+                        if ( matchedRecipes.length > 0 ) {
+                            
+                            
                             
                         } else {
-                            
                             matchedRecipes.push(recipeId);
-                            
                         }
-                        
-                        
-                        console.log('Recipe ids: '+matchedRecipes);
                     }
                     
                 }
