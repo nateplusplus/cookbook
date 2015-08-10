@@ -69,6 +69,24 @@ $( document ).ready(function(){
         unavailIngredients = [],
         matchedRecipes = [];
     
+    function compileAllIngredients() {
+        
+        var recipeIngredients = [];
+        
+        for (a=0; a<recipes.length; a++) {
+            for (b=0; b<recipes[a].ingredients.length; b++) {
+                var arrayCheck = recipeIngredients.indexOf(recipes[a].ingredients[b].food);
+                
+                if (arrayCheck < 0) {
+                    recipeIngredients.push(recipes[a].ingredients[b].food);
+                }
+                
+            }
+        }
+        
+        return recipeIngredients;
+    }
+    
     
     
     /* ====================== APPLICATION CONTROLLERS ========================== */
@@ -130,22 +148,11 @@ $( document ).ready(function(){
         }).then(function(){     // After success, put data into appropriate arrays
             
             // Reset arrays so duplicates aren't made
-            recipeNames = [];
             allIngredients = []; 
             
             recipes = model.recipes;
-
-            for (a=0; a<recipes.length; a++){
-                
-                recipeNames.push(recipes[a].name);
-
-                for (b=0; b<recipes[a].ingredients.length; b++){
-                    
-                    allIngredients.push(recipes[a].ingredients[b].food);
-                    
-                }
-
-            }
+            
+            allIngredients = compileAllIngredients();
             
             var availRecipes = findRecipes(cupboardList[0].available),
                 unavailRecipes = findRecipes(cupboardList[0].unavailable),
@@ -164,8 +171,8 @@ $( document ).ready(function(){
             createEl(recipeSteps, stepList, 'li');
 
 
-        }); // Ajax function
-    }
+        }); // Ajax .then function
+    } // getModelData function
     
     
     
@@ -306,7 +313,7 @@ $( document ).ready(function(){
         
         // Loop over items in cupboard JSON model and push them into an array
         for (i=0; i<cupboardList[0].available.length; i++) {
-            thisAvailItem = cupboardList[0].available[i].food;
+            var thisAvailItem = cupboardList[0].available[i].food;
             cupboardAvailArray.push(thisAvailItem);
         }
         
@@ -361,7 +368,7 @@ $( document ).ready(function(){
         // Loop over Unavailable items in cupboard JSON model and push them into an array
         for (i=0; i<cupboardList[0].unavailable.length; i++) {
             thisUnavailItem = cupboardList[0].unavailable[i].food;
-               
+            
             cupboardUnavailArray.push(thisUnavailItem); 
         }
         
@@ -388,6 +395,9 @@ $( document ).ready(function(){
         for (i=0; i<cupboardList[0].unavailable.length; i++){
             cupboardUnavail.push(cupboardList[0].unavailable[i].food);
         }
+        
+        // Reset the unavailable controller array
+        unavailIngredients = filterIngredients();
 
         event.target.setAttribute('class', 'selected');
         
@@ -414,35 +424,66 @@ $( document ).ready(function(){
         getModelData(clickedItem);
     };
     
+    
+    function checkRecipes(cupboardModel) {
+        
+        var filteredRecipes = [],
+            cupboardItems = [];
+        
+        for (i=0; i<cupboardModel.length; i++){
+            cupboardItems.push(cupboardModel[i].food);
+        }
+        
+        for (a=0; a<recipes.length; a++){
+            
+            var thisRecipe = recipes[a],
+                thisRecipeIngredients = [];
+            
+            for (b=0; b<thisRecipe.ingredients.length; b++){
+                thisRecipeIngredients.push(thisRecipe.ingredients[b].food);
+            }
+            
+            for (c=0; c<cupboardItems.length; c++){
+                var searchRecipe = thisRecipeIngredients.indexOf(cupboardItems[c]);
+                
+                if (searchRecipe >= 0) {
+                    filteredRecipes.push(thisRecipe.name);
+                }
+            }
+            
+        }
+        
+        return filteredRecipes;
+    }
+    
+    
     function filterIngredients() {
         
-        var availRecipeIngredients = [];
+        var availRecipeIngredients = [],
+            unavailRecipes = checkRecipes(cupboardList[0].unavailable),
+            availRecipes = checkRecipes(cupboardList[0].available);
         
-        // Loop over AVAILABLE items in cupboard JSON model and push them into an array
-        for (i=0; i<cupboardList[0].available.length; i++) {
+        for (i=0; i<recipes.length; i++){
             
-            thisAvailItem = cupboardList[0].available[i].food;
+            var thisRecipe = recipes[i],
+                thisRecipeIngredients = [],
+                searchUnavail = unavailRecipes.indexOf(thisRecipe.name),
+                searchAvail = availRecipes.indexOf(thisRecipe.name);
             
-            for (a=0; a<recipes.length; a++){
-                var thisRecipe = recipes[a],
-                    thisRecipeIngredients = [];
+            
+            if (searchUnavail < 0 && searchAvail >= 0) {
                 
-                for(b=0; b<recipes[a].ingredients.length; b++) {
-                    thisRecipeIngredients.push(recipes[a].ingredients[b].food);
-                }
-                
-                var searchIngredients = thisRecipeIngredients.indexOf(thisAvailItem);
-                
-                if (searchIngredients >= 0) {
+                for (b=0; b<thisRecipe.ingredients.length; b++){
                     
-                    for(c=0; c<thisRecipeIngredients.length; c++) {
-                        availRecipeIngredients.push(thisRecipeIngredients[c]);
+                    var checkArray = availRecipeIngredients.indexOf(thisRecipe.ingredients[b].food);
+                    
+                    if (checkArray < 0) {
+                        availRecipeIngredients.push(thisRecipe.ingredients[b].food);
                     }
                     
                 }
-                
+
             }
-            
         }
         
         return availRecipeIngredients;
