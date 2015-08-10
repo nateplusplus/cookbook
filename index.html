@@ -16,44 +16,79 @@
                     <h1>Cookbook</h1>
                     <p>A pragmatic recipe app</p>
                 </header>
+                
+                
                 <main id="mainSection">
                    
                    
-                   
-                    <div id="availableBox" class="column index"><!--Available Foods-->
+                    <!--Available Foods-->
+                    <div id="availableBox" class="column index">
 
                         <div class="selectBoxLabel">
                             <h3>What are you craving?</h3>
                         </div>    
 
                         <ul id='availableBoxList' class="selectBox">
-
+                            <!--All ingredients here-->
                         </ul>
                     </div>
                     
                     
                     
-                    
-                    <div id="unavailableBox" class="column filters"><!--Unavailable Foods-->
+                    <!--Unavailable Foods-->
+                    <div id="unavailableBox" class="column filters">
                         <div class="selectBoxLabel">
                             <h3>Missing any of these things?</h3>
                         </div>
 
                         <ul id='unavailableBoxList' class="selectBox">
-
+                            <!--Filtered ingredient list here-->
                         </ul>
                     </div>
-                    <div id="cupboardBox" class="column index filters"><!--Cupboard-->
-                        <h3>Your cupboard</h3>
-                        <p>Available:</p>
+                    
+                    
+                    <!--Cupboard-->
+                    <div id="cupboardBox" class="column index filters">
+                        <h3>Your Cupboard:</h3>
                         <ul id="cupboardAvailList">
-                            
+                            <!--Available items here-->
                         </ul>
-                        <p>Unavailable:</p>
                         <ul id="cupboardUnavailList">
-                            
+                            <!--Unavailable items here-->
                         </ul>
                     </div>
+                    
+                    
+                    
+                    
+                    <!---------------------------------------------------
+                                        RECIPES PAGE
+                    ----------------------------------------------------->
+                    
+                    <div id="recipeListBox" class="column recipes">
+                       
+                       <ul id="recipeList">
+                           <!--Recipes here-->
+                       </ul>
+                        
+                    </div>
+                    
+                    
+                    
+                    <!---------------------------------------------------
+                                        STEPS PAGE
+                    ----------------------------------------------------->
+                    
+                    <div id="stepsBox" class="steps">
+                       
+                        <div id="recipeTitle"><!--Title here--></div>
+                       
+                        <ul id="stepList">
+                            <!--Steps here-->
+                        </ul>
+                        
+                    </div>
+                    
                     
                     
                     
@@ -61,7 +96,7 @@
                 <footer id="navMenu">
                    
                    
-                    <div id="back" class="button left filters recipes">
+                    <div id="back" class="button left filters recipes steps">
                         <i class="fa fa-chevron-left fa-lg"></i> <span>Back</span>
                     </div>
                     

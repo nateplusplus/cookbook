@@ -41,6 +41,8 @@ footer, #cupboardBox { text-align: center; }
 
 a { text-decoration: none; }
 
+#cupboardUnavailList li { color: red; }
+
 
 
 /*    2 - Layout    */
@@ -119,6 +121,8 @@ ul li {
 .right {
     float: right;
 }
+
+#cupboardUnavailList li:before { content: 'No '; }
 
 
 

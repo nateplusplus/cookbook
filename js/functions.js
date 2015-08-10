@@ -45,6 +45,9 @@ $( document ).ready(function(){
         findRecipesButton = document.getElementById('findRecipes'),
         navSequence = [ '', '#filters/', '#recipes/', '#steps/' ],
         pageName = '',
+        recipeList = document.getElementById('recipeList'),
+        recipeTitle = document.getElementById('recipeTitle'),
+        stepList = document.getElementById('stepList'),
         
         
     /* ============================ MODELS ================================ */
@@ -63,6 +66,7 @@ $( document ).ready(function(){
         ],
         cupboardAvail = [],
         cupboardUnavail = [],
+        unavailIngredients = [],
         matchedRecipes = [];
     
     
@@ -90,7 +94,7 @@ $( document ).ready(function(){
     
     
     // AJAX request - update all model data
-    function getModelData() {
+    function getModelData(clickedRecipe) {
         
         
         // Using the core $.ajax() method
@@ -143,12 +147,21 @@ $( document ).ready(function(){
 
             }
             
+            var availRecipes = findRecipes(cupboardList[0].available),
+                unavailRecipes = findRecipes(cupboardList[0].unavailable),
+                filteredRecipes = filterRecipes(availRecipes, unavailRecipes),
+                recipeSteps = getSteps(clickedRecipe),
+                clickedRecipeTitle = getRecipeTitle(clickedRecipe);
+            
             
             // Build each list, with fetched data
             createEl(allIngredients, availableBoxList, 'li');
-            createEl(allIngredients, unavailableBoxList, 'li');
+            createEl(unavailIngredients, unavailableBoxList, 'li');
             createEl(cupboardAvail, cupboardAvailList, 'li');
             createEl(cupboardUnavail, cupboardUnavailList, 'li');
+            createEl(filteredRecipes, recipeList, 'li'),
+            createEl(clickedRecipeTitle, recipeTitle, 'h3'),
+            createEl(recipeSteps, stepList, 'li');
 
 
         }); // Ajax function
@@ -257,8 +270,6 @@ $( document ).ready(function(){
             default:
                 pageName = 'index';
         }
-
-        console.log('pageName: '+pageName);
     }
     
     //Render initial route
@@ -323,6 +334,9 @@ $( document ).ready(function(){
             cupboardAvail.push(cupboardList[0].available[i].food);
         }
         
+        // Reset the unavailable controller array
+        unavailIngredients = filterIngredients();
+        
         // Re-fetch model to update lists
         getModelData();
         
@@ -341,12 +355,14 @@ $( document ).ready(function(){
             // Create an array for the clicked item to work within blendArrays function
             clickedItem = [];
             
-            clickedItem.push(event.target.innerHTML);
         
-        // Loop over items in cupboard JSON model and push them into an array
+        clickedItem.push(event.target.innerHTML);
+        
+        // Loop over Unavailable items in cupboard JSON model and push them into an array
         for (i=0; i<cupboardList[0].unavailable.length; i++) {
             thisUnavailItem = cupboardList[0].unavailable[i].food;
-            cupboardUnavailArray.push(thisUnavailItem);
+               
+            cupboardUnavailArray.push(thisUnavailItem); 
         }
         
         // Add the clicked item to the array if it isn't already added
@@ -380,13 +396,66 @@ $( document ).ready(function(){
     };
     
     
+    // On-click, get the text of clicked element
+    // Add text to the cupboard.unavailable model
+    recipeList.onclick = function(event){
+        
+        // Prevent default behavior when clicked
+        event.preventDefault();
+        
+        // Initialize array
+        var clickedItem = event.target.innerHTML;
+        
+        window.location.hash = 'steps/';
+
+        event.target.setAttribute('class', 'selected');
+        
+        // Re-fetch model to update lists
+        getModelData(clickedItem);
+    };
+    
+    function filterIngredients() {
+        
+        var availRecipeIngredients = [];
+        
+        // Loop over AVAILABLE items in cupboard JSON model and push them into an array
+        for (i=0; i<cupboardList[0].available.length; i++) {
+            
+            thisAvailItem = cupboardList[0].available[i].food;
+            
+            for (a=0; a<recipes.length; a++){
+                var thisRecipe = recipes[a],
+                    thisRecipeIngredients = [];
+                
+                for(b=0; b<recipes[a].ingredients.length; b++) {
+                    thisRecipeIngredients.push(recipes[a].ingredients[b].food);
+                }
+                
+                var searchIngredients = thisRecipeIngredients.indexOf(thisAvailItem);
+                
+                if (searchIngredients >= 0) {
+                    
+                    for(c=0; c<thisRecipeIngredients.length; c++) {
+                        availRecipeIngredients.push(thisRecipeIngredients[c]);
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        return availRecipeIngredients;
+        
+    }
+    
+    
     
     /* ============================ NAV CONTROLLERS ================================ */
     
     
     
     function getNavSequence(button) {
-        console.log('You clicked '+button);
         
         var sequenceId = '';
         
@@ -396,12 +465,12 @@ $( document ).ready(function(){
             sequenceId = 0;
         } else {
             
-            for (i=0; i<navSequence.length; i++) {
-                if (window.location.hash == navSequence[i]) {
-                    sequenceId = i;
-                    
-                    break;
-                }
+            var searchSequence = navSequence.indexOf(window.location.hash);
+            
+            if (searchSequence >= 0) {
+                sequenceId = searchSequence;
+            } else {
+                console.warn('Error in getNavSequence');
             }
             
         }
@@ -428,9 +497,8 @@ $( document ).ready(function(){
                 page = '#recipes/';
                 break;
             default:
-                page = ''; //Home page
+                page = ''; // Home page
         }
-        
         
         return page;
     }
@@ -449,6 +517,7 @@ $( document ).ready(function(){
         event.preventDefault();
         
         window.location.hash = getNavSequence('back');
+        
     };
     
     findRecipesButton.onclick = function(event){
@@ -462,37 +531,110 @@ $( document ).ready(function(){
     /* ========================= SEARCH CONTROLLER ============================= */
     
     
-    function findRecipes () {
+    function findRecipes(filter) {
         
-        var availItems = [],
-            unavailItems = [];
+        var matchedRecipes = [];
         
-        // Add all items in available and unavailable models into arrays
-        for (i=0; i<available.length; i++) { availItems.push(available[i].food); }
-        for (i=0; i<available.length; i++) { unavailItems.push(available[i].food); }
+        if ( filter.length > 0 ) {
         
-        for (a=0; a<availItems.length; a++){
-            
-            for (b=0; b<recipes.length; b++){
-                
-                for (c=0; c<recipes[].length; c++){
-                
-                
-                
+            var cupboardItems = [];
+
+            // Add all items in available and unavailable models into arrays
+            for (i=0; i<filter.length; i++) { cupboardItems.push(filter[i].food); }
+
+            for (a=0; a<cupboardItems.length; a++){
+
+                for (b=0; b<recipes.length; b++){
+
+                    var thisRecipe = recipes[b].name,
+                        theseIngredients = [];
+
+                    for (c=0; c<recipes[b].ingredients.length; c++){
+
+                        theseIngredients.push(recipes[b].ingredients[c].food);
+
+                    }
+                        
+                    var searchIngredients = theseIngredients.indexOf(cupboardItems[a]);
+
+                    if(searchIngredients >= 0){
+                        
+                        var checkArray = matchedRecipes.indexOf(thisRecipe);
+                        
+                        if ( checkArray < 0){
+                        
+                            matchedRecipes.push(thisRecipe);
+                            
+                        } else {
+                            matchedRecipes.splice(checkArray, 1, thisRecipe);
+                        }
+                    }
+                    
                 }
+            } // for - outer loop
+        } // if cupboardList array is populated
+        
+        return matchedRecipes;
+        
+    } // findRecipes function
+    
+    function filterRecipes (avail, unavail) {
+        
+        var filtered = [];
+        
+        for (i=0; i<avail.length; i++) {
+            
+            var searchMatchedRecipes = unavail.indexOf(avail[i]);
+            
+            if ( searchMatchedRecipes < 0 ) {
                 
+                var checkArray = filtered.indexOf(avail[i]);
+                
+                if (checkArray < 0){
+                    filtered.push(avail[i]);
+                }
             }
         }
         
-        
-        // recipesWithAvail =  Find recipes that use cupboard ingredients 
-        // recipesWithUnavail = Find recipes within recipesWithAvail that use unavailable ingredients
-        // recipesMatch = Remove recipesWithUnavail from recipesWithAvail
-        
-        // return recipesMatch
-        
+        return filtered;
     }
     
+    
+    /* ========================= STEPS CONTROLLER ============================= */
+    
+    function getSteps(selection) {
+        
+        var recipeSteps = [];
+
+        for (a=0; a<recipes.length ; a++) {
+
+            if ( recipes[a].name === selection) {
+
+                for (b=0; b<recipes[a].directions.length; b++) {
+                    recipeSteps.push(recipes[a].directions[b].step);
+                }
+
+            }
+        }
+
+        if (recipeSteps.length === 0) {
+            recipeSteps.push('Error finding recipe!');
+        }
+
+        return recipeSteps;
+
+    }
+    
+    function getRecipeTitle(clickedRecipe) {
+        
+        var recipeTitle = [];
+        
+        if (clickedRecipe) {
+            var recipeTitle = [clickedRecipe];
+        }
+        
+        return recipeTitle;
+    }
     
     
     
