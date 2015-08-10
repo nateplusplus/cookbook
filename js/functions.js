@@ -1,3 +1,34 @@
+// Returns Array 1 with added items from Array 2, without duplicating anything
+function blendArrays(arry1, arry2) {
+	
+	// Loop through all items in Array 2
+	for (i=0; i<arry2.length; i++) {
+		
+		// Get the current item in the loop
+		var thisArray2 = arry2[i],
+		
+			// Search Array 1 for any occurrence of the current item in the loop
+			// A match will return the index number of that occurrence
+			// No match will return -1
+			arryIndex = arry1.indexOf(thisArray2);
+			
+			// If there's no match, push the result to Array 1
+			if (arryIndex < 0) {
+				arry1.push(thisArray2);
+				
+			// If there is a match, simply replace it with the same value
+			} else {
+				arry1.splice(arryIndex, 1, thisArray2);
+			}
+	}
+	
+	return arry1;
+	
+}
+
+
+
+
 $( document ).ready(function(){
     
     
@@ -112,8 +143,6 @@ $( document ).ready(function(){
 
             }
             
-            // Filter data based on any user input
-            filterRecipeData(cupboardAvail);
             
             // Build each list, with fetched data
             createEl(allIngredients, availableBoxList, 'li');
@@ -254,11 +283,38 @@ $( document ).ready(function(){
     // Add text to the cupboard.available model
     availableBoxList.onclick = function(event){
         
+        // Prevent default behavior when clicked
         event.preventDefault();
-
-        var obj = new Object();
-        obj.food = event.target.innerHTML;
-        cupboardList[0].available.push(obj);
+        
+        // Initialize array
+        var cupboardAvailArray = [],
+            // Create an array for the clicked item to work within blendArrays function
+            clickedItem = [];
+            
+            clickedItem.push(event.target.innerHTML);
+        
+        // Loop over items in cupboard JSON model and push them into an array
+        for (i=0; i<cupboardList[0].available.length; i++) {
+            thisAvailItem = cupboardList[0].available[i].food;
+            cupboardAvailArray.push(thisAvailItem);
+        }
+        
+        // Add the clicked item to the array if it isn't already added
+        blendArrays(cupboardAvailArray, clickedItem);
+        
+        // Reset the cupboard json model to accept new data
+        cupboardList[0].available = [];
+        
+        // Loop over each item of the cupboardAvailArray
+        for (i=0; i<cupboardAvailArray.length; i++){
+            
+            // For each item, create an object and put the value in a new food property
+            var obj = new Object();
+            obj.food = cupboardAvailArray[i];
+            
+            // Push each object to the cupboard list to create new json data
+            cupboardList[0].available.push(obj);
+        }
         
         // Reset the controller array
         cupboardAvail = [];
@@ -267,10 +323,9 @@ $( document ).ready(function(){
             cupboardAvail.push(cupboardList[0].available[i].food);
         }
         
-        event.target.setAttribute('class', 'selected');
-        
         // Re-fetch model to update lists
         getModelData();
+        
     };
     
     
@@ -278,11 +333,38 @@ $( document ).ready(function(){
     // Add text to the cupboard.unavailable model
     unavailableBoxList.onclick = function(event){
         
+        // Prevent default behavior when clicked
         event.preventDefault();
-
-        var obj = new Object();
-        obj.food = event.target.innerHTML;
-        cupboardList[0].unavailable.push(obj);
+        
+        // Initialize array
+        var cupboardUnavailArray = [],
+            // Create an array for the clicked item to work within blendArrays function
+            clickedItem = [];
+            
+            clickedItem.push(event.target.innerHTML);
+        
+        // Loop over items in cupboard JSON model and push them into an array
+        for (i=0; i<cupboardList[0].unavailable.length; i++) {
+            thisUnavailItem = cupboardList[0].unavailable[i].food;
+            cupboardUnavailArray.push(thisUnavailItem);
+        }
+        
+        // Add the clicked item to the array if it isn't already added
+        blendArrays(cupboardUnavailArray, clickedItem);
+        
+        // Reset the cupboard json model to accept new data
+        cupboardList[0].unavailable = [];
+        
+        // Loop over each item of the cupboardAvailArray
+        for (i=0; i<cupboardUnavailArray.length; i++){
+            
+            // For each item, create an object and put the value in a new food property
+            var obj = new Object();
+            obj.food = cupboardUnavailArray[i];
+            
+            // Push each object to the cupboard list to create new json data
+            cupboardList[0].unavailable.push(obj);
+        }
         
         // Reset the controller array
         cupboardUnavail = [];
@@ -380,36 +462,23 @@ $( document ).ready(function(){
     /* ========================= SEARCH CONTROLLER ============================= */
     
     
-    function filterRecipeData (available) {
+    function findRecipes () {
         
-        for (i=0; i<available.length; i++) {
+        var availItems = [],
+            unavailItems = [];
+        
+        // Add all items in available and unavailable models into arrays
+        for (i=0; i<available.length; i++) { availItems.push(available[i].food); }
+        for (i=0; i<available.length; i++) { unavailItems.push(available[i].food); }
+        
+        for (a=0; a<availItems.length; a++){
             
-            var thisCupboardItem = available[i];
-            
-            for (a=0; a<recipes.length; a++) {
-            
-                var thisRecipe = recipes[a],
-                    matchedRecipes = [];
+            for (b=0; b<recipes.length; b++){
                 
-                for (b=0; b<thisRecipe.ingredients.length; b++) {
-                    
-                    var thisIngredient = thisRecipe.ingredients[b].food;
-                    
-                    if( thisCupboardItem === thisIngredient ) {
-                        
-                        var recipeId = recipes.indexOf(thisRecipe);
-                        
-                        // How the hell to test if recipe has already been matched??
-                        
-                        if ( matchedRecipes.length > 0 ) {
-                            
-                            
-                            
-                        } else {
-                            matchedRecipes.push(recipeId);
-                        }
-                    }
-                    
+                for (c=0; c<recipes[].length; c++){
+                
+                
+                
                 }
                 
             }

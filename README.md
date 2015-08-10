@@ -9,3 +9,11 @@ LINKS:
 -----
 
 <a href="http://natehub.net/cookbook" target="_blank">Working Sample</a>
+
+
+
+TO DO:
+-----
+
+- Filter unavailable ingredients based on "available" selections
+- Filter unavailable ingredients with every new "unavailable" selection
