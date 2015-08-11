@@ -43,6 +43,9 @@ $( document ).ready(function(){
         nextButton = document.getElementById('next'),
         backButton = document.getElementById('back'),
         findRecipesButton = document.getElementById('findRecipes'),
+        cupboardLabel = document.getElementById('cupboardLabel'),
+        cupboardLists = document.getElementById('cupboardLists'),
+        cupboardCount = document.getElementById('cupboardCount'),
         navSequence = [ '', '#filters/', '#recipes/', '#steps/' ],
         pageName = '',
         recipeList = document.getElementById('recipeList'),
@@ -158,7 +161,8 @@ $( document ).ready(function(){
                 unavailRecipes = findRecipes(cupboardList[0].unavailable),
                 filteredRecipes = filterRecipes(availRecipes, unavailRecipes),
                 recipeSteps = getSteps(clickedRecipe),
-                clickedRecipeTitle = getRecipeTitle(clickedRecipe);
+                clickedRecipeTitle = getRecipeTitle(clickedRecipe),
+                totalCupboard = cupboardAvail.length+cupboardUnavail.length;
             
             
             // Build each list, with fetched data
@@ -169,6 +173,9 @@ $( document ).ready(function(){
             createEl(filteredRecipes, recipeList, 'li'),
             createEl(clickedRecipeTitle, recipeTitle, 'h3'),
             createEl(recipeSteps, stepList, 'li');
+            
+            
+            cupboardCount.innerHTML = totalCupboard;
 
 
         }); // Ajax .then function
@@ -677,6 +684,19 @@ $( document ).ready(function(){
         return recipeTitle;
     }
     
+    
+     /* ========================= CUPBOARD CONTROLLER ============================= */
+    
+    cupboardLabel.onclick = function(event) {
+        event.preventDefault();
+        
+        
+        if ( cupboardLists.className == 'closed') {
+            cupboardLists.setAttribute('class', 'open');
+        } else {
+            cupboardLists.setAttribute('class', 'closed');
+        }
+    }
     
     
 }); // DOM ready

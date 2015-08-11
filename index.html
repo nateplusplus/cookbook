@@ -4,6 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Cookbook</title>
+        <link href='http://fonts.googleapis.com/css?family=Lobster|Quicksand|Open+Sans:400,300' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="css/lib/normalize.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="css/style.css">
@@ -14,7 +15,22 @@
             <div id="wrapper">
                 <header>
                     <h1>Cookbook</h1>
-                    <p>Hand-picked recipes based on what you own</p>
+                    
+                    
+                    <!--Cupboard-->
+                    <div id="cupboardBox">
+                        <p id="cupboardLabel" class="button">your cupboard (<span id="cupboardCount"></span>)</p>
+                        <div id="cupboardLists" class="closed">
+                            <ul id="cupboardAvailList">
+                                <!--Available items here-->
+                            </ul>
+                            <ul id="cupboardUnavailList">
+                                <!--Unavailable items here-->
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    
                 </header>
                 
                 
@@ -22,13 +38,13 @@
                    
                    
                     <!--Available Foods-->
-                    <div id="availableBox" class="column index">
+                    <div id="availableBox" class="index">
 
                         <div class="selectBoxLabel">
                             <h3>What are you craving?</h3>
                         </div>    
 
-                        <ul id='availableBoxList' class="selectBox">
+                        <ul id='availableBoxList' class="list selectBox">
                             <!--All ingredients here-->
                         </ul>
                     </div>
@@ -36,7 +52,7 @@
                     
                     
                     <!--Unavailable Foods-->
-                    <div id="unavailableBox" class="column filters">
+                    <div id="unavailableBox" class="filters">
                         <div class="selectBoxLabel">
                             <h3>Missing any of these things?</h3>
                         </div>
@@ -47,25 +63,11 @@
                     </div>
                     
                     
-                    <!--Cupboard-->
-                    <div id="cupboardBox" class="column index filters">
-                        <h3>Your Cupboard:</h3>
-                        <ul id="cupboardAvailList">
-                            <!--Available items here-->
-                        </ul>
-                        <ul id="cupboardUnavailList">
-                            <!--Unavailable items here-->
-                        </ul>
-                    </div>
-                    
-                    
-                    
-                    
                     <!---------------------------------------------------
                                         RECIPES PAGE
                     ----------------------------------------------------->
                     
-                    <div id="recipeListBox" class="column recipes">
+                    <div id="recipeListBox" class="recipes">
                        
                        <ul id="recipeList">
                            <!--Recipes here-->
