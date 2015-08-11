@@ -176,6 +176,8 @@ $( document ).ready(function(){
             
             
             cupboardCount.innerHTML = totalCupboard;
+            
+             activateScroller();
 
 
         }); // Ajax .then function
@@ -202,9 +204,9 @@ $( document ).ready(function(){
         });
         
         
-        var renderElements = $('#mainSection .'+routeName),
+        var renderElements = $('#scroller .'+routeName),
             renderNav = $('#navMenu .'+routeName),
-            allMain = $('#mainSection > div'),
+            allMain = $('#scroller > div'),
             allNav = $('#navMenu > div');
         
         var test = $(renderElements).length;
@@ -696,6 +698,27 @@ $( document ).ready(function(){
         } else {
             cupboardLists.setAttribute('class', 'closed');
         }
+    }
+    
+    
+    /* ========================= ISCROLL ============================= */
+    
+    
+    function activateScroller() {
+    
+        // Prevent page from scrolling normally
+        function preventDefaultScrolling(event) { event.preventDefault(); }
+        document.addEventListener( 'touchmove', preventDefaultScrolling, false );
+
+
+        var myScroller = new iScroll(
+            'mainSection',
+            {
+                hScroll: false, 
+                vScrollbar: false,
+                bounce: false 
+            }
+        );
     }
     
     

@@ -5,6 +5,15 @@
 
 
 
+/*  To prevent OSX browsers from
+    bouncing at end of scroll     */
+html, body {
+    height: 100%;
+    overflow: hidden;
+}
+
+
+
 /* Normalizing */
 
 * { margin: 0; box-sizing: border-box; }
@@ -89,6 +98,12 @@ main {
     overflow-y: scroll;
 }
 
+#scroller {
+    display: block;
+    width: 100%;
+    overflow-y: scroll;
+}
+
 .column {
     position: relative;
     display: inline-block;
@@ -106,7 +121,7 @@ main {
     border: 0;
 }
 
-.selectBoxLabel {
+.listLabel {
     position: relative;
     height: 1.5em;
     text-align: center;
