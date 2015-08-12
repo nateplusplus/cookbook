@@ -51,6 +51,8 @@ $( document ).ready(function(){
         recipeList = document.getElementById('recipeList'),
         recipeTitle = document.getElementById('recipeTitle'),
         stepList = document.getElementById('stepList'),
+        missing = document.getElementById('missing'),
+        shopping = document.getElementById('shopping'),
         
         
     /* ============================ MODELS ================================ */
@@ -70,7 +72,8 @@ $( document ).ready(function(){
         cupboardAvail = [],
         cupboardUnavail = [],
         unavailIngredients = [],
-        matchedRecipes = [];
+        matchedRecipes = [],
+        cupboardAvailDisplayed = [];
     
     function compileAllIngredients() {
         
@@ -157,22 +160,32 @@ $( document ).ready(function(){
             
             allIngredients = compileAllIngredients();
             
-            var availRecipes = findRecipes(cupboardList[0].available),
-                unavailRecipes = findRecipes(cupboardList[0].unavailable),
+            cupboardAvail = resetControllerArray(cupboardList[0].available);
+            cupboardAvailDisplayed = resetControllerArray(cupboardList[0].available);
+            cupboardUnavail = resetControllerArray(cupboardList[0].unavailable);
+            
+            checkInput(cupboardAvail, allIngredients);
+            
+            var availRecipes = findRecipes(cupboardAvail),
+                unavailRecipes = findRecipes(cupboardUnavail),
                 filteredRecipes = filterRecipes(availRecipes, unavailRecipes),
                 recipeSteps = getSteps(clickedRecipe),
                 clickedRecipeTitle = getRecipeTitle(clickedRecipe),
-                totalCupboard = cupboardAvail.length+cupboardUnavail.length;
+                totalCupboard = getCupboardCount(cupboardAvailDisplayed, cupboardUnavail);
+            
+            // Reset the unavailable controller array
+            unavailIngredients = filterIngredients();
             
             
             // Build each list, with fetched data
             createEl(allIngredients, availableBoxList, 'li');
             createEl(unavailIngredients, unavailableBoxList, 'li');
-            createEl(cupboardAvail, cupboardAvailList, 'li');
+            createEl(cupboardAvailDisplayed, cupboardAvailList, 'li');
             createEl(cupboardUnavail, cupboardUnavailList, 'li');
             createEl(filteredRecipes, recipeList, 'li'),
             createEl(clickedRecipeTitle, recipeTitle, 'h3'),
-            createEl(recipeSteps, stepList, 'li');
+            createEl(recipeSteps, stepList, 'p');
+            
             
             
             cupboardCount.innerHTML = totalCupboard;
@@ -343,16 +356,6 @@ $( document ).ready(function(){
             cupboardList[0].available.push(obj);
         }
         
-        // Reset the controller array
-        cupboardAvail = [];
-
-        for (i=0; i<cupboardList[0].available.length; i++){
-            cupboardAvail.push(cupboardList[0].available[i].food);
-        }
-        
-        // Reset the unavailable controller array
-        unavailIngredients = filterIngredients();
-        
         // Re-fetch model to update lists
         getModelData();
         
@@ -397,22 +400,40 @@ $( document ).ready(function(){
             // Push each object to the cupboard list to create new json data
             cupboardList[0].unavailable.push(obj);
         }
-        
-        // Reset the controller array
-        cupboardUnavail = [];
-
-        for (i=0; i<cupboardList[0].unavailable.length; i++){
-            cupboardUnavail.push(cupboardList[0].unavailable[i].food);
-        }
-        
-        // Reset the unavailable controller array
-        unavailIngredients = filterIngredients();
 
         event.target.setAttribute('class', 'selected');
         
         // Re-fetch model to update lists
         getModelData();
     };
+    
+    
+    function resetControllerArray(data){
+        
+        // Reset the controller array
+        array = [];
+
+        for (i=0; i<data.length; i++){
+            array.push(data[i].food);
+        }
+        
+        return array;
+        
+    }
+    
+    function checkInput(array, model) {
+        
+        if (array.length <= 0) {
+            
+            for(i=0; i < model.length; i++){
+                
+                array.push(model[i]);
+                
+            }
+            
+        }
+    }
+    
     
     
     // On-click, get the text of clicked element
@@ -436,12 +457,7 @@ $( document ).ready(function(){
     
     function checkRecipes(cupboardModel) {
         
-        var filteredRecipes = [],
-            cupboardItems = [];
-        
-        for (i=0; i<cupboardModel.length; i++){
-            cupboardItems.push(cupboardModel[i].food);
-        }
+        var filteredRecipes = [];
         
         for (a=0; a<recipes.length; a++){
             
@@ -452,8 +468,8 @@ $( document ).ready(function(){
                 thisRecipeIngredients.push(thisRecipe.ingredients[b].food);
             }
             
-            for (c=0; c<cupboardItems.length; c++){
-                var searchRecipe = thisRecipeIngredients.indexOf(cupboardItems[c]);
+            for (c=0; c<cupboardModel.length; c++){
+                var searchRecipe = thisRecipeIngredients.indexOf(cupboardModel[c]);
                 
                 if (searchRecipe >= 0) {
                     filteredRecipes.push(thisRecipe.name);
@@ -469,8 +485,8 @@ $( document ).ready(function(){
     function filterIngredients() {
         
         var availRecipeIngredients = [],
-            unavailRecipes = checkRecipes(cupboardList[0].unavailable),
-            availRecipes = checkRecipes(cupboardList[0].available);
+            unavailRecipes = checkRecipes(cupboardUnavail),
+            availRecipes = checkRecipes(cupboardAvail);
         
         for (i=0; i<recipes.length; i++){
             
@@ -499,6 +515,18 @@ $( document ).ready(function(){
         
     }
     
+    
+    function getCupboardCount(avail, unavail) {
+        
+        var count = avail.length + unavail.length;
+        
+        if ( count === 0 ) {
+            count = '';
+        }
+        
+        return count;
+        
+    }
     
     
     /* ============================ NAV CONTROLLERS ================================ */
@@ -590,7 +618,7 @@ $( document ).ready(function(){
             var cupboardItems = [];
 
             // Add all items in available and unavailable models into arrays
-            for (i=0; i<filter.length; i++) { cupboardItems.push(filter[i].food); }
+            for (i=0; i<filter.length; i++) { cupboardItems.push(filter[i]); }
 
             for (a=0; a<cupboardItems.length; a++){
 
@@ -700,6 +728,30 @@ $( document ).ready(function(){
         }
     }
     
+    function removeClickedItem (event, model) {
+        
+        event.preventDefault();
+        
+        
+        for (i=0; i<model.length; i++){
+            var thisItem = model[i].food;
+            
+            if (thisItem === event.target.innerHTML){
+                model.splice(i, 1);
+                break;
+            }
+        }
+        
+        getModelData();
+    }
+    
+    
+    cupboardAvailList.onclick = function(event) {
+        removeClickedItem(event, cupboardList[0].available);
+    }
+    cupboardUnavailList.onclick = function(event) {
+        removeClickedItem(event, cupboardList[0].unavailable);
+    }
     
     /* ========================= ISCROLL ============================= */
     
@@ -716,7 +768,8 @@ $( document ).ready(function(){
             {
                 hScroll: false, 
                 vScrollbar: false,
-                bounce: false 
+                bounce: true,
+                mouseWheel: true
             }
         );
     }

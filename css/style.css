@@ -42,8 +42,12 @@ h3 { font-family: 'Quicksand', sans-serif; font-size: 1.15em; margin: 1em 0; }
 
 p { font-family: 'Open Sans', sans-serif; margin: 0; font-size: .9em; line-height: 1; }
 
-li:hover { color: red; }
-li:active, li:focus { color: yellow; }
+li:hover {
+    box-shadow: inset 0px 0px 10px 0px #DDDDDD,5px 5px 5px 1px #FFFFFF;
+    -webkit-box-shadow: inset 0px 0px 10px 0px #DDDDDD,5px 5px 5px 1px #FFFFFF;
+    -moz-box-shadow: inset 0px 0px 10px 0px #DDDDDD,5px 5px 5px 1px #FFFFFF;
+    -o-box-shadow: inset 0px 0px 10px 0px #DDDDDD,5px 5px 5px 1px #FFFFFF;
+}
 
 .selected { color: lightgrey; }
 
@@ -174,6 +178,11 @@ ul li {
     display:block;
     max-height: 300px;
     overflow-y: scroll;
+}
+
+
+.hide {
+    display: none;
 }
 
 
