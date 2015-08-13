@@ -102,7 +102,6 @@
             ],
             "directions"    : [
                 { "step"    : "The key to cooking good fish is always heat! Preheat your oven to 450 degrees." },
-                { "step"    : "Cover pan with aluminum foil" },
                 { "step"    : "Season your salmon with salt, pepper, garlic, oregano, basil, and onion powder." },
                 { "step"    : "Rub a coat of high-heat cooking oil of your choice over your pan to help season things a bit more, and to avoid a sticky mess." },
                 { "step"    : "Bake for about 15 minutes." },
