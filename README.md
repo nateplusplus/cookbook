@@ -9,12 +9,3 @@ LINKS:
 -----
 
 <a href="http://natehub.net/cookbook" target="_blank">Working Sample</a>
-
-
-
-TO DO:
------
-
-- Remove selection from list when it's in cupboard
-- Click on item in cupboard to remove it, and put it back on list
-- If user selects nothing in avail section, assume all is available

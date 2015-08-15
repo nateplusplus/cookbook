@@ -768,7 +768,7 @@ $( document ).ready(function(){
             {
                 hScroll: false, 
                 vScrollbar: false,
-                bounce: true,
+                bounce: false,
                 mouseWheel: true
             }
         );

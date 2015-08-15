@@ -85,6 +85,7 @@ a { text-decoration: none; }
 
 header, footer {
     position: relative;
+    display: block;
     height: 3.4em;
     z-index: 100;
 }
@@ -99,13 +100,11 @@ main {
     position: relative;
     height: 70%;
     width: 100%;
-    overflow-y: scroll;
 }
 
 #scroller {
     display: block;
     width: 100%;
-    overflow-y: scroll;
 }
 
 .column {
@@ -135,7 +134,6 @@ main {
     position: relative;
     display: block;
     height: 90%;
-    overflow-y: scroll;
 }
 
 ul li {
