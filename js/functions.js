@@ -202,7 +202,6 @@ $( document ).ready(function(){
     getModelData();
     
     
-    
     /* ================================ ROUTERS ================================ */
     
     // Render Route Function
