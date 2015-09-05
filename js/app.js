@@ -6,12 +6,12 @@ var availCupboard = [], unavailCupboard = [], availList = [], unavailList = [], 
     navSequence = [ '', '#filters/', '#recipes/', '#steps/' ],
     
     // initialize cupboardModel (JSON OBJ) - Holds selected avail and unavail items
-    cupboard = [
+    cupboardModel = [
             {
                 available   : [],
                 unavailable : []
             }
-        ]
+        ];
 
 
 /* ================ functions ================ */
@@ -110,7 +110,7 @@ function renderElements(selector) {
         var arrayCheck = classes.indexOf(hashName);
 
         // if the class attribute contains current hash in it
-        if ( arrayCheck > 0 ){
+        if ( arrayCheck >= 0 ){
 
             // show element using jquery's show method
             $(elements[i]).show();
@@ -145,6 +145,43 @@ function createEl(model, parent, child) {
 
 } // createEl
 
+
+// Find recipes for given array of ingredients
+// Returns an array of recipe objects
+var searchRecipeIngredients = function (ingredientsQuery){
+    
+    // Initialize matched recipes array
+    var matchedRecipes = [];
+    
+    // Loop through each recipe
+    for (a=0; a<recipes.length; a++) {
+        // Get this recipe object
+        var thisRecipe = recipes[a];
+        // Loop through each ingredient of each recipe
+        for (b=0; b<thisRecipe.ingredients.length; b++) {
+            // Get this ingredient name
+            var thisIngredient = thisRecipe.ingredients[b].food;
+            // Check if this ingredient name exists within the ingredientsQuery array
+            var queryMatch = ingredientsQuery.indexOf(thisIngredient);
+            // If there's a match...
+            if( queryMatch >= 0 ){
+                // Check if this recipe is already added to matchedRecipes
+                var arrayCheck = matchedRecipes.indexOf(thisRecipe);
+                // If arrayCheck returns negative, it hasn't been added
+                if (arrayCheck < 0) {
+                    // Add this recipe to matchedRecipes
+                    matchedRecipes.push(thisRecipe);
+                }
+            }
+            
+        }
+    }
+    
+    // Return all matched recipes
+    return matchedRecipes;
+}
+
+
 // Compile Lists (recipes model)
 function compileLists(recipes){
 
@@ -169,42 +206,67 @@ function compileLists(recipes){
         return recipeIngredients;
     }
 
-    // availRecipes
-    var availRecipes = function(recipes){
-        // get the avail ingredients from cupboard model
-        // check for recipes matching those ingredients
-            // if it matches, push the name of that recipe
-    }
-
-    // unavailRecipes
-    var unavailRecipes = function(recipes){
-        // get the unavail ingredients from cupboard model
-        // check for recipes matching those ingredients
-            // if it matches, push the name of that recipe
-    }
-
     // availCupboard
-    var availCupboard = function(recipes){
-        // push any items from cupboardModel.avail
-        // if no items, push all ingredients from recipe model
+    var availCupboard = function(){
+        
+        // get the avail ingredients from cupboard model
+        var ingredients = cupboardModel.avail;
+        
+        // if no items exist...
+        if (ingredients.length < 1){
+            
+            // push all ingredients from recipe model
+            for (i=0; allIngredients.length; i++){
+                ingredients.push( allIngredients[i] );
+            }
+            
+        }
     }
 
     // unavailCupboard - any items from cupboardModel.unavail
     var unavailCupboard = cupboardModel.unavail;
+    
+    // availRecipes
+    // returns array of recipe objects
+    var availRecipes = function(){
+        
+        // Return all recipes that match what's in the availCupboard array
+        return searchRecipeIngredients(availCupboard);
+    }
+
+    // unavailRecipes
+    // returns array of recipe objects
+    var unavailRecipes = function(){
+        
+        // Return all recipes that match what's in the unavailCupboard array
+        return searchRecipeIngredients(unavailCupboard);
+    }
 
     // availList
-    var availList = function(recipes){
+    // returns array of filtered ingredients
+    var availList = function(){
+        
+        var filteredIngredients = [];
+        
         // check allIngredients for any matches with unavailCupboard
             // add anything that doesn't match
         // check cupboardModel.avail for any matches
             // splice any matches
+        
+        return filteredIngredients;
     }
 
     // unavailList
-    var unavailList = function(recipes){
+    // returns array of filtered ingredients
+    var unavailList = function(){
+        
+        var filteredIngredients = [];
+        
         // iterate through recipes model
             // if a recipe does not match unavailRecipes and does match availRecipes...
                 // push all the ingredients of that recipe
+        
+        return filteredIngredients;
     }
 
     // Call createEl function passing each model array, parent element, and desired tag name
@@ -233,7 +295,7 @@ function setHash(currentHashIndex, modifier) {
 } // setHash
 
 // Page Nav (clicked button)
-function pageNav (button) {
+function pageNav(button) {
 
     // Set currentHashIndex variable to value of getHashIndex function
     var currentHashIndex = getHashIndex();
@@ -251,7 +313,7 @@ function pageNav (button) {
         // Back Button
         case 'back':
             // If current hash is greater than 0
-            if (sequenceId > 0) {
+            if (currentHashIndex > 0) {
                 // Call Set Hash function and pass in getHashIndex value, and -1
                 setHash(currentHashIndex, -1);
              }
@@ -282,31 +344,32 @@ function pageNav (button) {
 // When document is loaded
 $( document ).ready(function(){
     
-    // Render the page based on current URL hash
-    renderPage();
-    // Get model data, build lists, and append data to page
+    // On first load, Get model data, build lists, and append data to page based on hash
     getModelData();
     
-        
     
-    // When window hash changes
+    // When window hash changes...
     $(window).on('hashchange',  function(){
         
-        // Render the page based on current URL hash
-        renderPage();
-        // Get model data, build lists, and append data to page
+        // Get model data, build lists, and append data to page based on hash
         getModelData();
+        
     });
        
                  
                  
     // Footer Nav
-    // When any button is clicked
-    $('#navMenu .button')
-        // Call Page Nav function, passing the name of the clicked button
+    // Get the Nav buttons
+    var backButton = document.getElementById('back');
+    var nextButton = document.getElementById('next');
+    var findRecipes = document.getElementById('findRecipes');
     
-                 
-                 
+    // Bind proper events to each button
+    backButton.addEventListener( 'click', pageNav('back') );
+    nextButton.addEventListener( 'click', pageNav('next') );
+    findRecipes.addEventListener( 'click', pageNav('findRecipes') );
+    
+    
     // Cupboard
     // When cupboard avail item is clicked
         // set cupboard.avail to value of Remove Item function, passing cupboard.avail and clicked item
