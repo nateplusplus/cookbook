@@ -1,6 +1,6 @@
 /*================ global variables =================*/
 
-var availCupboard = [], unavailCupboard = [], availList = [], unavailList = [], recipes = [],
+var availCupboard = [], unavailCupboard = [], availList = [], unavailList = [], recipes = [], allIngredients = [],
     
     // Define the sequence of pages - navSequence
     navSequence = [ '', '#filters/', '#recipes/', '#steps/' ],
@@ -19,7 +19,9 @@ var availCupboard = [], unavailCupboard = [], availList = [], unavailList = [], 
 // Get Model Data - Send ajax request
 function getModelData() {
 
-
+    console.log( 'Running getModelData' );
+    
+    
     // Using the core $.ajax() method
     $.ajax({
 
@@ -41,9 +43,9 @@ function getModelData() {
         // Code to run if the request fails; the raw request and
         // status codes are passed to the function
         error: function( xhr, status, errorThrown ) {
-            console.log('ajax request failed');
-            console.log( "Error: " + errorThrown );
-            console.log( "Status: " + status );
+            console.error('ajax request failed');
+            console.error( "Error: " + errorThrown );
+            console.error( "Status: " + status );
             console.dir( xhr );
         },
 
@@ -66,22 +68,44 @@ function getModelData() {
 
 
 // Check the current URL hash
+// Return hash string without special characters
 function getCurrentHash() {
+    console.log( 'Running getCurrentHash' );
+    
     return window.location.hash.replace( /\W/g, '' );
+}
+
+function getHashName() {
+    
+     console.log( 'Running getHashName' );
+    
+    // get the current hash name
+    var hashName = getCurrentHash();
+    
+    if ( hashName === "" || hashName === "#" ){
+        hashName = 'index';
+    }
+    
+    return hashName;
 }
 
 
 // Check Current Hash Index
 function getHashIndex() {
+    
+     console.log( 'Running getHashIndex' );
 
     var hash = getCurrentHash();
-
-    // Get index of current hash on navSequence
-    var hashIndex = navSequence.indexOf(hash);
-
-    // If no matches, default to 0 (home page)
-    if (hashIndex < 0){
-        hashIndex = 0;
+    var hashIndex = 0;
+    
+    // Search navSequence for a string pattern matching the current hash
+    
+    for(var i=0; i<navSequence.length; i++){
+        if(navSequence[i].match(hash)){
+            // Get index of current hash on navSequence
+            hashIndex = navSequence.indexOf(navSequence[i]);
+            break;
+        }
     }
 
     return hashIndex;
@@ -91,12 +115,14 @@ function getHashIndex() {
 
 // Render Elements (DOM selector)
 function renderElements(selector) {
+    
+     console.log( 'Running renderElements' );
 
     // get all items on dom with selector
-    var elements = $(selector);
+    var elements = document.querySelectorAll(selector);
 
     // get the current hash name
-    var hashName = navSequence[getHashIndex()];
+    var hashName = getHashName();
 
     // for each item...
     for(i=0; i<elements.length; i++ ){
@@ -121,6 +147,8 @@ function renderElements(selector) {
 
 // Render Page
 function renderPage(){
+    
+     console.log( 'Running renderPage' );
 
     // call Render Elements function passing in main selector
     renderElements('#scroller > div');
@@ -132,15 +160,19 @@ function renderPage(){
 
 // createEl (model, parent element, tag name) - Create and append the element to document
 function createEl(model, parent, child) {
+    
+    console.log( 'Running createEl' );
+    
+    var parentEl = document.querySelector(parent);
 
     // Empty the parent to write over old data
-    $(parent).innerHTML = '';
+    parentEl.innerHTML = '';
 
     for (i=0; i<model.length; i++){
         var li = document.createElement(child);
         var txt = document.createTextNode(model[i]);
         li.appendChild(txt);
-        parent.appendChild(li);
+        parentEl.appendChild(li);
     }
 
 } // createEl
@@ -149,6 +181,8 @@ function createEl(model, parent, child) {
 // Find recipes for given array of ingredients
 // Returns an array of recipe objects
 var searchRecipeIngredients = function (ingredientsQuery){
+    
+     console.log( 'Running searchRecipeIngredients' );
     
     // Initialize matched recipes array
     var matchedRecipes = [];
@@ -183,12 +217,17 @@ var searchRecipeIngredients = function (ingredientsQuery){
 
 
 // Compile Lists (recipes model)
-function compileLists(recipes){
+function compileLists(){
+    
+    console.log( 'Running compileLists' );
 
     // Initialize list arrays
 
-    // allIngredients
-    var allIngredients = function(recipes){
+    // get all ingredients
+    var getAllIngredients = function(){
+        
+        console.log( 'Running allIngredients' );
+        
         // get all ingredients from recipe model
         var recipeIngredients = [];
 
@@ -197,68 +236,81 @@ function compileLists(recipes){
                     var arrayCheck = recipeIngredients.indexOf(recipes[a].ingredients[b].food);
 
                     if (arrayCheck < 0) {
+                        console.log('pushing ', recipes[a].ingredients[b].food);
                         recipeIngredients.push(recipes[a].ingredients[b].food);
                     }
 
                 }
             }
-
+        
         return recipeIngredients;
-    }
+    };
+    allIngredients = getAllIngredients();
 
+    
     // availCupboard
-    var availCupboard = function(){
+    // returns array of all selected ingredients, or otherwise all ingredients
+/*    var getAvailCupboard = function(){
         
         // get the avail ingredients from cupboard model
-        var ingredients = cupboardModel.avail;
+        var availCupboardIngredients = cupboardModel[0].available;
         
         // if no items exist...
-        if (ingredients.length < 1){
+        if (availCupboardIngredients.length < 1){
             
             // push all ingredients from recipe model
             for (i=0; allIngredients.length; i++){
-                ingredients.push( allIngredients[i] );
+                availCupboardIngredients.push( allIngredients[i] );
             }
             
         }
-    }
+        
+        return availCupboardIngredients;
+    };
+    availCupboard = getAvailCupboard();*/
 
+    
     // unavailCupboard - any items from cupboardModel.unavail
-    var unavailCupboard = cupboardModel.unavail;
+    var unavailCupboard = cupboardModel[0].unavailable;
     
     // availRecipes
+    // Return all recipes that match what's in the availCupboard array
     // returns array of recipe objects
-    var availRecipes = function(){
-        
-        // Return all recipes that match what's in the availCupboard array
-        return searchRecipeIngredients(availCupboard);
-    }
+    // var availRecipes = searchRecipeIngredients(availCupboard);
 
     // unavailRecipes
+    // Return all recipes that match what's in the unavailCupboard array
     // returns array of recipe objects
-    var unavailRecipes = function(){
-        
-        // Return all recipes that match what's in the unavailCupboard array
-        return searchRecipeIngredients(unavailCupboard);
-    }
+    // var unavailRecipes = searchRecipeIngredients(unavailCupboard);
 
     // availList
     // returns array of filtered ingredients
-    var availList = function(){
+    var getAvailList = function(){
         
         var filteredIngredients = [];
+        var unavailIngredientsArray = [];
         
-        // check allIngredients for any matches with unavailCupboard
-            // add anything that doesn't match
-        // check cupboardModel.avail for any matches
-            // splice any matches
+        for (var i=0; i<unavailCupboard.length; i++){
+            unavailIngredientsArray.push(unavailCupboard[i]);
+        }
+        
+        for(var i=0; i<allIngredients.length; i++){
+            
+            var allIngredientsQuery = unavailIngredientsArray.indexOf(allIngredients[i]);
+            
+            if( allIngredientsQuery < 0 ) {
+                filteredIngredients.push(allIngredients[i]);
+            }
+            
+        }
         
         return filteredIngredients;
-    }
+    };
+    availList = getAvailList();
 
     // unavailList
     // returns array of filtered ingredients
-    var unavailList = function(){
+/*    var getUnavailList = function(){
         
         var filteredIngredients = [];
         
@@ -267,35 +319,42 @@ function compileLists(recipes){
                 // push all the ingredients of that recipe
         
         return filteredIngredients;
-    }
+    };
+    unavailList = getUnavailList();*/
 
     // Call createEl function passing each model array, parent element, and desired tag name
     createEl(availList, '#availableBoxList', 'li');
-    createEl(unavailList, '#unavailableBoxList', 'li');
+/*    createEl(unavailList, '#unavailableBoxList', 'li');
     createEl(availCupboard, '#cupboardAvailList', 'li');
     createEl(unavailCupboard, '#cupboardUnavailList', 'li');
-    createEl(availRecipes, '#recipeList', 'li');
+    createEl(availRecipes, '#recipeList', 'li');*/
 
 } // compileLists
 
 
 // Set Hash (current hash value, modifier)
 function setHash(currentHashIndex, modifier) {
-
+    
+    console.log( 'Running setHash' );
+    
+    var newHashIndex = currentHashIndex+modifier;
+    
     // Check navSequence for values at the array position which matches currentHashIndex plus modifier
-    if (navSequence[currentHashIndex+modifier]){
+    if (newHashIndex >= 0 || newHashIndex <= navSequence.length){
 
         // Set the window hash to the corrosponding pageSequence name
-        window.location.hash = navSequence[currentHashIndex+modifier];
+        window.location.hash = navSequence[newHashIndex];
 
     } else {
-        console.warn('Error in setHash function');
+        console.error('Error in setHash function. Hash value plus modifier is not within nav sequence.');
     }
 
 } // setHash
 
 // Page Nav (clicked button)
 function pageNav(button) {
+    
+    console.log( 'Running pageNav' );
 
     // Set currentHashIndex variable to value of getHashIndex function
     var currentHashIndex = getHashIndex();
@@ -304,24 +363,44 @@ function pageNav(button) {
     switch (button) {
         // Next Button
         case 'next':
-            // If current hash is less than 3
+            // If current hash is not the last page in the nav sequence...
             if (currentHashIndex < navSequence.length) {
-                // Call Set Hash function and pass in getHashIndex value, and 1
+                
+                console.log( 'Running switch next statement' );
+                
+                // Call Set Hash function and advance in the sequence by one
                 setHash(currentHashIndex, 1);
             }
+            break;
 
         // Back Button
         case 'back':
+            
+            console.log( 'Running switch back statement' );
+            
             // If current hash is greater than 0
             if (currentHashIndex > 0) {
                 // Call Set Hash function and pass in getHashIndex value, and -1
                 setHash(currentHashIndex, -1);
              }
+            break;
 
         // Find Recipes Button
         case 'findRecipes':
+            
+            console.log( 'Running switch findRecipes statement' );
+            
             // Change current hash to 'recipes'
             window.location.hash = '#recipes/';
+            break;
+        
+        default:
+            
+            console.error( 'Button unknown. Running default behavior - returning home.' );
+            
+            window.location.hash = '#';
+            
+            break;
     } // switch
 } // pageNav
 
@@ -344,12 +423,16 @@ function pageNav(button) {
 // When document is loaded
 $( document ).ready(function(){
     
+    console.log( 'Running onLoad' );
+    
     // On first load, Get model data, build lists, and append data to page based on hash
     getModelData();
     
     
     // When window hash changes...
     $(window).on('hashchange',  function(){
+        
+        console.log( 'Running on hashchange' );
         
         // Get model data, build lists, and append data to page based on hash
         getModelData();
@@ -358,16 +441,21 @@ $( document ).ready(function(){
        
                  
                  
-    // Footer Nav
+    // FOOTER NAV
     // Get the Nav buttons
     var backButton = document.getElementById('back');
     var nextButton = document.getElementById('next');
     var findRecipes = document.getElementById('findRecipes');
     
     // Bind proper events to each button
-    backButton.addEventListener( 'click', pageNav('back') );
-    nextButton.addEventListener( 'click', pageNav('next') );
-    findRecipes.addEventListener( 'click', pageNav('findRecipes') );
+    backButton.addEventListener( 'mouseup', function(){ pageNav('back') }, false );
+    backButton.addEventListener( 'touchend', function(){ pageNav('back') }, false );
+    
+    nextButton.addEventListener( 'mouseup', function(){ pageNav('next') }, false );
+    nextButton.addEventListener( 'touchend', function(){ pageNav('next') }, false );
+    
+    findRecipes.addEventListener( 'mouseup', function(){ pageNav('findRecipes') }, false );
+    findRecipes.addEventListener( 'touchend', function(){ pageNav('findRecipes') }, false );
     
     
     // Cupboard
