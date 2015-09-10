@@ -9,7 +9,7 @@ var availCupboard = [], unavailCupboard = [], availList = [], unavailList = [], 
     cupboardModel = [
             {
                 available   : [],
-                unavailable : []
+                unavailable : [ 'Brussle Sprouts' ]
             }
         ];
 
@@ -492,18 +492,20 @@ $( document ).ready(function(){
     
     
     // Cupboard
-    // When cupboard avail item is clicked
+    // When cupboard avail item is clicked or touched
         // set cupboard.avail to value of Remove Item function, passing cupboard.avail and clicked item
         // Call getModelData function
 
-    // When cupboard unavail item is clicked
+    // When cupboard unavail item is clicked or touched
         // set cupboard.unavail to value of Remove Item function, passing cupboard.unavail and clicked item
         // Call getModelData function
     
                  
                  
     // Home Page
-    // When avail item is clicked
+    // When avail item is clicked or touched
+    document.getElementById('availableBoxList').addEventListener('mouseup', function(){ console.log('clicked available '+event.target.innerHTML); }, false );
+    document.getElementById('availableBoxList').addEventListener('touchend', function(){ console.log('clicked available '+event.target.innerHTML); }, false );
         // set cupboard.avail to value of Add Item function, passing cupboard.avail and clicked item
         // Call getModelData function
     
@@ -511,6 +513,8 @@ $( document ).ready(function(){
                  
     // Filters Page
     // When unavail item is clicked
+    document.getElementById('unavailableBoxList').addEventListener('mouseup', function(){ console.log('clicked unavailable '+event.target.innerHTML); }, false );
+    document.getElementById('unavailableBoxList').addEventListener('touchend', function(){ console.log('clicked unavailable '+event.target.innerHTML); }, false );
         // set cupboard.unavail to value of Add Item function, passing cupboard.unavail and clicked item
         // Call getModelData function
     

@@ -13,6 +13,10 @@ Currently I'm refactoring so here's a working sample of how it used to work befo
 <a href="http://natehub.net/cookbook" target="_blank">Working Sample</a>
 
 
+MARK:
+----
+- Working on available list logic — should not list ingredients from recipes that are unavailable
+
 
 NOTES:
 -----
