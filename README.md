@@ -13,14 +13,11 @@ Currently I'm refactoring so here's a working sample of how it used to work befo
 <a href="http://natehub.net/cookbook" target="_blank">Working Sample</a>
 
 
-MARK:
-----
-- Note on availRecipes - Working on availList and unavailList logic
-
-
 NOTES:
 -----
 
+- Needs to support recipe images
+- Recipe directions are missing the ingredients and measurements
 - the renderElements function runs getHashName twice, which is redundant
 - change "avail" items and lists to "selected" items
 - change "unavail" items and lists to "filtered" items

@@ -35,67 +35,63 @@
                 
                 
                 <main id="mainSection">
-                    
-                    <div id="scroller">  <!-- For iScroll functionality -->
+                       
+                    <!--Available Foods-->
+                    <div id="availableBox" class="index">
 
-                        <!--Available Foods-->
-                        <div id="availableBox" class="index">
+                        <div class="listLabel">
+                            <h3>What are you craving?</h3>
+                        </div>    
 
-                            <div class="listLabel">
-                                <h3>What are you craving?</h3>
-                            </div>    
+                        <ul id='availableBoxList' class="list selectBox">
+                            <!--All ingredients here-->
+                        </ul>
+                    </div>
 
-                            <ul id='availableBoxList' class="list selectBox">
-                                <!--All ingredients here-->
-                            </ul>
+
+
+                    <!--Unavailable Foods-->
+                    <div id="unavailableBox" class="filters">
+                        <div class="listLabel">
+                            <h3 id="missing">Missing any of these things?</h3>
                         </div>
 
+                        <ul id='unavailableBoxList' class="list selectBox">
+                            <!--Filtered ingredient list here-->
+                        </ul>
+                    </div>
 
 
-                        <!--Unavailable Foods-->
-                        <div id="unavailableBox" class="filters">
-                            <div class="listLabel">
-                                <h3 id="missing">Missing any of these things?</h3>
-                            </div>
+                    <!---------------------------------------------------
+                                        RECIPES PAGE
+                    ----------------------------------------------------->
 
-                            <ul id='unavailableBoxList' class="list selectBox">
-                                <!--Filtered ingredient list here-->
-                            </ul>
+                    <div id="recipeListBox" class="recipes">
+
+                      <div class="listLabel">
+                            <h3>Here are some recipes for you:</h3>
                         </div>
 
+                       <ul id="recipeList" class="list">
+                           <!--Recipes here-->
+                       </ul>
 
-                        <!---------------------------------------------------
-                                            RECIPES PAGE
-                        ----------------------------------------------------->
-
-                        <div id="recipeListBox" class="recipes">
-                          
-                          <div class="listLabel">
-                                <h3>Here are some recipes for you:</h3>
-                            </div>
-                          
-                           <ul id="recipeList" class="list">
-                               <!--Recipes here-->
-                           </ul>
-
-                        </div>
+                    </div>
 
 
 
-                        <!---------------------------------------------------
-                                            STEPS PAGE
-                        ----------------------------------------------------->
+                    <!---------------------------------------------------
+                                        STEPS PAGE
+                    ----------------------------------------------------->
 
-                        <div id="stepsBox" class="steps">
+                    <div id="stepsBox" class="steps">
 
-                            <div id="recipeTitle"><!--Title here--></div>
+                        <div id="recipeTitle"><!--Title here--></div>
 
-                            <ul id="stepList">
-                                <!--Steps here-->
-                            </ul>
+                        <ul id="stepList">
+                            <!--Steps here-->
+                        </ul>
 
-                        </div>
-                    
                     </div>
 
                 </main>
@@ -123,7 +119,6 @@
         
         <!-- Scripts, Libraries and Frameworks, oh my! -->
         <script src="js/lib/jquery-1.11.3.min.js"></script>
-        <script src="js/lib/iscroll.js"></script>
         <script src="js/app.js"></script>
     </body>
 </html>
