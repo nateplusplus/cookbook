@@ -293,8 +293,10 @@ function compileLists(){
         var filteredIngredients = [];
         var unavailIngredientsArray = [];
         
-        for (var i=0; i<unavailCupboard.length; i++){
-            unavailIngredientsArray.push(unavailCupboard[i]);
+        for (var i=0; i<unavailRecipes.length; i++){
+            for (var a=0; a<unavailRecipes[i].ingredients.length; a++){
+                unavailIngredientsArray.push(unavailRecipes[i].ingredients[a].food);
+            }
         }
         
         for(var i=0; i<allIngredients.length; i++){

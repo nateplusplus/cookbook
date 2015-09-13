@@ -15,7 +15,7 @@ Currently I'm refactoring so here's a working sample of how it used to work befo
 
 MARK:
 ----
-- Working on available list logic — should not list ingredients from recipes that are unavailable
+- 
 
 
 NOTES:
