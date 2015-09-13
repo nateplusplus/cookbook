@@ -22,3 +22,5 @@ NOTES:
 -----
 
 - the renderElements function runs getHashName twice, which is redundant
+- change "avail" items and lists to "selected" items
+- change "unavail" items and lists to "filtered" items

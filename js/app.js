@@ -1,25 +1,16 @@
 /*================ global variables =================*/
 
-var availCupboard = [], unavailCupboard = [], recipes = [], allIngredients = [],
+var recipes = [],
     
     // Define the sequence of pages - navSequence
-    navSequence = [ '', '#filters/', '#recipes/', '#steps/' ],
+    navSequence = [ '', '#filters/', '#recipes/', '#steps/' ];
     
-    // initialize cupboardModel (JSON OBJ) - Holds selected avail and unavail items
-    cupboardModel = [
-            {
-                available   : [ 'Chicken' ],
-                unavailable : [ 'Basil' ]
-            }
-        ];
-
-
+    
+    
 /* ================ functions ================ */
 
 // Get Model Data - Send ajax request
 function getModelData() {
-
-    console.log( 'Running getModelData' );
     
     
     // Using the core $.ajax() method
@@ -70,14 +61,11 @@ function getModelData() {
 // Check the current URL hash
 // Return hash string without special characters
 function getCurrentHash() {
-    console.log( 'Running getCurrentHash' );
     
     return window.location.hash.replace( /\W/g, '' );
 }
 
 function getHashName() {
-    
-     console.log( 'Running getHashName' );
     
     // get the current hash name
     var hashName = getCurrentHash();
@@ -92,8 +80,6 @@ function getHashName() {
 
 // Check Current Hash Index
 function getHashIndex() {
-    
-     console.log( 'Running getHashIndex' );
 
     var hash = getCurrentHash();
     var hashIndex = 0;
@@ -115,8 +101,6 @@ function getHashIndex() {
 
 // Render Elements (DOM selector)
 function renderElements(selector) {
-    
-     console.log( 'Running renderElements' );
 
     // get all items on dom with selector
     var elements = document.querySelectorAll(selector);
@@ -147,8 +131,6 @@ function renderElements(selector) {
 
 // Render Page
 function renderPage(){
-    
-     console.log( 'Running renderPage' );
 
     // call Render Elements function passing in main selector
     renderElements('#scroller > div');
@@ -160,8 +142,6 @@ function renderPage(){
 
 // createEl (model, parent element, tag name) - Create and append the element to document
 function createEl(model, parent, child) {
-    
-    console.log( 'Running createEl' );
     
     var parentEl = document.querySelector(parent);
 
@@ -181,8 +161,6 @@ function createEl(model, parent, child) {
 // Find recipes for given array of ingredients
 // Returns an array of recipe objects
 var searchRecipeIngredients = function (ingredientsQuery){
-    
-     console.log( 'Running searchRecipeIngredients' );
     
     // Initialize matched recipes array
     var matchedRecipes = [];
@@ -219,7 +197,16 @@ var searchRecipeIngredients = function (ingredientsQuery){
 // Compile Lists (recipes model)
 function compileLists(){
     
-    console.log( 'Running compileLists' );
+    
+    
+    // initialize cupboardModel (JSON OBJ) - Holds selected avail and unavail items
+    var cupboardModel = [
+            {
+                available   : [ 'Chicken' ],
+                unavailable : [ 'Basil' ]
+            }
+        ];
+    
 
     // Initialize list arrays
 
@@ -242,143 +229,172 @@ function compileLists(){
         
         return recipeIngredients;
     };
-    allIngredients = getAllIngredients();
+    var allIngredients = getAllIngredients();
 
     
     // availCupboard
-    // returns array of all selected ingredients, or otherwise all ingredients
-    var getAvailCupboard = function(){
-        
-        // get the avail ingredients from cupboard model
-        var availCupboardIngredients = cupboardModel[0].available;
-        
-        // if no items exist...
-        /*if (availCupboardIngredients.length < 1){
-            
-            // push all ingredients from recipe model
-            for (var i=0; i<allIngredients.length; i++){
-                availCupboardIngredients.push( allIngredients[i] );
-            }
-            
-        }*/
-        
-        return availCupboardIngredients;
-    };
-    availCupboard = getAvailCupboard();
+    // returns array of all selected ingredients
+    var availCupboard = cupboardModel[0].available;
 
     
     // unavailCupboard - any items from cupboardModel.unavail
     var unavailCupboard = cupboardModel[0].unavailable;
     
-    // availRecipes
-    // Return all recipes that match what's in the availCupboard array
-    // returns array of recipe objects
-    var availRecipes = searchRecipeIngredients(availCupboard);  // If availCupboard empty, add all recipes here
-
+    
     // unavailRecipes
     // Return all recipes that match what's in the unavailCupboard array
     // returns array of recipe objects
-    var unavailRecipes = searchRecipeIngredients(unavailCupboard);
-
+    var unavailRecipes = searchRecipeIngredients(unavailCupboard); // Needed for generating availList
+    
+    
+    // availRecipes
+    // Return all recipes that match what's in the availCupboard array
+    // returns array of recipe objects
+    var getAvailRecipes = function(){
+        
+        var availRecipesArray = [],
+            unavailRecipeNames = [],
+            recipeResults = [];
+        
+        if( availCupboard.length > 0 ){
+            
+            // If availCupboard has items, add recipes containing those items
+            availRecipesArray = searchRecipeIngredients(availCupboard);
+        } else {
+            
+            // If availCupboard empty, add all recipes
+            availRecipesArray = searchRecipeIngredients(allIngredients);
+        }
+        
+        if( unavailRecipes.length > 0 ){
+            
+            // If unavailRecipes has items, add those recipe names
+            for (var i=0; i<unavailRecipes.length; i++){
+                
+                var arrayCheck = unavailRecipes.indexOf(unavailRecipes[i].name);
+                
+                if( arrayCheck < 0 ){
+                    unavailRecipeNames.push(unavailRecipes[i].name);
+                }
+            }
+        }
+        
+        for (var i=0; i<availRecipesArray.length; i++){
+            
+            var unavailQuery = unavailRecipeNames.indexOf(availRecipesArray[i].name);
+            
+            if( unavailQuery >= 0 ){
+                availRecipesArray.splice(i, 1);
+            }
+            
+        }
+        
+        return availRecipesArray;
+        
+    };
+    
+    var availRecipes = getAvailRecipes();
+    
+    
+    var availRecipeNames = function(){
+        
+        var results = [];
+        
+        for( var i=0; i<availRecipes.length; i++ ){
+            var arrayCheck = results.indexOf(availRecipes[i].name);
+            
+            if( arrayCheck < 0 ){
+                results.push(availRecipes[i].name);
+            }
+        }
+        
+        return results;
+    }
+    
     // availList
-    // returns array of filtered ingredients
+    // returns array of filtered ingredients:
+    // Ingredients from all recipes except those that contain unavail items,
+    // and except ingredients already added to cupboard.
     var getAvailList = function(){
         
         var filteredIngredients = [],
             unavailIngredientsArray = [],
             availIngredientsArray = [];
         
-        for (var i=0; i<unavailRecipes.length; i++){
-            for (var a=0; a<unavailRecipes[i].ingredients.length; a++){
-                var arrayCheck = unavailIngredientsArray.indexOf(unavailRecipes[i].ingredients[a].food);
+        for (var i=0; i<unavailCupboard.length; i++){
+            var arrayCheck = unavailIngredientsArray.indexOf(unavailCupboard[i]);
+
+            if(arrayCheck < 0){
+                unavailIngredientsArray.push(unavailCupboard[i]);
+            }
+        }
+        
+        for (var i=0; i<availCupboard.length; i++){
                 
-                if(arrayCheck < 0){
-                    unavailIngredientsArray.push(unavailRecipes[i].ingredients[a].food);
+                var arrayCheck = availIngredientsArray.indexOf(availCupboard[i]);
+                
+                if( arrayCheck < 0 ){
+                    availIngredientsArray.push(availCupboard[i]);
                 }
-            }
         }
         
-        for (var i=0; i<availRecipes.length; i++){
-            for (var a=0; a<availRecipes[i].ingredients.length; a++){
+        
+        // Build the ingredients list by recipe
+        // Skip a RECIPE if it contains unavail ingredients
+        // Skip any INGREDIENTS that are already listed as available
+        for(var i=0; i<recipes.length; i++){
+            
+            var recipeIngredients = [],
+                unavailIngredientsQuery = [],
+                availIngredientsQuery = [],
+                recipeFlag = 0;
+            
+            for(var a=0; a<recipes[i].ingredients.length; a++){
                 
-                var arrayCheck = availIngredientsArray.indexOf(availRecipes[i].ingredients[a].food);
+                unavailIngredientsQuery = unavailIngredientsArray.indexOf(recipes[i].ingredients[a].food);
                 
-                if(arrayCheck < 0){
-                availIngredientsArray.push(availRecipes[i].ingredients[a].food);
+                if( unavailIngredientsQuery >= 0 ){
+                    recipeFlag = 1;
+                    break;
                 }
-            }
-        }
-        
-        console.log('availIngredientsArray: '+availIngredientsArray);
-        
-        for(var i=0; i<allIngredients.length; i++){
-            
-            var allIngredientsQuery = unavailIngredientsArray.indexOf(allIngredients[i]);
-            
-            if( allIngredientsQuery < 0 ) {
-                filteredIngredients.push(allIngredients[i]);
+                
             }
             
-        }
-        
-        return filteredIngredients;
-    };
-    
-    // Unavail List
-    // Returns array of filtered ingredients which are in recipes that contain selected avail ingredients
-    var getUnavailList = function(){
-        var availList = getAvailList(),
-            filteredIngredients = [];
-        
-        
-        // If there's data in avail cupboard
-        if ( availCupboard.length > 0 ){
-            
-            console.log( 'availCupboard has items' );
-            
-            for( var i=0; i<availRecipes.length; i++){
-                for( var a=0; a<availRecipes[i].ingredients.length; a++){
+            if( recipeFlag === 0 ){
+                for(var a=0; a<recipes[i].ingredients.length; a++){
+                    var availIngredientsQuery = availIngredientsArray.indexOf(recipes[i].ingredients[a].food);
                     
-                    // Check whether each ingredient is already added to the array
-                    var arrayCheck = filteredIngredients.indexOf(availRecipes[i].ingredients[a].food);
-                    
-                    // if not already added, add it
-                    if( arrayCheck < 0 ){
-                        filteredIngredients.push(availRecipes[i].ingredients[a].food);
+                    if ( availIngredientsQuery < 0 ){
+                        
+                        var arrayCheck = filteredIngredients.indexOf(recipes[i].ingredients[a].food);
+                        
+                        if( arrayCheck < 0 ){
+                            filteredIngredients.push(recipes[i].ingredients[a].food);
+                        }
                     }
                 }
-            } // availRecipes loop
-        } else {
-            console.log( 'availCupboard has NO items' );
-            //If no data in avail cupboard, print ingredients of all recipes which are not unavailable
-            
-            for ( var i=0; i<availList.length; i++){
-                filteredIngredients.push(availList[i]);
             }
             
-            console.log( 'availList: '+availList );
+            
+            
         }
         
-        // If there's data in unavail cupboard
-        
         return filteredIngredients;
-        
     };
+    var availList = getAvailList();
 
     // Call createEl function passing each model array, parent element, and desired tag name
-    createEl(getAvailList(), '#availableBoxList', 'li');
-    createEl(getUnavailList(), '#unavailableBoxList', 'li');
-/*    createEl(availCupboard, '#cupboardAvailList', 'li');
+    createEl(availList, '#availableBoxList', 'li');
+    createEl(availList, '#unavailableBoxList', 'li');
+    createEl(availCupboard, '#cupboardAvailList', 'li');
     createEl(unavailCupboard, '#cupboardUnavailList', 'li');
-    createEl(availRecipes, '#recipeList', 'li');*/
+    createEl(availRecipeNames(), '#recipeList', 'li');
 
 } // compileLists
 
 
 // Set Hash (current hash value, modifier)
 function setHash(currentHashIndex, modifier) {
-    
-    console.log( 'Running setHash' );
     
     var newHashIndex = currentHashIndex+modifier;
     
@@ -397,8 +413,6 @@ function setHash(currentHashIndex, modifier) {
 // Page Nav (clicked button)
 function pageNav(button) {
     
-    console.log( 'Running pageNav' );
-
     // Set currentHashIndex variable to value of getHashIndex function
     var currentHashIndex = getHashIndex();
 
@@ -409,8 +423,6 @@ function pageNav(button) {
             // If current hash is not the last page in the nav sequence...
             if (currentHashIndex < navSequence.length) {
                 
-                console.log( 'Running switch next statement' );
-                
                 // Call Set Hash function and advance in the sequence by one
                 setHash(currentHashIndex, 1);
             }
@@ -418,8 +430,6 @@ function pageNav(button) {
 
         // Back Button
         case 'back':
-            
-            console.log( 'Running switch back statement' );
             
             // If current hash is greater than 0
             if (currentHashIndex > 0) {
@@ -430,8 +440,6 @@ function pageNav(button) {
 
         // Find Recipes Button
         case 'findRecipes':
-            
-            console.log( 'Running switch findRecipes statement' );
             
             // Change current hash to 'recipes'
             window.location.hash = '#recipes/';
@@ -466,16 +474,12 @@ function pageNav(button) {
 // When document is loaded
 $( document ).ready(function(){
     
-    console.log( 'Running onLoad' );
-    
     // On first load, Get model data, build lists, and append data to page based on hash
     getModelData();
     
     
     // When window hash changes...
     $(window).on('hashchange',  function(){
-        
-        console.log( 'Running on hashchange' );
         
         // Get model data, build lists, and append data to page based on hash
         getModelData();
