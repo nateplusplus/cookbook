@@ -15,7 +15,7 @@ Currently I'm refactoring so here's a working sample of how it used to work befo
 
 MARK:
 ----
-- 
+- Note on availRecipes - Working on availList and unavailList logic
 
 
 NOTES:

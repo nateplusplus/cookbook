@@ -1,6 +1,6 @@
 /*================ global variables =================*/
 
-var availCupboard = [], unavailCupboard = [], availList = [], unavailList = [], recipes = [], allIngredients = [],
+var availCupboard = [], unavailCupboard = [], recipes = [], allIngredients = [],
     
     // Define the sequence of pages - navSequence
     navSequence = [ '', '#filters/', '#recipes/', '#steps/' ],
@@ -8,8 +8,8 @@ var availCupboard = [], unavailCupboard = [], availList = [], unavailList = [], 
     // initialize cupboardModel (JSON OBJ) - Holds selected avail and unavail items
     cupboardModel = [
             {
-                available   : [],
-                unavailable : [ 'Brussle Sprouts' ]
+                available   : [ 'Chicken' ],
+                unavailable : [ 'Basil' ]
             }
         ];
 
@@ -226,8 +226,6 @@ function compileLists(){
     // get all ingredients
     var getAllIngredients = function(){
         
-        console.log( 'Running allIngredients' );
-        
         // get all ingredients from recipe model
         var recipeIngredients = [];
 
@@ -251,20 +249,18 @@ function compileLists(){
     // returns array of all selected ingredients, or otherwise all ingredients
     var getAvailCupboard = function(){
         
-        console.log( 'Running getAvailCupboard' );
-        
         // get the avail ingredients from cupboard model
         var availCupboardIngredients = cupboardModel[0].available;
         
         // if no items exist...
-        if (availCupboardIngredients.length < 1){
+        /*if (availCupboardIngredients.length < 1){
             
             // push all ingredients from recipe model
             for (var i=0; i<allIngredients.length; i++){
                 availCupboardIngredients.push( allIngredients[i] );
             }
             
-        }
+        }*/
         
         return availCupboardIngredients;
     };
@@ -277,7 +273,7 @@ function compileLists(){
     // availRecipes
     // Return all recipes that match what's in the availCupboard array
     // returns array of recipe objects
-    var availRecipes = searchRecipeIngredients(availCupboard);
+    var availRecipes = searchRecipeIngredients(availCupboard);  // If availCupboard empty, add all recipes here
 
     // unavailRecipes
     // Return all recipes that match what's in the unavailCupboard array
@@ -288,16 +284,32 @@ function compileLists(){
     // returns array of filtered ingredients
     var getAvailList = function(){
         
-        console.log( 'Running getAvailList' );
-        
-        var filteredIngredients = [];
-        var unavailIngredientsArray = [];
+        var filteredIngredients = [],
+            unavailIngredientsArray = [],
+            availIngredientsArray = [];
         
         for (var i=0; i<unavailRecipes.length; i++){
             for (var a=0; a<unavailRecipes[i].ingredients.length; a++){
-                unavailIngredientsArray.push(unavailRecipes[i].ingredients[a].food);
+                var arrayCheck = unavailIngredientsArray.indexOf(unavailRecipes[i].ingredients[a].food);
+                
+                if(arrayCheck < 0){
+                    unavailIngredientsArray.push(unavailRecipes[i].ingredients[a].food);
+                }
             }
         }
+        
+        for (var i=0; i<availRecipes.length; i++){
+            for (var a=0; a<availRecipes[i].ingredients.length; a++){
+                
+                var arrayCheck = availIngredientsArray.indexOf(availRecipes[i].ingredients[a].food);
+                
+                if(arrayCheck < 0){
+                availIngredientsArray.push(availRecipes[i].ingredients[a].food);
+                }
+            }
+        }
+        
+        console.log('availIngredientsArray: '+availIngredientsArray);
         
         for(var i=0; i<allIngredients.length; i++){
             
@@ -311,55 +323,51 @@ function compileLists(){
         
         return filteredIngredients;
     };
-    availList = getAvailList();
-
-    // unavailList
-    // returns array of filtered ingredients
+    
+    // Unavail List
+    // Returns array of filtered ingredients which are in recipes that contain selected avail ingredients
     var getUnavailList = function(){
-        
-        var filteredIngredients = [],
-            availRecipesArray = [],
-            unavailRecipesArray = [];
-        
-        // Dump the recipe names from availRecipes into array
-        for(var i=0; i<availRecipes.length; i++){
-            availRecipesArray.push(availRecipes[i].name);
-        }
-        
-        // Dump the recipe names from unavailRecipes into array
-        for(var i=0; i<unavailRecipes.length; i++){
-            unavailRecipesArray.push(unavailRecipes[i].name);
-        }
+        var availList = getAvailList(),
+            filteredIngredients = [];
         
         
-        // iterate through recipes model
-        for (var a=0; a<recipes.length; a++) {
-
-            // if a recipe does not match unavailRecipes and does match availRecipes...
-            if( unavailRecipesArray.indexOf(recipes[a].name) < 0 || availRecipesArray.indexOf(recipes[a].name) >= 0 ){
-                
-                for (var b=0; b<recipes[a].ingredients.length; b++) {
-                    
-                    // Check if the ingredient is already on the list
-                    var arrayCheck = filteredIngredients.indexOf(recipes[a].ingredients[b]);
-                    
-                    // if not...
-                    if(arrayCheck < 0){
-                        // push all the ingredients of that recipe
-                        filteredIngredients.push(recipes[a].ingredients[b].food);
-                    } // arrayCheck
-                } // recipe ingredients loop
-            } // if statement
-        } // Recipes loop
+        // If there's data in avail cupboard
+        if ( availCupboard.length > 0 ){
             
+            console.log( 'availCupboard has items' );
+            
+            for( var i=0; i<availRecipes.length; i++){
+                for( var a=0; a<availRecipes[i].ingredients.length; a++){
+                    
+                    // Check whether each ingredient is already added to the array
+                    var arrayCheck = filteredIngredients.indexOf(availRecipes[i].ingredients[a].food);
+                    
+                    // if not already added, add it
+                    if( arrayCheck < 0 ){
+                        filteredIngredients.push(availRecipes[i].ingredients[a].food);
+                    }
+                }
+            } // availRecipes loop
+        } else {
+            console.log( 'availCupboard has NO items' );
+            //If no data in avail cupboard, print ingredients of all recipes which are not unavailable
+            
+            for ( var i=0; i<availList.length; i++){
+                filteredIngredients.push(availList[i]);
+            }
+            
+            console.log( 'availList: '+availList );
+        }
+        
+        // If there's data in unavail cupboard
         
         return filteredIngredients;
+        
     };
-    unavailList = getUnavailList();
 
     // Call createEl function passing each model array, parent element, and desired tag name
-    createEl(availList, '#availableBoxList', 'li');
-    createEl(unavailList, '#unavailableBoxList', 'li');
+    createEl(getAvailList(), '#availableBoxList', 'li');
+    createEl(getUnavailList(), '#unavailableBoxList', 'li');
 /*    createEl(availCupboard, '#cupboardAvailList', 'li');
     createEl(unavailCupboard, '#cupboardUnavailList', 'li');
     createEl(availRecipes, '#recipeList', 'li');*/
