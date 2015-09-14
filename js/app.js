@@ -671,12 +671,18 @@ $( document ).ready(function(){
     
     // Bind proper events to each button
     backButton.addEventListener( 'mouseup', function(){ pageNav('back') }, false );
+    backButton.addEventListener('touchstart', function(){ event.preventDefault(); }, false );
+    backButton.addEventListener('touchmove', function(){ event.preventDefault(); }, false );
     backButton.addEventListener( 'touchend', function(){ pageNav('back') }, false );
     
     nextButton.addEventListener( 'mouseup', function(){ pageNav('next') }, false );
+    nextButton.addEventListener('touchstart', function(){ event.preventDefault(); }, false );
+    nextButton.addEventListener('touchmove', function(){ event.preventDefault(); }, false );
     nextButton.addEventListener( 'touchend', function(){ pageNav('next') }, false );
     
     findRecipes.addEventListener( 'mouseup', function(){ pageNav('findRecipes') }, false );
+    findRecipes.addEventListener('touchstart', function(){ event.preventDefault(); }, false );
+    findRecipes.addEventListener('touchmove', function(){ event.preventDefault(); }, false );
     findRecipes.addEventListener( 'touchend', function(){ pageNav('findRecipes') }, false );
     
     
@@ -685,12 +691,10 @@ $( document ).ready(function(){
     // toggle cupboardLists class "closed"
     var cupboardLabel = document.getElementById('cupboardLabel'),
         cupboardLists = document.getElementById('cupboardLists');
-    cupboardLabel.addEventListener('mouseup', function(){
-        cupboardLists.classList.toggle('closed');
-    }, false );
-    cupboardLabel.addEventListener('touchend', function(){
-        cupboardLists.classList.toggle('closed');
-    }, false );
+    cupboardLabel.addEventListener('mouseup', function(){ cupboardLists.classList.toggle('closed'); }, false );
+    cupboardLabel.addEventListener('touchstart', function(){ event.preventDefault(); }, false );
+    cupboardLabel.addEventListener('touchmove', function(){ event.preventDefault(); }, false );
+    cupboardLabel.addEventListener('touchend', function(){ cupboardLists.classList.toggle('closed'); }, false );
     
     
     // When cupboard avail item is clicked or touched
@@ -699,8 +703,9 @@ $( document ).ready(function(){
     cupboardAvailList.addEventListener('mouseup', function(){
         removeItem( cupboardModel[0].available, event.target.innerHTML );
     }, false );
+    /*cupboardAvailList.addEventListener('touchstart', function(){ event.preventDefault(); }, false );*/
     cupboardAvailList.addEventListener('touchend', function(){
-        removeItem( cupboardModel[0].available, event.target.innerHTML );
+        removeItem( cupboardModel[0].available, event.targetTouches[0].innerHTML );
     }, false );
         
 
@@ -710,8 +715,9 @@ $( document ).ready(function(){
     cupboardUnavailList.addEventListener('mouseup', function(){
         removeItem( cupboardModel[0].unavailable, event.target.innerHTML );
     }, false );
+    /*cupboardUnavailList.addEventListener('touchstart', function(){ event.preventDefault(); }, false );*/
     cupboardUnavailList.addEventListener('touchend', function(){
-        removeItem( cupboardModel[0].unavailable, event.target.innerHTML );
+        removeItem( cupboardModel[0].unavailable, event.targetTouches[0].innerHTML );
     }, false );
     
                  
@@ -724,7 +730,7 @@ $( document ).ready(function(){
         addItem(cupboardModel[0].available, event.target.innerHTML );
     }, false );
     availableBoxList.addEventListener('touchend', function(){
-        addItem(cupboardModel[0].available, event.target.innerHTML );
+        addItem(cupboardModel[0].available, event.targetTouches[0].innerHTML );
     }, false );
     
                  
@@ -737,7 +743,7 @@ $( document ).ready(function(){
         addItem(cupboardModel[0].unavailable, event.target.innerHTML );
     }, false );
     unavailableBoxList.addEventListener('touchend', function(){
-        addItem(cupboardModel[0].unavailable, event.target.innerHTML );
+        addItem(cupboardModel[0].unavailable, event.targetTouches[0].innerHTML );
     }, false );
     
                  
