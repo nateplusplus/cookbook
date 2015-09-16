@@ -30,7 +30,7 @@ h3 { font-family: 'Quicksand', sans-serif; font-size: 1.15em; margin: 1em 0; }
 
 p { font-family: 'Open Sans', sans-serif; margin: 0; font-size: .9em; line-height: 1; }
 
-li:hover {
+.list li:hover {
     box-shadow: inset 0px 0px 10px 0px #DDDDDD,5px 5px 5px 1px #FFFFFF;
     -webkit-box-shadow: inset 0px 0px 10px 0px #DDDDDD,5px 5px 5px 1px #FFFFFF;
     -moz-box-shadow: inset 0px 0px 10px 0px #DDDDDD,5px 5px 5px 1px #FFFFFF;
@@ -59,6 +59,7 @@ a { text-decoration: none; }
 
 #container {
     width: 100%;
+    background: #EDEDED;
 }
 
 #wrapper {
@@ -66,6 +67,7 @@ a { text-decoration: none; }
     width: 90%;
     max-width: 900px;
     margin: 0 auto;
+    background: #FFF;
 }
 
 header, footer {
@@ -126,8 +128,9 @@ ul li {
 
 #cupboardBox {
     position: absolute;
-    right: 0px;
-    top: 1em;
+    right: 0;
+    top: 0;
+    margin: 1em;
 }
 
 #cupboardLists {
@@ -135,6 +138,59 @@ ul li {
     border-bottom: solid #DDD 1px;
     border-radius: 0 0 5px 5px;
     margin-top: .5em;
+}
+
+#recipeTitle {
+    display: inline-block;
+    width: 100%;
+    vertical-align: top;
+    text-align: center;
+}
+
+@media screen and (min-width: 650px){
+
+    #recipeTitle {
+        width: 50%;
+        text-align:left;
+    }
+    
+}
+
+#recipeTitle h3 { margin-top: 0; }
+
+#recipeImage {
+    display: inline-block;
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+}
+#recipeImage:before {
+    display: inline-block;
+    content: '';
+    padding-top: 35%;
+}
+
+@media screen and (min-width: 650px){
+    #recipeImage {
+        width: 45%;
+        float: right;
+        background-size: cover;
+    }
+    #recipeImage:before {
+        padding-top: 80%;
+    }
+}
+
+
+
+#ingredientsList {
+    margin: 1em 0;
+    display: inline-block;
+    width: 50%;
+}
+
+#ingredientsList li {
+    margin-left: 1.5em;
 }
 
 .left {
@@ -180,7 +236,7 @@ header { border-bottom: 1px solid black; }
 
 footer { border-top: 1px solid black; }
 
-li:nth-child(2n) { background-color: rgb(245,248,255); }
+.list li:nth-child(2n) { background-color: rgb(245,248,255); }
 
 .button { cursor: pointer; }
 

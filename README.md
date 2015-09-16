@@ -14,8 +14,11 @@ LINKS:
 NOTES:
 -----
 
-- Needs to support recipe images
-- Recipe directions are missing the ingredients and measurements
+- If the cupboard is empty, don't allow it to be opened
+- Add the Yummly API!
+
+Refactoring:
+- Make getRecipeId function
 - the renderElements function runs getHashName twice, which is redundant
 - change "avail" items and lists to "selected" items
 - change "unavail" items and lists to "filtered" items

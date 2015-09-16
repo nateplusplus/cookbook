@@ -13,6 +13,7 @@
         
         <section id="container">
             <div id="wrapper">
+               
                 <header>
                     <h1>Cookbook</h1>
                     
@@ -83,17 +84,39 @@
                     <!---------------------------------------------------
                                         STEPS PAGE
                     ----------------------------------------------------->
+                    
+                    <script id="steps_template" type="text/x-handlebars-template">
 
-                    <div id="stepsBox" class="steps">
-
-                        <div id="recipeTitle"><!--Title here--></div>
+                        <div id="recipeTitle">
+                            <!--Title here-->
+                            <h3>{{name}}</h3>
+                        </div>
                         
-                        <div id="ingredientsList"></div>
+                        <div id="recipeImage" style="background-image: url({{img}})">
+                            <!--Image here-->
+                        </div>
 
-                        <ul id="stepList">
+                        <div id="ingredientsList">
+                            <h4>Ingredients:</h4>
+                            <!--Ingredients here-->
+                            {{#each ingredients}}
+                                <li><span>{{amount}} </span>{{food}}</li>
+                            {{/each}}
+                        </div>
+                        
+                        <h4>Steps:</h4>
+                        <ol id="stepList">
                             <!--Steps here-->
-                        </ul>
+                            {{#each directions}}
+                                <li>{{step}}</li>
+                            {{/each}}
+                        </ol>
 
+                    </script>
+                    
+                    
+                    <div id="stepsBox" class="steps">
+                        <div id="steps-placeholder"></div>
                     </div>
 
                 </main>
@@ -121,6 +144,7 @@
         
         <!-- Scripts, Libraries and Frameworks, oh my! -->
         <script src="js/lib/jquery-1.11.3.min.js"></script>
+        <script src="js/lib/handlebars-v4.0.2.js"></script>
         <script src="js/app.js"></script>
     </body>
 </html>

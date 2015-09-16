@@ -455,10 +455,16 @@ function compileLists(){
     
     
     var getSteps = function(){
+        
         var result = [];
         
+        // Recipe ID Error
+        var idError =
+            'Sorry, there was an error loading your recipe,'+
+            ' please go back and try selecting it again.';
+        
         // Check if there is a recipe ID in the hash
-        var hashCheck = window.location.hash.match(/id=[0-9]/);
+        var hashCheck = window.location.hash.match(/id=[0-9]+/);
         
         // If so, use it to find the recipe directions and return them in array
         if(hashCheck){
@@ -468,6 +474,8 @@ function compileLists(){
             for ( var i=0; i<recipes.length; i++ ){
                 
                 if( recipes[i].id === recipeId ){
+                    
+                    var data = recipes[i];
                 
                     for ( var a=0; a<recipes[i].directions.length; a++ ){
                         
@@ -482,54 +490,32 @@ function compileLists(){
             }
             
         } else {
-            // If not, return an error message to the user
-            result.push(
-                'Sorry, there was an error loading your recipe,'+
-                ' please go back and try selecting it again.'
-            );
+            // If no recipe ID present, return an error message to user
+            result.push( idError );
+            
+            var data = result;
         }
+        
+        var source   = document.getElementById('steps_template').innerHTML;
+        var template = Handlebars.compile(source);
+        var steps_html = template(data);
+        document.getElementById('steps-placeholder').innerHTML = steps_html;
         
         return result;
     };
     
-    var getRecipeTitle = function(){
-        var result = [];
-        
-        // Check if there is a recipe ID in the hash
-        var hashCheck = window.location.hash.match(/id=[0-9]/);
-        
-        // If so, use it to find the recipe name and return it in array
-        if(hashCheck){
-            hashCheck = hashCheck.pop();
-            recipeId = hashCheck.split('=')[1];
-            
-            for ( var i=0; i<recipes.length; i++ ){
-                
-                if( recipes[i].id === recipeId ){
-                    
-                    var arrayCheck = result.indexOf(recipes[i].name);
-
-                    if ( arrayCheck < 0 ){
-                        result.push(recipes[i].name);
-                    }
-                }
-            }
-            
-        }
-        
-        // If not, return an empty array
-        
-        return result;
-    };
-
+    if ( getHashName() == "steps" ){
+        getSteps();
+    }
+    
     // Call createEl function passing each model array, parent element, and desired tag name
     createEl(availList, '#availableBoxList', 'li');
     createEl(unavailList, '#unavailableBoxList', 'li');
     createEl(availCupboard, '#cupboardAvailList', 'li');
     createEl(unavailCupboard, '#cupboardUnavailList', 'li');
     createEl(availRecipeNames(), '#recipeList', 'li');
-    createEl(getRecipeTitle(), '#recipeTitle', 'h3');
-    createEl(getSteps(), '#stepList', 'p');
+    
+    
     
     // Add cupboard count
     var cupboardCount = document.getElementById('cupboardCount');
@@ -649,17 +635,18 @@ var getSteps = function(recipeName){
 // When document is loaded
 $( document ).ready(function(){
     
+    
     // On first load, Get model data, build lists, and append data to page based on hash
     getModelData();
     
     
     // When window hash changes...
-    $(window).on('hashchange',  function(){
+    window.addEventListener( 'hashchange',  function(){
         
         // Get model data, build lists, and append data to page based on hash
         getModelData();
         
-    });
+    }, false);
        
                  
                  

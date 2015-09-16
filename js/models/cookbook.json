@@ -73,14 +73,14 @@
                 { "food"    : "Black Pepper" },
                 { "food"    : "Brussle Sprouts" },
                 { "food"    : "Garlic" },
-                { "food"    : "Pecans" },
+                { "food"    : "Chopped Pecans" },
                 { "food"    : "Mapel Syrup" }
             ],
             "directions"    : [
                 { "step"    : "Preheat oven to 350 degrees." },
                 { "step"    : "Cover pan with aluminum foil" },
                 { "step"    : "Coat foil with cooking oil of choice." },
-                { "step"    : "Arrange pecans on foil-covered pan." },
+                { "step"    : "Arrange chopped pecans on foil-covered pan." },
                 { "step"    : "Toast the pecans, but don't let them burn!" },
                 { "step"    : "Cut brussles in half, along the stem." },
                 { "step"    : "Take pecans out, let cool for a minute." },
@@ -146,12 +146,24 @@
             "img"   : "",
             "ingredients"   : [
                 { "food"    : "Cooking Oil" },
-                { "food"    : "Bell Pepper" },
-                { "food"    : "Onion" },
-                { "food"    : "Zucchini" },
+                {
+                    "food"    : "Bell Pepper",
+                    "amount"  : "1"
+                },
+                { 
+                    "food"    : "Onion",
+                    "amount"  : "1"
+                },
+                { 
+                    "food"    : "Zucchini",
+                    "amount"  : "1"
+                },
                 { "food"    : "Snow Peas" },
                 { "food"    : "Carrots" },
-                { "food"    : "Curry Sauce" }
+                { 
+                    "food"    : "Can or Jar of Curry Sauce",
+                    "amount"  : "1"
+                }
             ],
             "directions"    : [
                 { "step"    : "Chop bell pepper and onion into medium-sized chunks (not too small)" },
