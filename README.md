@@ -15,10 +15,9 @@ NOTES:
 -----
 
 - If the cupboard is empty, don't allow it to be opened
-- Add the Yummly API!
 
 Refactoring:
-- Make getRecipeId function
+- DRY: Make getRecipeId function instead of repeating code
 - the renderElements function runs getHashName twice, which is redundant
 - change "avail" items and lists to "selected" items
 - change "unavail" items and lists to "filtered" items
