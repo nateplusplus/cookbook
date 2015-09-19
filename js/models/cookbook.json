@@ -66,7 +66,6 @@
         {
             "id"    : "4",
             "name"  : "Pecan Roasted Brussles",
-            "img"   : "",
             "ingredients"   : [
                 { "food"    : "Cooking Oil" },
                 { "food"    : "Salt" },
@@ -94,7 +93,6 @@
         {
             "id"    : "5",
             "name"  : "Herb Crusted Salmon",
-            "img"   : "",
             "ingredients"   : [
                 { "food"    : "Cooking Oil" },
                 { "food"    : "Salt" },
@@ -118,7 +116,6 @@
         {
             "id"    : "6",
             "name"  : "Pineapple and Pepper Baked Ham Steaks",
-            "img"   : "",
             "ingredients"   : [
                 { "food"    : "Butter" },
                 { "food"    : "Ham steak" },
@@ -143,7 +140,6 @@
         {
             "id"    : "7",
             "name"  : "Curry Sauteed Vegetables",
-            "img"   : "",
             "ingredients"   : [
                 { "food"    : "Cooking Oil" },
                 {
@@ -175,6 +171,32 @@
                 { "step"    : "When the veggies are sauteed, pour some curry sauce in, and mix it thoroughly." },
                 { "step"    : "Let this simmer on low-medium heat for about 10 more minutes." },
                 { "step"    : "Once it's done, let it cool for a bit and enjoy!" }
+            ]
+        },
+        {
+            "id"    : "8",
+            "name"  : "Herb Seasoned Baked Potato Wedges",
+            "ingredients"   : [
+                { 
+                    "food"    : "Potatos",
+                    "amount"  : "4"
+                },
+                { "food"    : "Cooking Oil" },
+                { "food"    : "Salt" },
+                { "food"    : "Black Pepper" },
+                { "food"    : "Garlic" },
+                { "food"    : "Oregano" },
+                { "food"    : "Thyme" },
+                { "food"    : "Rosemary" }
+            ],
+            "directions"    : [
+                { "step"    : "Preheat oven to 400 degrees." },
+                { "step"    : "Scrub potatoes clean" },
+                { "step"    : "Cut each potato in half lengthwise. Cut each half into 3-4 wedges, according to your size preference." },
+                { "step"    : "Place the wedges in a bowl, add the olive oil and all remaining ingredients and toss multiple times to evenly coat the potato wedges." },
+                { "step"    : "Arrange potato wedges onto a pan or baking sheet." },
+                { "step"    : "Bake for 30-35 minutes, or until lightly browned and crispy, turning them over on their other side with a spatula after 20 minutes." },
+                { "step"    : "Enjoy!" } 
             ]
         }
     ]
