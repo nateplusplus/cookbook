@@ -9,7 +9,7 @@ import { NavController } from 'ionic-angular';
 export class ExcludePage {
 
 	constructor(public navCtrl: NavController) {
-
+		// TODO: Get this list from all recipes that use include ingredients - recipes with exclude ingredients - include ingredients
 	}
 
 }

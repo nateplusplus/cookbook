@@ -9,7 +9,7 @@ import { NavController } from 'ionic-angular';
 export class RecipePage {
 
 	constructor(public navCtrl: NavController) {
-
+		// TODO: Display the clicked recipe
 	}
 
 }
