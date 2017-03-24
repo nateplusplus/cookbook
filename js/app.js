@@ -657,20 +657,20 @@ $( document ).ready(function(){
 		findRecipes = document.getElementById('findRecipes');
 	
 	// Bind proper events to each button
-	backButton.addEventListener( 'mouseup', function(){ pageNav('back') }, false );
-	backButton.addEventListener('touchstart', function(){ event.preventDefault(); }, false );
-	backButton.addEventListener('touchmove', function(){ event.preventDefault(); }, false );
-	backButton.addEventListener( 'touchend', function(){ pageNav('back') }, false );
+	backButton.addEventListener( 'mouseup', function(event){ pageNav('back') }, false );
+	backButton.addEventListener('touchstart', function(event){ event.preventDefault(); }, false );
+	backButton.addEventListener('touchmove', function(event){ event.preventDefault(); }, false );
+	backButton.addEventListener( 'touchend', function(event){ pageNav('back') }, false );
 	
-	nextButton.addEventListener( 'mouseup', function(){ pageNav('next') }, false );
-	nextButton.addEventListener('touchstart', function(){ event.preventDefault(); }, false );
-	nextButton.addEventListener('touchmove', function(){ event.preventDefault(); }, false );
-	nextButton.addEventListener( 'touchend', function(){ pageNav('next') }, false );
+	nextButton.addEventListener( 'mouseup', function(event){ pageNav('next') }, false );
+	nextButton.addEventListener('touchstart', function(event){ event.preventDefault(); }, false );
+	nextButton.addEventListener('touchmove', function(event){ event.preventDefault(); }, false );
+	nextButton.addEventListener( 'touchend', function(event){ pageNav('next') }, false );
 	
-	findRecipes.addEventListener( 'mouseup', function(){ pageNav('findRecipes') }, false );
-	findRecipes.addEventListener('touchstart', function(){ event.preventDefault(); }, false );
-	findRecipes.addEventListener('touchmove', function(){ event.preventDefault(); }, false );
-	findRecipes.addEventListener( 'touchend', function(){ pageNav('findRecipes') }, false );
+	findRecipes.addEventListener( 'mouseup', function(event){ pageNav('findRecipes') }, false );
+	findRecipes.addEventListener('touchstart', function(event){ event.preventDefault(); }, false );
+	findRecipes.addEventListener('touchmove', function(event){ event.preventDefault(); }, false );
+	findRecipes.addEventListener( 'touchend', function(event){ pageNav('findRecipes') }, false );
 	
 	
 	// CUPBOARD
@@ -678,20 +678,20 @@ $( document ).ready(function(){
 	// toggle cupboardLists class "closed"
 	var cupboardLabel = document.getElementById('cupboardLabel'),
 		cupboardLists = document.getElementById('cupboardLists');
-	cupboardLabel.addEventListener('mouseup', function(){ cupboardLists.classList.toggle('closed'); }, false );
-	cupboardLabel.addEventListener('touchstart', function(){ event.preventDefault(); }, false );
-	cupboardLabel.addEventListener('touchmove', function(){ event.preventDefault(); }, false );
-	cupboardLabel.addEventListener('touchend', function(){ cupboardLists.classList.toggle('closed'); }, false );
+	cupboardLabel.addEventListener('mouseup', function(event){ cupboardLists.classList.toggle('closed'); }, false );
+	cupboardLabel.addEventListener('touchstart', function(event){ event.preventDefault(); }, false );
+	cupboardLabel.addEventListener('touchmove', function(event){ event.preventDefault(); }, false );
+	cupboardLabel.addEventListener('touchend', function(event){ cupboardLists.classList.toggle('closed'); }, false );
 	
 	
 	// When cupboard avail item is clicked or touched
 	// remove item from cupboardModel available array
 	var cupboardAvailList = document.getElementById('cupboardAvailList');
-	cupboardAvailList.addEventListener('mouseup', function(){
+	cupboardAvailList.addEventListener('mouseup', function(event){
 		removeItem( cupboardModel[0].available, event.target.innerHTML );
 	}, false );
 	/*cupboardAvailList.addEventListener('touchstart', function(){ event.preventDefault(); }, false );*/
-	cupboardAvailList.addEventListener('touchend', function(){
+	cupboardAvailList.addEventListener('touchend', function(event){
 		removeItem( cupboardModel[0].available, event.targetTouches[0].innerHTML );
 	}, false );
 		
@@ -699,11 +699,11 @@ $( document ).ready(function(){
 	// When cupboard unavail item is clicked or touched
 	// remove item from cupboardModel unavailable array
 	var cupboardUnavailList = document.getElementById('cupboardUnavailList');
-	cupboardUnavailList.addEventListener('mouseup', function(){
+	cupboardUnavailList.addEventListener('mouseup', function(event){
 		removeItem( cupboardModel[0].unavailable, event.target.innerHTML );
 	}, false );
 	/*cupboardUnavailList.addEventListener('touchstart', function(){ event.preventDefault(); }, false );*/
-	cupboardUnavailList.addEventListener('touchend', function(){
+	cupboardUnavailList.addEventListener('touchend', function(event){
 		removeItem( cupboardModel[0].unavailable, event.targetTouches[0].innerHTML );
 	}, false );
 	
@@ -713,10 +713,10 @@ $( document ).ready(function(){
 	// When avail item is clicked or touched
 	// add the clicked item to cupboardModel available array
 	var availableBoxList = document.getElementById('availableBoxList');
-	availableBoxList.addEventListener('mouseup', function(){
+	availableBoxList.addEventListener('mouseup', function(event){
 		addItem(cupboardModel[0].available, event.target.innerHTML );
 	}, false );
-	availableBoxList.addEventListener('touchend', function(){
+	availableBoxList.addEventListener('touchend', function(event){
 		addItem(cupboardModel[0].available, event.targetTouches[0].innerHTML );
 	}, false );
 	
@@ -726,10 +726,10 @@ $( document ).ready(function(){
 	// When unavail item is clicked
 	// add the clicked item to cupboardModel unavailable array
 	var unavailableBoxList = document.getElementById('unavailableBoxList');
-	unavailableBoxList.addEventListener('mouseup', function(){
+	unavailableBoxList.addEventListener('mouseup', function(event){
 		addItem(cupboardModel[0].unavailable, event.target.innerHTML );
 	}, false );
-	unavailableBoxList.addEventListener('touchend', function(){
+	unavailableBoxList.addEventListener('touchend', function(event){
 		addItem(cupboardModel[0].unavailable, event.targetTouches[0].innerHTML );
 	}, false );
 	
@@ -739,7 +739,7 @@ $( document ).ready(function(){
 	// When a recipe is clicked
 	// Find the recipe ID and add it to the hash
 	var recipeList = document.getElementById('recipeList');
-	recipeList.addEventListener('mouseup', function(){ getSteps(event.target.innerHTML); }, false );
-	recipeList.addEventListener('touchend', function(){ getSteps(event.target.innerHTML); }, false );
+	recipeList.addEventListener('mouseup', function(event){ getSteps(event.target.innerHTML); }, false );
+	recipeList.addEventListener('touchend', function(event){ getSteps(event.target.innerHTML); }, false );
 	
 });
