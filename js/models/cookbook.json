@@ -1,203 +1,203 @@
 {
-    "recipes": [
-        {
-            "id"    : "1",
-            "name"  : "Herb Seasoned Baked Chicken",
-            "img"   : "../img/baked-chicken.jpg",
-            "ingredients"   : [
-                { "food"    : "Chicken" },
-                { "food"    : "Cooking Oil" },
-                { "food"    : "Salt" },
-                { "food"    : "Black Pepper" },
-                { "food"    : "Garlic" },
-                { "food"    : "Oregano" },
-                { "food"    : "Basil" }
-            ],
-            "directions"    : [
-                { "step"    : "Preheat oven to 400 degrees." },
-                { "step"    : "Pat chicken dry." },
-                { "step"    : "Rub chicken with a bit of salt, pepper, garlic, and oregano." },
-                { "step"    : "Coat pan with cooking oil of choice." },
-                { "step"    : "Arrange chicken on pan." },
-                { "step"    : "Cook chicken for 30 minutes to brown the chicken." },
-                { "step"    : "Set oven to 350 and continue cooking until juices run clear, or internal temperature is 170 degrees." },
-                { "step"    : "Sprinkle some basil on top before serving." } 
-            ]
-        },
-        {
-            "id"    : "2",
-            "name"  : "Lightly Seasoned Baked Chicken",
-            "img"   : "../img/baked-chicken.jpg",
-            "ingredients"   : [
-                { "food"    : "Chicken" },
-                { "food"    : "Cooking Oil" },
-                { "food"    : "Salt" },
-                { "food"    : "Black Pepper" }
-            ],
-            "directions"    : [
-                { "step"    : "Preheat oven to 400 degrees." },
-                { "step"    : "Pat chicken dry." },
-                { "step"    : "Rub chicken with a bit of salt and pepper." },
-                { "step"    : "Coat pan with cooking oil of choice." },
-                { "step"    : "Arrange chicken on pan." },
-                { "step"    : "Cook chicken for 30 minutes to brown the chicken." },
-                { "step"    : "Set oven to 350 and continue cooking until juices run clear, or internal temperature is 170 degrees." } 
-            ]
-        },
-        {
-            "id"    : "3",
-            "name"  : "Simple Baked Chicken",
-            "img"   : "../img/baked-chicken.jpg",
-            "ingredients"   : [
-                { "food"    : "Chicken" },
-                { "food"    : "Cooking Oil" },
-                { "food"    : "Black Pepper" }
-            ],
-            "directions"    : [
-                { "step"    : "Preheat oven to 400 degrees." },
-                { "step"    : "Pat chicken dry." },
-                { "step"    : "Rub chicken with a bit of salt." },
-                { "step"    : "Coat pan with cooking oil of choice." },
-                { "step"    : "Arrange chicken on pan." },
-                { "step"    : "Cook chicken for 30 minutes to brown the chicken." },
-                { "step"    : "Set oven to 350 and continue cooking until juices run clear, or internal temperature is 170 degrees." } 
-            ]
-        },
-        {
-            "id"    : "4",
-            "name"  : "Pecan Roasted Brussles",
-            "ingredients"   : [
-                { "food"    : "Cooking Oil" },
-                { "food"    : "Salt" },
-                { "food"    : "Black Pepper" },
-                { "food"    : "Brussle Sprouts" },
-                { "food"    : "Garlic" },
-                { "food"    : "Chopped Pecans" },
-                { "food"    : "Mapel Syrup" }
-            ],
-            "directions"    : [
-                { "step"    : "Preheat oven to 350 degrees." },
-                { "step"    : "Cover pan with aluminum foil" },
-                { "step"    : "Coat foil with cooking oil of choice." },
-                { "step"    : "Arrange chopped pecans on foil-covered pan." },
-                { "step"    : "Toast the pecans, but don't let them burn!" },
-                { "step"    : "Cut brussles in half, along the stem." },
-                { "step"    : "Take pecans out, let cool for a minute." },
-                { "step"    : "Again, coat the pan with cooking oil of choice." },
-                { "step"    : "Toss brussles with oil, maple syrup, salt and pepper." },
-                { "step"    : "Roast the brussles for 20 minutes or until golden brown in spots." },
-                { "step"    : "Transfer to a serving dish, and top with nuts." }
+	"recipes": [
+		{
+			"id"    : "1",
+			"name"  : "Herb Seasoned Baked Chicken",
+			"img"   : "../img/baked-chicken.jpg",
+			"ingredients"   : [
+				{ "food"    : "Chicken" },
+				{ "food"    : "Cooking Oil" },
+				{ "food"    : "Salt" },
+				{ "food"    : "Black Pepper" },
+				{ "food"    : "Garlic" },
+				{ "food"    : "Oregano" },
+				{ "food"    : "Basil" }
+			],
+			"directions"    : [
+				{ "step"    : "Preheat oven to 400 degrees." },
+				{ "step"    : "Pat chicken dry." },
+				{ "step"    : "Rub chicken with a bit of salt, pepper, garlic, and oregano." },
+				{ "step"    : "Coat pan with cooking oil of choice." },
+				{ "step"    : "Arrange chicken on pan." },
+				{ "step"    : "Cook chicken for 30 minutes to brown the chicken." },
+				{ "step"    : "Set oven to 350 and continue cooking until juices run clear, or internal temperature is 170 degrees." },
+				{ "step"    : "Sprinkle some basil on top before serving." } 
+			]
+		},
+		{
+			"id"    : "2",
+			"name"  : "Lightly Seasoned Baked Chicken",
+			"img"   : "../img/baked-chicken.jpg",
+			"ingredients"   : [
+				{ "food"    : "Chicken" },
+				{ "food"    : "Cooking Oil" },
+				{ "food"    : "Salt" },
+				{ "food"    : "Black Pepper" }
+			],
+			"directions"    : [
+				{ "step"    : "Preheat oven to 400 degrees." },
+				{ "step"    : "Pat chicken dry." },
+				{ "step"    : "Rub chicken with a bit of salt and pepper." },
+				{ "step"    : "Coat pan with cooking oil of choice." },
+				{ "step"    : "Arrange chicken on pan." },
+				{ "step"    : "Cook chicken for 30 minutes to brown the chicken." },
+				{ "step"    : "Set oven to 350 and continue cooking until juices run clear, or internal temperature is 170 degrees." } 
+			]
+		},
+		{
+			"id"    : "3",
+			"name"  : "Simple Baked Chicken",
+			"img"   : "../img/baked-chicken.jpg",
+			"ingredients"   : [
+				{ "food"    : "Chicken" },
+				{ "food"    : "Cooking Oil" },
+				{ "food"    : "Black Pepper" }
+			],
+			"directions"    : [
+				{ "step"    : "Preheat oven to 400 degrees." },
+				{ "step"    : "Pat chicken dry." },
+				{ "step"    : "Rub chicken with a bit of salt." },
+				{ "step"    : "Coat pan with cooking oil of choice." },
+				{ "step"    : "Arrange chicken on pan." },
+				{ "step"    : "Cook chicken for 30 minutes to brown the chicken." },
+				{ "step"    : "Set oven to 350 and continue cooking until juices run clear, or internal temperature is 170 degrees." } 
+			]
+		},
+		{
+			"id"    : "4",
+			"name"  : "Pecan Roasted Brussles",
+			"ingredients"   : [
+				{ "food"    : "Cooking Oil" },
+				{ "food"    : "Salt" },
+				{ "food"    : "Black Pepper" },
+				{ "food"    : "Brussle Sprouts" },
+				{ "food"    : "Garlic" },
+				{ "food"    : "Chopped Pecans" },
+				{ "food"    : "Mapel Syrup" }
+			],
+			"directions"    : [
+				{ "step"    : "Preheat oven to 350 degrees." },
+				{ "step"    : "Cover pan with aluminum foil" },
+				{ "step"    : "Coat foil with cooking oil of choice." },
+				{ "step"    : "Arrange chopped pecans on foil-covered pan." },
+				{ "step"    : "Toast the pecans, but don't let them burn!" },
+				{ "step"    : "Cut brussles in half, along the stem." },
+				{ "step"    : "Take pecans out, let cool for a minute." },
+				{ "step"    : "Again, coat the pan with cooking oil of choice." },
+				{ "step"    : "Toss brussles with oil, maple syrup, salt and pepper." },
+				{ "step"    : "Roast the brussles for 20 minutes or until golden brown in spots." },
+				{ "step"    : "Transfer to a serving dish, and top with nuts." }
 
-            ]
-        },
-        {
-            "id"    : "5",
-            "name"  : "Herb Crusted Salmon",
-            "ingredients"   : [
-                { "food"    : "Cooking Oil" },
-                { "food"    : "Salt" },
-                { "food"    : "Black Pepper" },
-                { "food"    : "Salmon" },
-                { "food"    : "Garlic" },
-                { "food"    : "Oregano" },
-                { "food"    : "Basil" },
-                { "food"    : "Onion Powder" }
-            ],
-            "directions"    : [
-                { "step"    : "The key to cooking good fish is always heat! Preheat your oven to 450 degrees." },
-                { "step"    : "Season your salmon with salt, pepper, garlic, oregano, basil, and onion powder." },
-                { "step"    : "Rub a coat of high-heat cooking oil of your choice over your pan to help season things a bit more, and to avoid a sticky mess." },
-                { "step"    : "Bake for about 15 minutes." },
-                { "step"    : "When the salmon is done, it will be easy to flake with a fork. If you're nervous, stick a thermometer in it: The internal temperature should be at least 145 degrees fahrenheit." },
-                { "step"    : "Enjoy that delicious salmon!" }
+			]
+		},
+		{
+			"id"    : "5",
+			"name"  : "Herb Crusted Salmon",
+			"ingredients"   : [
+				{ "food"    : "Cooking Oil" },
+				{ "food"    : "Salt" },
+				{ "food"    : "Black Pepper" },
+				{ "food"    : "Salmon" },
+				{ "food"    : "Garlic" },
+				{ "food"    : "Oregano" },
+				{ "food"    : "Basil" },
+				{ "food"    : "Onion Powder" }
+			],
+			"directions"    : [
+				{ "step"    : "The key to cooking good fish is always heat! Preheat your oven to 450 degrees." },
+				{ "step"    : "Season your salmon with salt, pepper, garlic, oregano, basil, and onion powder." },
+				{ "step"    : "Rub a coat of high-heat cooking oil of your choice over your pan to help season things a bit more, and to avoid a sticky mess." },
+				{ "step"    : "Bake for about 15 minutes." },
+				{ "step"    : "When the salmon is done, it will be easy to flake with a fork. If you're nervous, stick a thermometer in it: The internal temperature should be at least 145 degrees fahrenheit." },
+				{ "step"    : "Enjoy that delicious salmon!" }
 
-            ]
-        },
-        {
-            "id"    : "6",
-            "name"  : "Pineapple and Pepper Baked Ham Steaks",
-            "ingredients"   : [
-                { "food"    : "Butter" },
-                { "food"    : "Ham steak" },
-                { "food"    : "Pineapple Rings" },
-                { "food"    : "Bell Pepper" },
-                { "food"    : "Brown Sugar" },
-                { "food"    : "Mustard" }
-            ],
-            "directions"    : [
-                { "step"    : "Pre-heat oven to 350 degrees." },
-                { "step"    : "Cut the ham steak into portions roughly the size of your pineapple rings" },
-                { "step"    : "Slice a bell pepper width-wise, to make circular rings." },
-                { "step"    : "Cover each side of the hamsteaks with mustard and brown sugar." },
-                { "step"    : "Put each ham steak into its own piece of aluminum foil. This will be used to wrap the ham and keep things juicy as it bakes!" },
-                { "step"    : "Put a pineapple ring and a pepper ring on top of each steak." },
-                { "step"    : "Add about 1 tablespoon of butter on top of the steaks, in the center of each pineapple ring." },
-                { "step"    : "Bake for about 20-30 minutes, or until heated through." },
-                { "step"    : "Unwrap the ham and drain the juices. This is great to serve over some rice. Enjoy!" }
+			]
+		},
+		{
+			"id"    : "6",
+			"name"  : "Pineapple and Pepper Baked Ham Steaks",
+			"ingredients"   : [
+				{ "food"    : "Butter" },
+				{ "food"    : "Ham steak" },
+				{ "food"    : "Pineapple Rings" },
+				{ "food"    : "Bell Pepper" },
+				{ "food"    : "Brown Sugar" },
+				{ "food"    : "Mustard" }
+			],
+			"directions"    : [
+				{ "step"    : "Pre-heat oven to 350 degrees." },
+				{ "step"    : "Cut the ham steak into portions roughly the size of your pineapple rings" },
+				{ "step"    : "Slice a bell pepper width-wise, to make circular rings." },
+				{ "step"    : "Cover each side of the hamsteaks with mustard and brown sugar." },
+				{ "step"    : "Put each ham steak into its own piece of aluminum foil. This will be used to wrap the ham and keep things juicy as it bakes!" },
+				{ "step"    : "Put a pineapple ring and a pepper ring on top of each steak." },
+				{ "step"    : "Add about 1 tablespoon of butter on top of the steaks, in the center of each pineapple ring." },
+				{ "step"    : "Bake for about 20-30 minutes, or until heated through." },
+				{ "step"    : "Unwrap the ham and drain the juices. This is great to serve over some rice. Enjoy!" }
 
-            ]
-        },
-        {
-            "id"    : "7",
-            "name"  : "Curry Sauteed Vegetables",
-            "ingredients"   : [
-                { "food"    : "Cooking Oil" },
-                {
-                    "food"    : "Bell Pepper",
-                    "amount"  : "1"
-                },
-                { 
-                    "food"    : "Onion",
-                    "amount"  : "1"
-                },
-                { 
-                    "food"    : "Zucchini",
-                    "amount"  : "1"
-                },
-                { "food"    : "Snow Peas" },
-                { "food"    : "Carrots" },
-                { 
-                    "food"    : "Can or Jar of Curry Sauce",
-                    "amount"  : "1"
-                }
-            ],
-            "directions"    : [
-                { "step"    : "Chop bell pepper and onion into medium-sized chunks (not too small)" },
-                { "step"    : "Slice zucchini" },
-                { "step"    : "Slice carrots" },
-                { "step"    : "Coat a non-stick pan with cooking oil." },
-                { "step"    : "Place your pan on the stove, and set it to medium heat." },
-                { "step"    : "Once your pan is hot, carefully drop all your cut veggies onto the pan and let them sautee in the oil for about 10 minutes, or until you see that they are beginning to soften. When ready, you'll notice the onion turn transluscent and start to brown." },
-                { "step"    : "When the veggies are sauteed, pour some curry sauce in, and mix it thoroughly." },
-                { "step"    : "Let this simmer on low-medium heat for about 10 more minutes." },
-                { "step"    : "Once it's done, let it cool for a bit and enjoy!" }
-            ]
-        },
-        {
-            "id"    : "8",
-            "name"  : "Herb Seasoned Baked Potato Wedges",
-            "ingredients"   : [
-                { 
-                    "food"    : "Potatos",
-                    "amount"  : "4"
-                },
-                { "food"    : "Cooking Oil" },
-                { "food"    : "Salt" },
-                { "food"    : "Black Pepper" },
-                { "food"    : "Garlic" },
-                { "food"    : "Oregano" },
-                { "food"    : "Thyme" },
-                { "food"    : "Rosemary" }
-            ],
-            "directions"    : [
-                { "step"    : "Preheat oven to 400 degrees." },
-                { "step"    : "Scrub potatoes clean" },
-                { "step"    : "Cut each potato in half lengthwise. Cut each half into 3-4 wedges, according to your size preference." },
-                { "step"    : "Place the wedges in a bowl, add the olive oil and all remaining ingredients and toss multiple times to evenly coat the potato wedges." },
-                { "step"    : "Arrange potato wedges onto a pan or baking sheet." },
-                { "step"    : "Bake for 30-35 minutes, or until lightly browned and crispy, turning them over on their other side with a spatula after 20 minutes." },
-                { "step"    : "Enjoy!" } 
-            ]
-        }
-    ]
+			]
+		},
+		{
+			"id"    : "7",
+			"name"  : "Curry Sauteed Vegetables",
+			"ingredients"   : [
+				{ "food"    : "Cooking Oil" },
+				{
+					"food"    : "Bell Pepper",
+					"amount"  : "1"
+				},
+				{ 
+					"food"    : "Onion",
+					"amount"  : "1"
+				},
+				{ 
+					"food"    : "Zucchini",
+					"amount"  : "1"
+				},
+				{ "food"    : "Snow Peas" },
+				{ "food"    : "Carrots" },
+				{ 
+					"food"    : "Can or Jar of Curry Sauce",
+					"amount"  : "1"
+				}
+			],
+			"directions"    : [
+				{ "step"    : "Chop bell pepper and onion into medium-sized chunks (not too small)" },
+				{ "step"    : "Slice zucchini" },
+				{ "step"    : "Slice carrots" },
+				{ "step"    : "Coat a non-stick pan with cooking oil." },
+				{ "step"    : "Place your pan on the stove, and set it to medium heat." },
+				{ "step"    : "Once your pan is hot, carefully drop all your cut veggies onto the pan and let them sautee in the oil for about 10 minutes, or until you see that they are beginning to soften. When ready, you'll notice the onion turn transluscent and start to brown." },
+				{ "step"    : "When the veggies are sauteed, pour some curry sauce in, and mix it thoroughly." },
+				{ "step"    : "Let this simmer on low-medium heat for about 10 more minutes." },
+				{ "step"    : "Once it's done, let it cool for a bit and enjoy!" }
+			]
+		},
+		{
+			"id"    : "8",
+			"name"  : "Herb Seasoned Baked Potato Wedges",
+			"ingredients"   : [
+				{ 
+					"food"    : "Potatos",
+					"amount"  : "4"
+				},
+				{ "food"    : "Cooking Oil" },
+				{ "food"    : "Salt" },
+				{ "food"    : "Black Pepper" },
+				{ "food"    : "Garlic" },
+				{ "food"    : "Oregano" },
+				{ "food"    : "Thyme" },
+				{ "food"    : "Rosemary" }
+			],
+			"directions"    : [
+				{ "step"    : "Preheat oven to 400 degrees." },
+				{ "step"    : "Scrub potatoes clean" },
+				{ "step"    : "Cut each potato in half lengthwise. Cut each half into 3-4 wedges, according to your size preference." },
+				{ "step"    : "Place the wedges in a bowl, add the olive oil and all remaining ingredients and toss multiple times to evenly coat the potato wedges." },
+				{ "step"    : "Arrange potato wedges onto a pan or baking sheet." },
+				{ "step"    : "Bake for 30-35 minutes, or until lightly browned and crispy, turning them over on their other side with a spatula after 20 minutes." },
+				{ "step"    : "Enjoy!" } 
+			]
+		}
+	]
 }

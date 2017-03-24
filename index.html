@@ -1,147 +1,147 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Cookbook</title>
-        <link href='http://fonts.googleapis.com/css?family=Lobster|Quicksand|Open+Sans:400,300' rel='stylesheet' type='text/css'>
-        <link rel="stylesheet" href="css/lib/normalize.css">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-        <link rel="stylesheet" href="css/style.css">
-    </head>
-    <body>
-        <div id="wrapper">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Cookbook</title>
+		<link href='http://fonts.googleapis.com/css?family=Lobster|Quicksand|Open+Sans:400,300' rel='stylesheet' type='text/css'>
+		<link rel="stylesheet" href="css/lib/normalize.css">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+		<link rel="stylesheet" href="css/style.css">
+	</head>
+	<body>
+		<div id="wrapper">
 
-            <header>
-                <h1>Cookbook</h1>
-
-
-                <!--Cupboard-->
-                <div id="cupboardBox">
-                    <p id="cupboardLabel" class="button">your cupboard (<span id="cupboardCount"></span>)</p>
-                    <div id="cupboardLists" class="closed">
-                        <ul id="cupboardAvailList">
-                            <!--Available items here-->
-                        </ul>
-                        <ul id="cupboardUnavailList">
-                            <!--Unavailable items here-->
-                        </ul>
-                    </div>
-                </div>
+			<header>
+				<h1>Cookbook</h1>
 
 
-            </header>
+				<!--Cupboard-->
+				<div id="cupboardBox">
+					<p id="cupboardLabel" class="button">your cupboard (<span id="cupboardCount"></span>)</p>
+					<div id="cupboardLists" class="closed">
+						<ul id="cupboardAvailList">
+							<!--Available items here-->
+						</ul>
+						<ul id="cupboardUnavailList">
+							<!--Unavailable items here-->
+						</ul>
+					</div>
+				</div>
 
 
-            <main id="mainSection">
-
-                <!--Available Foods-->
-                <div id="availableBox" class="index">
-
-                    <div class="listLabel">
-                        <h3>What are you craving?</h3>
-                    </div>    
-
-                    <ul id='availableBoxList' class="list selectBox">
-                        <!--All ingredients here-->
-                    </ul>
-                </div>
+			</header>
 
 
+			<main id="mainSection">
 
-                <!--Unavailable Foods-->
-                <div id="unavailableBox" class="filters">
-                    <div class="listLabel">
-                        <h3 id="missing">Missing any of these things?</h3>
-                    </div>
+				<!--Available Foods-->
+				<div id="availableBox" class="index">
 
-                    <ul id='unavailableBoxList' class="list selectBox">
-                        <!--Filtered ingredient list here-->
-                    </ul>
-                </div>
+					<div class="listLabel">
+						<h3>What are you craving?</h3>
+					</div>    
 
-
-                <!---------------------------------------------------
-                                    RECIPES PAGE
-                ----------------------------------------------------->
-
-                <div id="recipeListBox" class="recipes">
-
-                  <div class="listLabel">
-                        <h3>Here are some recipes for you:</h3>
-                    </div>
-
-                   <ul id="recipeList" class="list">
-                       <!--Recipes here-->
-                   </ul>
-
-                </div>
+					<ul id='availableBoxList' class="list selectBox">
+						<!--All ingredients here-->
+					</ul>
+				</div>
 
 
 
-                <!---------------------------------------------------
-                                    STEPS PAGE
-                ----------------------------------------------------->
+				<!--Unavailable Foods-->
+				<div id="unavailableBox" class="filters">
+					<div class="listLabel">
+						<h3 id="missing">Missing any of these things?</h3>
+					</div>
 
-                <script id="steps_template" type="text/x-handlebars-template">
-
-                    <div id="recipeTitle">
-                        <!--Title here-->
-                        <h3>{{name}}</h3>
-                    </div>
-
-                    <div id="recipeImage" style="background-image: url({{img}})">
-                        <!--Image here-->
-                    </div>
-
-                    <div id="ingredientsList">
-                        <h4>Ingredients:</h4>
-                        <!--Ingredients here-->
-                        {{#each ingredients}}
-                            <li><span>{{amount}} </span>{{food}}</li>
-                        {{/each}}
-                    </div>
-
-                    <h4>Steps:</h4>
-                    <ol id="stepList">
-                        <!--Steps here-->
-                        {{#each directions}}
-                            <li>{{step}}</li>
-                        {{/each}}
-                    </ol>
-
-                </script>
+					<ul id='unavailableBoxList' class="list selectBox">
+						<!--Filtered ingredient list here-->
+					</ul>
+				</div>
 
 
-                <div id="stepsBox" class="steps">
-                    <div id="steps-placeholder"></div>
-                </div>
+				<!---------------------------------------------------
+									RECIPES PAGE
+				----------------------------------------------------->
 
-            </main>
-            <footer id="navMenu">
+				<div id="recipeListBox" class="recipes">
 
+				  <div class="listLabel">
+						<h3>Here are some recipes for you:</h3>
+					</div>
 
-                <div id="back" class="button left filters recipes steps">
-                    <i class="fa fa-chevron-left fa-lg"></i> <span>Back</span>
-                </div>
+				   <ul id="recipeList" class="list">
+					   <!--Recipes here-->
+				   </ul>
 
-
-                <div id="next" class="button middle index">
-                    <span>Next</span> <i class="fa fa-chevron-right fa-lg"></i>
-                </div>
-
-
-                <div id="findRecipes" class="button middle filters">
-                    <i class="fa fa-cutlery fa-lg"></i> <span>Find Recipes!</span>
-                </div>
+				</div>
 
 
-            </footer>
-        </div>
-        
-        <!-- Scripts, Libraries and Frameworks, oh my! -->
-        <script src="js/lib/jquery-1.11.3.min.js"></script>
-        <script src="js/lib/handlebars-v4.0.2.js"></script>
-        <script src="js/app.js"></script>
-    </body>
+
+				<!---------------------------------------------------
+									STEPS PAGE
+				----------------------------------------------------->
+
+				<script id="steps_template" type="text/x-handlebars-template">
+
+					<div id="recipeTitle">
+						<!--Title here-->
+						<h3>{{name}}</h3>
+					</div>
+
+					<div id="recipeImage" style="background-image: url({{img}})">
+						<!--Image here-->
+					</div>
+
+					<div id="ingredientsList">
+						<h4>Ingredients:</h4>
+						<!--Ingredients here-->
+						{{#each ingredients}}
+							<li><span>{{amount}} </span>{{food}}</li>
+						{{/each}}
+					</div>
+
+					<h4>Steps:</h4>
+					<ol id="stepList">
+						<!--Steps here-->
+						{{#each directions}}
+							<li>{{step}}</li>
+						{{/each}}
+					</ol>
+
+				</script>
+
+
+				<div id="stepsBox" class="steps">
+					<div id="steps-placeholder"></div>
+				</div>
+
+			</main>
+			<footer id="navMenu">
+
+
+				<div id="back" class="button left filters recipes steps">
+					<i class="fa fa-chevron-left fa-lg"></i> <span>Back</span>
+				</div>
+
+
+				<div id="next" class="button middle index">
+					<span>Next</span> <i class="fa fa-chevron-right fa-lg"></i>
+				</div>
+
+
+				<div id="findRecipes" class="button middle filters">
+					<i class="fa fa-cutlery fa-lg"></i> <span>Find Recipes!</span>
+				</div>
+
+
+			</footer>
+		</div>
+		
+		<!-- Scripts, Libraries and Frameworks, oh my! -->
+		<script src="js/lib/jquery-1.11.3.min.js"></script>
+		<script src="js/lib/handlebars-v4.0.2.js"></script>
+		<script src="js/app.js"></script>
+	</body>
 </html>
