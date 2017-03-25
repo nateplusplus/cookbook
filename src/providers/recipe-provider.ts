@@ -104,4 +104,50 @@ export class RecipeProvider {
 	constructor(public http: Http) {
 	}
 
+
+	/*
+	*	Determines whether a recipe matches current filters
+	*		@PARAM include (obj) = recipeProvider.include
+	*		@PARAM exclude (obj) = recipeProvider.exclude
+	*		@PARAM ingredients (array) = the array of ingredient IDs of a recipe
+	*/
+	recipeFilter(include, exclude, ingredients)
+	{
+		// Loop through recipes and find the ones that aren't filted out
+		var addRecipe = true;
+		// If include ingredeients listed, test those first
+		if (include.length > 0) {
+			for(var key in include) {
+
+				var ingredientId = include[key];
+
+				// If included ingredients were NOT found, do not add and break out of for-loop
+				if (!ingredients.includes(ingredientId)) {
+					addRecipe = false;
+					break;
+				}
+			}
+		}
+
+		// If the recipe isn't yet filted out, test for excluded ingredients
+		if (addRecipe && exclude.length > 0) {
+			for(var key in exclude) {
+
+				var ingredientId = exclude[key];
+
+				// If excluded ingredients were found, do not add and break out of for-loop
+				if (ingredients.includes(ingredientId)) {
+					addRecipe = false;
+					break;
+				}
+			}
+		}
+
+		// Add the recipe if applicable
+		if (addRecipe) {
+			return true;
+		}
+	}
+
+
 }

@@ -8,14 +8,9 @@
 
 <ion-content>
 	<ion-list>
-		<ion-item>
-			Chicken Recipe
-		</ion-item>
-		<ion-item>
-			Rice Recipe
-		</ion-item>
-		<ion-item>
-			Brocoli Recipe
-		</ion-item>
+		<ion-list-header>Here are some recipes that match your criteria.</ion-list-header>
+		<button ion-item *ngFor="let item of list" (click)="itemSelected(item)">
+			{{item.name}}
+		</button>
 	</ion-list>
 </ion-content>
