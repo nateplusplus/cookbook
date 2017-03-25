@@ -7,16 +7,22 @@
 </ion-header>
 
 <ion-content>
-<ion-list>
-	<ion-list-header>Ingredients</ion-list-header>
-	<ion-item>
-		Chicken
-	</ion-item>
-	<ion-item>
-		Rice
-	</ion-item>
-	<ion-item>
-		Brocoli
-	</ion-item>
+	<ion-list no-lines>
+		<ion-item>
+			<h2>{{recipe.name}}</h2>
+		</ion-item>
+	</ion-list>
+	<ion-list no-lines>
+		<ion-list-header color="light">Ingredients:</ion-list-header>
+		<ion-item text-wrap *ngFor="let ingredient of recipe.ingredients">
+			{{ingredient.name}}
+		</ion-item>
+	</ion-list>
+	<br />
+	<ion-list no-lines>
+		<ion-list-header color="light">Steps:</ion-list-header>
+		<ion-item text-wrap *ngFor="let step of recipe.steps; let i = index;">
+			{{i + 1}}. {{step}}
+		</ion-item>
 	</ion-list>
 </ion-content>

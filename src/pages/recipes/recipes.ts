@@ -34,6 +34,9 @@ export class RecipesPage {
 
 	itemSelected(item) {
 		console.log("Open Recipe: "+item.name);
+		this.navCtrl.push(RecipePage, {
+			id: item.id,
+		});
 	}
 
 }
