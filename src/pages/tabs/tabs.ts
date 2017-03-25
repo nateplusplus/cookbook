@@ -4,6 +4,7 @@ import { IncludePage } from '../include/include';
 import { ExcludePage } from '../exclude/exclude';
 import { RecipesPage } from '../recipes/recipes';
 import { RecipePage } from '../recipe/recipe';
+import { IngredientsProvider } from '../../providers/ingredients-provider';
 
 @Component({
 	templateUrl: 'tabs.html'

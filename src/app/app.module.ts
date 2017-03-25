@@ -6,6 +6,7 @@ import { RecipesPage } from '../pages/recipes/recipes';
 import { ExcludePage } from '../pages/exclude/exclude';
 import { IncludePage } from '../pages/include/include';
 import { TabsPage } from '../pages/tabs/tabs';
+import { IngredientsProvider } from '../providers/ingredients-provider';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -32,6 +33,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 		TabsPage
 	],
 	providers: [
+		IngredientsProvider,
 		StatusBar,
 		SplashScreen,
 		{provide: ErrorHandler, useClass: IonicErrorHandler}
