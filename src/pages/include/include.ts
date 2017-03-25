@@ -24,11 +24,9 @@ export class IncludePage {
 	}
 
 	itemSelected(item) {
-		console.log(item.name);
-
-		// TODO: Create local storage "cupboard". Add included and excluded items to storage
-		// TODO: Add recipes to dataProvider
-		// TODO: Parse recipes for all ingredients instead of hardcoding here
+		console.log("adding "+item.name);
+		this.ingredientsProvider.include.push(item.id);
+		console.log(this.ingredientsProvider.include);
 	}
 
 }
