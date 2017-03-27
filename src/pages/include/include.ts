@@ -10,25 +10,25 @@ import { RecipeProvider } from '../../providers/recipe-provider';
 })
 export class IncludePage {
 
-	list: Array<{id: number, name: string}>;
+	list: Array<{ id: number, name: string }>;
 
 	constructor(public navCtrl: NavController, public ingredientsProvider: IngredientsProvider, public recipeProvider: RecipeProvider) {
 
 		// TODO: remove items that are excluded and remove items as they are clicked
-		this.generateList();
+		//this.generateList();
 
-		// this.list = [];
-		// for(var ingredient in ingredientsProvider.ingredients) {
-		// 	this.list.push({
-		// 		id : ingredientsProvider.ingredients[ingredient].id,
-		// 		name : ingredientsProvider.ingredients[ingredient].name
-		// 	});
-		// }
+		this.list = [];
+		for(var ingredient in ingredientsProvider.ingredients) {
+			this.list.push({
+				id : ingredientsProvider.ingredients[ingredient].id,
+				name : ingredientsProvider.ingredients[ingredient].name
+			});
+		}
 
 	}
 
 	itemSelected(item) {
-		console.log("adding "+item.name);
+		console.log("adding " + item.name);
 		this.ingredientsProvider.include.push(item.id);
 		console.log(this.ingredientsProvider.include);
 	}
@@ -45,8 +45,7 @@ export class IncludePage {
 		var ingredientIds = new Array();
 
 		// Get all recipes that don't use exclude ingredients
-		for(var recipe in this.recipeProvider.recipes)
-		{
+		for (var recipe in this.recipeProvider.recipes) {
 
 			// Loop through recipes and find the ones that aren't filted out yet
 			var addRecipe = this.recipeProvider.recipeFilter([], this.ingredientsProvider.exclude, this.recipeProvider.recipes[recipe].ingredients);
@@ -55,7 +54,7 @@ export class IncludePage {
 			if (addRecipe) {
 
 				// Add the recipe ingredients if not already added
-				for(key in this.recipeProvider.recipes[recipe].ingredients) {
+				for (key in this.recipeProvider.recipes[recipe].ingredients) {
 					var ingredientId = this.recipeProvider.recipes[recipe].ingredients[key];
 					if (ingredientIds.indexOf(ingredientId) == -1) {
 						ingredientIds.push(ingredientId);
@@ -65,7 +64,7 @@ export class IncludePage {
 		}
 
 		this.list = [];
-		for(var key in this.ingredientsProvider.ingredients) {
+		for (var key in this.ingredientsProvider.ingredients) {
 			var ingredient = this.ingredientsProvider.ingredients[key];
 
 			// Continue if this ingredient is on the ingredientIds array
@@ -74,8 +73,8 @@ export class IncludePage {
 				// Add it if it's not on the "include" list
 				if (this.ingredientsProvider.include.indexOf(ingredient.id) == -1) {
 					this.list.push({
-						id : this.ingredientsProvider.ingredients[key].id,
-						name : this.ingredientsProvider.ingredients[key].name
+						id: this.ingredientsProvider.ingredients[key].id,
+						name: this.ingredientsProvider.ingredients[key].name
 					});
 				}
 			}
