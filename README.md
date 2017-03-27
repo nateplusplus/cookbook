@@ -10,4 +10,4 @@ I've decided to use this project to play with the <a href="http://www.ionicframe
 LINKS:
 -----
 
-<a href="http://natehub.net/projects/cookbook" target="_blank">Working Sample</a>
+Working sample coming soon
