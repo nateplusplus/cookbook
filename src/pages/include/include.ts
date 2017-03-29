@@ -15,22 +15,13 @@ export class IncludePage {
 	constructor(public navCtrl: NavController, public ingredientsProvider: IngredientsProvider, public recipeProvider: RecipeProvider) {
 
 		// TODO: remove items that are excluded and remove items as they are clicked
-		//this.generateList();
-
-		this.list = [];
-		for(var ingredient in ingredientsProvider.ingredients) {
-			this.list.push({
-				id : ingredientsProvider.ingredients[ingredient].id,
-				name : ingredientsProvider.ingredients[ingredient].name
-			});
-		}
+		this.generateList();
 
 	}
 
 	itemSelected(item) {
-		console.log("adding " + item.name);
 		this.ingredientsProvider.include.push(item.id);
-		console.log(this.ingredientsProvider.include);
+		this.generateList();
 	}
 
 
@@ -56,7 +47,11 @@ export class IncludePage {
 				// Add the recipe ingredients if not already added
 				for (key in this.recipeProvider.recipes[recipe].ingredients) {
 					var ingredientId = this.recipeProvider.recipes[recipe].ingredients[key];
-					if (ingredientIds.indexOf(ingredientId) == -1) {
+
+					// Don't add if already on include array
+					var addIngredient = (!this.ingredientsProvider.include.includes(ingredientId));
+
+					if (ingredientIds.indexOf(ingredientId) == -1 && addIngredient) {
 						ingredientIds.push(ingredientId);
 					}
 				}
