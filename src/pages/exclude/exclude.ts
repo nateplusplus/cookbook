@@ -26,23 +26,26 @@ export class ExcludePage {
 	*		1) Don't show ingredients from recipes that contain excluded ingredients
 	*		2) Don't show ingredients already selected to include
 	*/
-	generateList() {
+	generateList()
+	{
 
-		var ingredientIds = new Array();
+		var ingredientIds = new Array(),
+			include = this.ingredientsProvider.include,
+			exclude = this.ingredientsProvider.exclude,
+			recipes = this.recipeProvider.recipes,
+			allIngredients = this.ingredientsProvider.ingredients;
 
 		// Get all recipes that don't use exclude ingredients
-		for(var recipe in this.recipeProvider.recipes)
+		for(var recipe in recipes)
 		{
+			var recipeIngredients = recipes[recipe].ingredients;
 
 			// Loop through recipes and find the ones that aren't filted out yet
-			var addRecipe = this.recipeProvider.recipeFilter(this.ingredientsProvider.include, this.ingredientsProvider.exclude, this.recipeProvider.recipes[recipe].ingredients);
-
-			// Now if both tests passed, add it!
-			if (addRecipe) {
+			if (this.recipeProvider.recipeFilter(include, exclude, recipeIngredients)) {
 
 				// Add the recipe ingredients if not already added
-				for(key in this.recipeProvider.recipes[recipe].ingredients) {
-					var ingredientId = this.recipeProvider.recipes[recipe].ingredients[key];
+				for(key in recipeIngredients) {
+					var ingredientId = recipeIngredients[key];
 					if (ingredientIds.indexOf(ingredientId) == -1) {
 						ingredientIds.push(ingredientId);
 					}
@@ -51,17 +54,17 @@ export class ExcludePage {
 		}
 
 		this.list = [];
-		for(var key in this.ingredientsProvider.ingredients) {
-			var ingredient = this.ingredientsProvider.ingredients[key];
+		for(var key in allIngredients) {
+			var ingredient = allIngredients[key];
 
 			// Continue if this ingredient is on the ingredientIds array
 			if (ingredientIds.indexOf(ingredient.id) > -1) {
 
 				// Add it if it's not on the "include" list
-				if (this.ingredientsProvider.include.indexOf(ingredient.id) == -1) {
+				if (include.indexOf(ingredient.id) == -1) {
 					this.list.push({
-						id : this.ingredientsProvider.ingredients[key].id,
-						name : this.ingredientsProvider.ingredients[key].name
+						id : allIngredients[key].id,
+						name : allIngredients[key].name
 					});
 				}
 			}
@@ -71,6 +74,10 @@ export class ExcludePage {
 	itemSelected(item) {
 		console.log("removing "+item.name);
 		this.ingredientsProvider.exclude.push(item.id);
+		this.generateList();
+	}
+
+	ionViewWillEnter() {
 		this.generateList();
 	}
 

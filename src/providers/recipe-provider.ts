@@ -113,17 +113,19 @@ export class RecipeProvider {
 	*/
 	recipeFilter(include, exclude, ingredients)
 	{
-		// Loop through recipes and find the ones that aren't filted out
+		// Start true, as there may be nothing to loop through
 		var addRecipe = true;
+
 		// If include ingredeients listed, test those first
 		if (include.length > 0) {
-			for(var key in include) {
 
+			// Do not add this recipe unless at least 1 include ingredient is found
+			addRecipe = false;
+			for(var key in include) {
 				var ingredientId = include[key];
 
-				// If included ingredients were NOT found, do not add and break out of for-loop
 				if (!ingredients.includes(ingredientId)) {
-					addRecipe = false;
+					addRecipe = true;
 					break;
 				}
 			}
@@ -131,8 +133,9 @@ export class RecipeProvider {
 
 		// If the recipe isn't yet filted out, test for excluded ingredients
 		if (addRecipe && exclude.length > 0) {
-			for(var key in exclude) {
 
+			// Do NOT add if at least 1 exclude ingredient found
+			for(var key in exclude) {
 				var ingredientId = exclude[key];
 
 				// If excluded ingredients were found, do not add and break out of for-loop
@@ -147,6 +150,9 @@ export class RecipeProvider {
 		if (addRecipe) {
 			return true;
 		}
+
+		// Otherwise return false
+		return false;
 	}
 
 

@@ -14,22 +14,7 @@ export class RecipesPage {
 	list: Array<{id: number, name: string}>;
 
 	constructor(public navCtrl: NavController, public recipeProvider: RecipeProvider, public ingredientsProvider: IngredientsProvider) {
-
-		// List all recipes that use include ingredients - recipes with exclude ingredients
-		this.list = [];
-		for(var recipe in recipeProvider.recipes) {
-
-			// Loop through recipes and find the ones that aren't filted out
-			var addRecipe = recipeProvider.recipeFilter(this.ingredientsProvider.include, this.ingredientsProvider.exclude, recipeProvider.recipes[recipe].ingredients);
-
-			// Add the recipe if applicable
-			if (addRecipe) {
-				this.list.push({
-					id : recipeProvider.recipes[recipe].id,
-					name : recipeProvider.recipes[recipe].name
-				});
-			}
-		}
+		this.generateList();
 	}
 
 	itemSelected(item) {
@@ -39,4 +24,28 @@ export class RecipesPage {
 		});
 	}
 
+	generateList()
+	{
+		var include = this.ingredientsProvider.include,
+			exclude = this.ingredientsProvider.exclude,
+			recipes = this.recipeProvider.recipes;
+
+		// List all recipes that use include ingredients - recipes with exclude ingredients
+		this.list = [];
+		for(var recipe in recipes) {
+			var recipeIngredients = recipes[recipe].ingredients
+
+			// Loop through recipes and find the ones that aren't filted out
+			if (this.recipeProvider.recipeFilter(include, exclude, recipeIngredients)) {
+				this.list.push({
+					id : recipes[recipe].id,
+					name : recipes[recipe].name
+				});
+			}
+		}
+	}
+
+	ionViewWillEnter() {
+		this.generateList();
+	}
 }
